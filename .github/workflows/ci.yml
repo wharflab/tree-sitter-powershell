@@ -47,9 +47,9 @@ jobs:
           OUTPUT=$(npx tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1)
           ERROR_COUNT=$(echo "$OUTPUT" | grep -c 'ERROR' || true)
           echo "Parse errors: $ERROR_COUNT"
-          # Expect no more than 21 errors (7 intentional + known limitations)
-          if [ "$ERROR_COUNT" -gt 21 ]; then
-            echo "::error::Too many parse errors ($ERROR_COUNT > 21)"
+          # Expect no more than 19 errors (8 intentional + known limitations)
+          if [ "$ERROR_COUNT" -gt 19 ]; then
+            echo "::error::Too many parse errors ($ERROR_COUNT > 19)"
             echo "$OUTPUT" | grep 'ERROR'
             exit 1
           fi

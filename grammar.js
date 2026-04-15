@@ -318,7 +318,7 @@ export default grammar({
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
 
     // Parameters
-    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`]+/, '--')),
+    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`][a-zA-Z0-9_?\-`]*/, '--')),
 
     _verbatim_command_argument_chars: ($) =>
       repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
