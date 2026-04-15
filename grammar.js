@@ -52,20 +52,18 @@ export default grammar({
       token(
         seq(
           /[0-9]+/,
-          optional(
-            choice('y', 'uy', 's', 'us', 'u', 'l', 'ul', 'n', 'd'),
-          ),
-          optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+          optional(/[yY]|[uU][yYsSlL]|[uUsSdDnNlL]/),
+          optional(/[kKmMgGtTpP][bB]/),
         ),
       ),
 
     hexadecimal_integer_literal: ($) =>
       token(
         seq(
-          '0x',
+          /0[xX]/,
           /[0-9a-fA-F]+/,
-          optional(choice('y', 'uy', 's', 'us', 'u', 'l', 'ul', 'n')),
-          optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+          optional(/[yY]|[uU][yYsSlL]|[uUsSnNlL]/),
+          optional(/[kKmMgGtTpP][bB]/),
         ),
       ),
 
@@ -75,18 +73,21 @@ export default grammar({
         choice(
           seq(
             /[0-9]+\.[0-9]+/,
-            optional(token(seq('e', optional(choice('+', '-')), /[0-9]+/))),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            optional(/[dDlL]/),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
             /\.[0-9]+/,
-            optional(token(seq('e', optional(choice('+', '-')), /[0-9]+/))),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            optional(/[dDlL]/),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
             /[0-9]+/,
-            token(seq('e', optional(choice('+', '-')), /[0-9]+/)),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/)),
+            optional(/[dDlL]/),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
         ),
       ),
@@ -151,10 +152,14 @@ export default grammar({
     simple_name: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     // Type names
-    type_identifier: ($) => /[a-zA-Z0-9_]+/,
+    type_identifier: ($) => /[a-zA-Z0-9_]+(`[0-9]+)?/,
 
     type_name: ($) =>
-      choice($.type_identifier, seq($.type_name, '.', $.type_identifier)),
+      choice(
+        $.type_identifier,
+        seq($.type_name, '.', $.type_identifier),
+        seq($.type_name, '+', $.type_identifier),
+      ),
 
     array_type_name: ($) => seq($.type_name, '['),
     generic_type_name: ($) => seq($.type_name, '['),
@@ -304,7 +309,7 @@ export default grammar({
         $.braced_variable,
       ),
 
-    braced_variable: ($) => /\$\{[^}]+\}/,
+    braced_variable: ($) => /\$\{([^}`]|`[}\s\S])+\}/,
 
     // Commands
     generic_token: ($) =>
@@ -849,9 +854,17 @@ export default grammar({
         '(',
         optional($.class_method_parameter_list),
         ')',
+        optional($.class_method_base_ctor),
         '{',
         optional($.script_block),
         '}',
+      ),
+
+    class_method_base_ctor: ($) =>
+      seq(
+        ':',
+        choice(reservedWord('base'), reservedWord('this')),
+        $.argument_list,
       ),
 
     class_statement: ($) =>
@@ -1113,14 +1126,23 @@ export default grammar({
         ),
         seq($._primary_expression, '::', $.member_name, $.argument_list),
         $.invokation_foreach_expression,
+        $.invokation_where_expression,
       ),
 
-    // adding this rule to handle .foreach synthax
+    // adding this rule to handle .foreach syntax
     invokation_foreach_expression: ($) =>
       seq(
         $._primary_expression,
         token.immediate(reservedWord('.foreach')),
-        $.script_block_expression,
+        choice($.script_block_expression, $.argument_list),
+      ),
+
+    // adding this rule to handle .where syntax
+    invokation_where_expression: ($) =>
+      seq(
+        $._primary_expression,
+        token.immediate(reservedWord('.where')),
+        choice($.script_block_expression, $.argument_list),
       ),
 
     argument_list: ($) =>

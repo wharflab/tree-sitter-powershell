@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION}}
+
+      - name: Install modules
+        run: npm ci --legacy-peer-deps
+
+      - name: Run corpus tests
+        run: npx tree-sitter test
+
+  parse-sample:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION}}
+
+      - name: Install modules
+        run: npm ci --legacy-peer-deps
+
+      - name: Download TheBigTestFile.ps1
+        run: curl -fsSL -o /tmp/TheBigTestFile.ps1 https://raw.githubusercontent.com/PowerShell/EditorSyntax/master/examples/TheBigTestFile.ps1
+
+      - name: Parse TheBigTestFile.ps1
+        run: |
+          OUTPUT=$(npx tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1)
+          ERROR_COUNT=$(echo "$OUTPUT" | grep -c 'ERROR' || true)
+          echo "Parse errors: $ERROR_COUNT"
+          # Expect no more than 21 errors (7 intentional + known limitations)
+          if [ "$ERROR_COUNT" -gt 21 ]; then
+            echo "::error::Too many parse errors ($ERROR_COUNT > 21)"
+            echo "$OUTPUT" | grep 'ERROR'
+            exit 1
+          fi
+          echo "Within acceptable threshold"
