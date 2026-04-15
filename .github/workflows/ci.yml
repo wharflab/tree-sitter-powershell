@@ -33,14 +33,17 @@ jobs:
         run: gh api repos/PowerShell/EditorSyntax/contents/examples/TheBigTestFile.ps1 --jq '.content' | base64 -d > /tmp/TheBigTestFile.ps1
 
       - name: Parse TheBigTestFile.ps1
+        id: parse
+        continue-on-error: true
+        run: tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1 | tee /tmp/parse-output.txt
+
+      - name: Check error count
         run: |
-          OUTPUT=$(tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1 || true)
-          ERROR_COUNT=$(echo "$OUTPUT" | grep -c 'ERROR' || true)
+          ERROR_COUNT=$(grep -c 'ERROR' /tmp/parse-output.txt || true)
           echo "Parse errors: $ERROR_COUNT"
-          # Expect no more than 19 errors (8 intentional + known limitations)
           if [ "$ERROR_COUNT" -gt 19 ]; then
             echo "::error::Too many parse errors ($ERROR_COUNT > 19)"
-            echo "$OUTPUT" | grep 'ERROR'
+            grep 'ERROR' /tmp/parse-output.txt
             exit 1
           fi
           echo "Within acceptable threshold"
