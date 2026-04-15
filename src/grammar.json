@@ -3801,7 +3801,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "using_expression"
+                  "name": "type_name"
                 }
               ]
             },
@@ -3822,8 +3822,21 @@
                   "value": "module"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "using_expression"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_name"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "verbatim_string_characters"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "hash_literal_expression"
+                    }
+                  ]
                 }
               ]
             },
@@ -3844,8 +3857,17 @@
                   "value": "assembly"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "using_expression"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "type_name"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "verbatim_string_characters"
+                    }
+                  ]
                 }
               ]
             },
@@ -3859,32 +3881,19 @@
                     "value": 1,
                     "content": {
                       "type": "PATTERN",
-                      "value": "[tT][yY][pP][eE]"
+                      "value": "[sS][tT][aA][tT][iI][cC]"
                     }
                   },
                   "named": false,
-                  "value": "type"
+                  "value": "static"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "using_expression"
+                  "name": "type_name"
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    "using_expression": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "type_name"
         }
       ]
     },

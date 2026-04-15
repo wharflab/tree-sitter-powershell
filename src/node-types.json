@@ -3496,25 +3496,6 @@
     }
   },
   {
-    "type": "using_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "type_name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "using_statement",
     "named": true,
     "fields": {},
@@ -3523,7 +3504,15 @@
       "required": true,
       "types": [
         {
-          "type": "using_expression",
+          "type": "hash_literal_expression",
+          "named": true
+        },
+        {
+          "type": "type_name",
+          "named": true
+        },
+        {
+          "type": "verbatim_string_characters",
           "named": true
         }
       ]
@@ -4296,6 +4285,10 @@
     "named": true
   },
   {
+    "type": "static",
+    "named": false
+  },
+  {
     "type": "stop_parsing",
     "named": true
   },
@@ -4317,10 +4310,6 @@
   },
   {
     "type": "try",
-    "named": false
-  },
-  {
-    "type": "type",
     "named": false
   },
   {

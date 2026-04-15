@@ -656,15 +656,24 @@ export default grammar({
       seq(
         reservedWord('using'),
         choice(
-          seq(reservedWord('namespace'), $.using_expression),
-          seq(reservedWord('module'), $.using_expression),
-          seq(reservedWord('assembly'), $.using_expression),
-          seq(reservedWord('type'), $.using_expression),
+          seq(
+            reservedWord('namespace'),
+            $.type_name,
+          ),
+          seq(
+            reservedWord('module'),
+            choice($.type_name, $.verbatim_string_characters, $.hash_literal_expression),
+          ),
+          seq(
+            reservedWord('assembly'),
+            choice($.type_name, $.verbatim_string_characters),
+          ),
+          seq(
+            reservedWord('static'),
+            $.type_name,
+          ),
         ),
       ),
-
-    using_expression: ($) =>
-      choice($.string_literal, $.type_name),
 
     pipeline: ($) =>
       choice(
