@@ -28,11 +28,13 @@ jobs:
         uses: tree-sitter/setup-action/cli@v2
 
       - name: Download TheBigTestFile.ps1
-        run: curl -fsSL -o /tmp/TheBigTestFile.ps1 https://raw.githubusercontent.com/PowerShell/EditorSyntax/master/examples/TheBigTestFile.ps1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/PowerShell/EditorSyntax/contents/examples/TheBigTestFile.ps1 --jq '.content' | base64 -d > /tmp/TheBigTestFile.ps1
 
       - name: Parse TheBigTestFile.ps1
         run: |
-          OUTPUT=$(tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1)
+          OUTPUT=$(tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1 || true)
           ERROR_COUNT=$(echo "$OUTPUT" | grep -c 'ERROR' || true)
           echo "Parse errors: $ERROR_COUNT"
           # Expect no more than 19 errors (8 intentional + known limitations)
