@@ -52,7 +52,9 @@ export default grammar({
       token(
         seq(
           /[0-9]+/,
-          optional(choice('l', 'd')),
+          optional(
+            choice('y', 'uy', 's', 'us', 'u', 'l', 'ul', 'n', 'd'),
+          ),
           optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
         ),
       ),
@@ -62,7 +64,7 @@ export default grammar({
         seq(
           '0x',
           /[0-9a-fA-F]+/,
-          optional('l'),
+          optional(choice('y', 'uy', 's', 'us', 'u', 'l', 'ul', 'n')),
           optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
         ),
       ),
@@ -159,7 +161,7 @@ export default grammar({
 
     // Operators and punctuators
     assignement_operator: ($) =>
-      choice('=', '!=', '+=', '*=', '/=', '%=', '-='),
+      choice('=', '!=', '+=', '*=', '/=', '%=', '-=', '??='),
 
     file_redirection_operator: ($) =>
       choice(
@@ -365,6 +367,7 @@ export default grammar({
         reservedWord('begin'),
         reservedWord('process'),
         reservedWord('end'),
+        reservedWord('clean'),
       ),
 
     statement_block: ($) =>
@@ -387,6 +390,7 @@ export default grammar({
           $.inlinescript_statement,
           $.parallel_statement,
           $.sequence_statement,
+          seq($.using_statement, $._statement_terminator),
           seq($.pipeline, $._statement_terminator),
           $.empty_statement,
         ),
@@ -636,6 +640,20 @@ export default grammar({
 
     sequence_statement: ($) => seq(reservedWord('sequence'), $.statement_block),
 
+    using_statement: ($) =>
+      seq(
+        reservedWord('using'),
+        choice(
+          seq(reservedWord('namespace'), $.using_expression),
+          seq(reservedWord('module'), $.using_expression),
+          seq(reservedWord('assembly'), $.using_expression),
+          seq(reservedWord('type'), $.using_expression),
+        ),
+      ),
+
+    using_expression: ($) =>
+      choice($.string_literal, $.type_name),
+
     pipeline: ($) =>
       choice(
         $.assignment_expression,
@@ -729,9 +747,15 @@ export default grammar({
           new RegExp(caseInsensitive('class-')),
           new RegExp(caseInsensitive('enum-')),
           new RegExp(caseInsensitive('switch-')),
+          new RegExp(caseInsensitive('foreach-')),
           new RegExp(caseInsensitive('for-')),
           new RegExp(caseInsensitive('while-')),
+          new RegExp(caseInsensitive('do-')),
+          new RegExp(caseInsensitive('data-')),
           new RegExp(caseInsensitive('parallel-')),
+          new RegExp(caseInsensitive('inlinescript-')),
+          new RegExp(caseInsensitive('sequence-')),
+          new RegExp(caseInsensitive('using-')),
         ),
         repeat(
           choice(
@@ -863,7 +887,29 @@ export default grammar({
       seq($.simple_name, optional(seq('=', $.integer_literal))),
 
     // Expressions
-    _expression: ($) => $.logical_expression,
+    _expression: ($) => $.ternary_expression,
+
+    ternary_expression: ($) =>
+      prec.right(
+        choice(
+          $.null_coalesce_expression,
+          seq(
+            $.null_coalesce_expression,
+            '?',
+            $.ternary_expression,
+            ':',
+            $.ternary_expression,
+          ),
+        ),
+      ),
+
+    null_coalesce_expression: ($) =>
+      prec.left(
+        choice(
+          $.logical_expression,
+          seq($.null_coalesce_expression, '??', $.logical_expression),
+        ),
+      ),
 
     logical_expression: ($) =>
       prec.left(
@@ -1089,7 +1135,33 @@ export default grammar({
         seq($.argument_expression, repeat(seq(',', $.argument_expression))),
       ),
 
-    argument_expression: ($) => $.logical_argument_expression,
+    argument_expression: ($) => $.ternary_argument_expression,
+
+    ternary_argument_expression: ($) =>
+      prec.right(
+        choice(
+          $.null_coalesce_argument_expression,
+          seq(
+            $.null_coalesce_argument_expression,
+            '?',
+            $.ternary_argument_expression,
+            ':',
+            $.ternary_argument_expression,
+          ),
+        ),
+      ),
+
+    null_coalesce_argument_expression: ($) =>
+      prec.left(
+        choice(
+          $.logical_argument_expression,
+          seq(
+            $.null_coalesce_argument_expression,
+            '??',
+            $.logical_argument_expression,
+          ),
+        ),
+      ),
 
     logical_argument_expression: ($) =>
       prec.left(

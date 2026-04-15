@@ -46,7 +46,7 @@
       "required": true,
       "types": [
         {
-          "type": "logical_argument_expression",
+          "type": "ternary_argument_expression",
           "named": true
         }
       ]
@@ -215,6 +215,10 @@
             "named": true
           },
           {
+            "type": "using_statement",
+            "named": true
+          },
+          {
             "type": "while_statement",
             "named": true
           }
@@ -268,11 +272,11 @@
       "required": true,
       "types": [
         {
-          "type": "logical_expression",
+          "type": "simple_name",
           "named": true
         },
         {
-          "type": "simple_name",
+          "type": "ternary_expression",
           "named": true
         }
       ]
@@ -525,7 +529,7 @@
           "named": true
         },
         {
-          "type": "logical_expression",
+          "type": "ternary_expression",
           "named": true
         },
         {
@@ -951,10 +955,6 @@
           "named": true
         },
         {
-          "type": "logical_expression",
-          "named": true
-        },
-        {
           "type": "member_access",
           "named": true
         },
@@ -984,6 +984,10 @@
         },
         {
           "type": "sub_expression",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
           "named": true
         },
         {
@@ -1532,6 +1536,10 @@
           "named": true
         },
         {
+          "type": "using_statement",
+          "named": true
+        },
+        {
           "type": "while_statement",
           "named": true
         }
@@ -1849,7 +1857,7 @@
       "required": true,
       "types": [
         {
-          "type": "logical_expression",
+          "type": "ternary_expression",
           "named": true
         }
       ]
@@ -2105,6 +2113,44 @@
     }
   },
   {
+    "type": "null_coalesce_argument_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "logical_argument_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_argument_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "null_coalesce_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parallel_statement",
     "named": true,
     "fields": {},
@@ -2223,11 +2269,11 @@
           "named": true
         },
         {
-          "type": "logical_expression",
+          "type": "redirections",
           "named": true
         },
         {
-          "type": "redirections",
+          "type": "ternary_expression",
           "named": true
         },
         {
@@ -2696,7 +2742,7 @@
       "required": true,
       "types": [
         {
-          "type": "logical_expression",
+          "type": "ternary_expression",
           "named": true
         }
       ]
@@ -2811,6 +2857,10 @@
         },
         {
           "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "using_statement",
           "named": true
         },
         {
@@ -3117,6 +3167,44 @@
     }
   },
   {
+    "type": "ternary_argument_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "null_coalesce_argument_expression",
+          "named": true
+        },
+        {
+          "type": "ternary_argument_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ternary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "trap_statement",
     "named": true,
     "fields": {},
@@ -3293,6 +3381,40 @@
         },
         {
           "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "using_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "type_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "using_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "using_expression",
           "named": true
         }
       ]
@@ -3876,6 +3998,18 @@
     "named": false
   },
   {
+    "type": "?",
+    "named": false
+  },
+  {
+    "type": "??",
+    "named": false
+  },
+  {
+    "type": "??=",
+    "named": false
+  },
+  {
     "type": "@(",
     "named": false
   },
@@ -3896,6 +4030,10 @@
     "named": false
   },
   {
+    "type": "assembly",
+    "named": false
+  },
+  {
     "type": "begin",
     "named": false
   },
@@ -3912,12 +4050,17 @@
     "named": false
   },
   {
+    "type": "clean",
+    "named": false
+  },
+  {
     "type": "command_parameter",
     "named": true
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "continue",
@@ -4000,6 +4143,14 @@
     "named": true
   },
   {
+    "type": "module",
+    "named": false
+  },
+  {
+    "type": "namespace",
+    "named": false
+  },
+  {
     "type": "parallel",
     "named": false
   },
@@ -4052,11 +4203,19 @@
     "named": false
   },
   {
+    "type": "type",
+    "named": false
+  },
+  {
     "type": "type_identifier",
     "named": true
   },
   {
     "type": "until",
+    "named": false
+  },
+  {
+    "type": "using",
     "named": false
   },
   {

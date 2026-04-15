@@ -1,12 +1,8 @@
 ===
-Single inline comment
+Ternary operator
 ===
 
-$x = 3
-
-# This is a comment
-
-Get-ChildItem .
+$x = $true ? "yes" : "no"
 
 ---
 
@@ -28,7 +24,7 @@ Get-ChildItem .
                               (unary_expression
                                 (variable)))))))))))))
         (assignement_operator)
-        (pipeline
+        value: (pipeline
           (pipeline_chain
             (ternary_expression
               (null_coalesce_expression
@@ -41,26 +37,39 @@ Get-ChildItem .
                             (range_expression
                               (array_literal_expression
                                 (unary_expression
-                                  (integer_literal
-                                    (decimal_integer_literal)))))))))))))))))
-    (comment)
-    (pipeline
-      (pipeline_chain
-        (command
-          (command_name)
-          (command_elements
-            (command_argument_sep)
-            (generic_token)))))))
+                                  (variable)))))))))))
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal)))))))))))))
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal))))))))))))))))))))
 
 ===
-Single line block comment
+Null-coalescing operator
 ===
 
-$x = 3
-
-<# Block comment #>
-
-Get-ChildItem .
+$x = $y ?? "default"
 
 ---
 
@@ -82,10 +91,21 @@ Get-ChildItem .
                               (unary_expression
                                 (variable)))))))))))))
         (assignement_operator)
-        (pipeline
+        value: (pipeline
           (pipeline_chain
             (ternary_expression
               (null_coalesce_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable)))))))))))
                 (logical_expression
                   (bitwise_expression
                     (comparison_expression
@@ -95,34 +115,14 @@ Get-ChildItem .
                             (range_expression
                               (array_literal_expression
                                 (unary_expression
-                                  (integer_literal
-                                    (decimal_integer_literal)))))))))))))))))
-    (comment)
-    (pipeline
-      (pipeline_chain
-        (command
-          (command_name)
-          (command_elements
-            (command_argument_sep)
-            (generic_token)))))))
+                                  (string_literal
+                                    (expandable_string_literal)))))))))))))))))))
 
 ===
-Multi-line block comment
+Null-coalescing assignment
 ===
 
-$x = 3
-
-<#
-
-Here
-
-is a
-
-longer
-
-comment           #>
-
-Get-ChildItem .
+$x ??= "default"
 
 ---
 
@@ -144,7 +144,7 @@ Get-ChildItem .
                               (unary_expression
                                 (variable)))))))))))))
         (assignement_operator)
-        (pipeline
+        value: (pipeline
           (pipeline_chain
             (ternary_expression
               (null_coalesce_expression
@@ -157,68 +157,5 @@ Get-ChildItem .
                             (range_expression
                               (array_literal_expression
                                 (unary_expression
-                                  (integer_literal
-                                    (decimal_integer_literal)))))))))))))))))
-    (comment)
-    (pipeline
-      (pipeline_chain
-        (command
-          (command_name)
-          (command_elements
-            (command_argument_sep)
-            (generic_token)))))))
-
-===
-Pathological block comment #1
-===
-
-<##>
-$a
-
----
-
-(program
-  (comment)
-  (statement_list
-    (pipeline
-      (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
-
-===
-Pathological block comment #2
-===
-
-<###>
-$a
-
-
----
-
-(program
-  (comment)
-  (statement_list
-    (pipeline
-      (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+                                  (string_literal
+                                    (expandable_string_literal)))))))))))))))))))

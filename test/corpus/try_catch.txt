@@ -1,0 +1,149 @@
+===
+Try catch basic
+===
+
+try {
+    Get-Process
+} catch {
+    Write-Error $_
+}
+
+---
+
+(program
+  (statement_list
+    (try_statement
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (command
+                command_name: (command_name))))))
+      (catch_clauses
+        (catch_clause
+          (statement_block
+            statement_list: (statement_list
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)
+                    command_elements: (command_elements
+                      (command_argument_sep)
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))))))))
+
+===
+Try catch with typed catch and finally
+===
+
+try {
+    Get-Process
+} catch [System.IO.IOException] {
+    Write-Error "IO Error"
+} catch {
+    Write-Error $_
+} finally {
+    Write-Host "Done"
+}
+
+---
+
+(program
+  (statement_list
+    (try_statement
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (command
+                command_name: (command_name))))))
+      (catch_clauses
+        (catch_clause
+          (catch_type_list
+            (type_literal
+              (type_spec
+                (type_name
+                  (type_name
+                    (type_name
+                      (type_identifier))
+                    (type_identifier))
+                  (type_identifier)))))
+          (statement_block
+            statement_list: (statement_list
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)
+                    command_elements: (command_elements
+                      (command_argument_sep)
+                      (array_literal_expression
+                        (unary_expression
+                          (string_literal
+                            (expandable_string_literal)))))))))))
+        (catch_clause
+          (statement_block
+            statement_list: (statement_list
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)
+                    command_elements: (command_elements
+                      (command_argument_sep)
+                      (array_literal_expression
+                        (unary_expression
+                          (variable)))))))))))
+      (finally_clause
+        (statement_block
+          statement_list: (statement_list
+            (pipeline
+              (pipeline_chain
+                (command
+                  command_name: (command_name)
+                  command_elements: (command_elements
+                    (command_argument_sep)
+                    (array_literal_expression
+                      (unary_expression
+                        (string_literal
+                          (expandable_string_literal))))))))))))))
+
+===
+Try finally without catch
+===
+
+try {
+    Get-Content "file.txt"
+} finally {
+    Write-Host "Cleanup"
+}
+
+---
+
+(program
+  (statement_list
+    (try_statement
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (command
+                command_name: (command_name)
+                command_elements: (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal))))))))))
+      (finally_clause
+        (statement_block
+          statement_list: (statement_list
+            (pipeline
+              (pipeline_chain
+                (command
+                  command_name: (command_name)
+                  command_elements: (command_elements
+                    (command_argument_sep)
+                    (array_literal_expression
+                      (unary_expression
+                        (string_literal
+                          (expandable_string_literal))))))))))))))

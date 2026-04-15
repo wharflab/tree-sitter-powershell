@@ -1,0 +1,111 @@
+===
+Do-while loop
+===
+
+do {
+    $i++
+} while ($i -lt 10)
+
+---
+
+(program
+  (statement_list
+    (do_statement
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (post_increment_expression
+                                      (variable)))))))))))))))))
+      condition: (while_condition
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable))))))))
+                      (comparison_operator)
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal)))))))))))))))))))
+
+===
+Do-until loop
+===
+
+do {
+    $i++
+} until ($i -ge 10)
+
+---
+
+(program
+  (statement_list
+    (do_statement
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (post_increment_expression
+                                      (variable)))))))))))))))))
+      condition: (while_condition
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable))))))))
+                      (comparison_operator)
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal)))))))))))))))))))
