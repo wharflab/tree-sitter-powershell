@@ -19,15 +19,14 @@
   "metadata": {
     "version": "0.26.3",
     "license": "MIT",
-    "description": "A Powershell grammar for tree-sitter",
+    "description": "PowerShell grammar for tree-sitter",
     "authors": [
       {
-        "name": "Airbus CERT",
-        "email": "cert@airbus.com"
+        "name": "Wharflab"
       }
     ],
     "links": {
-      "repository": "https://github.com/airbus-cert/tree-sitter-powershell"
+      "repository": "https://github.com/wharflab/tree-sitter-powershell"
     }
   },
   "bindings": {

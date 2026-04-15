@@ -1,13 +1,13 @@
 [package]
-name = "tree-sitter-powershell"
-description = "A Powershell grammar for tree-sitter"
+name = "tree-sitter-pwsh"
+description = "PowerShell grammar for tree-sitter"
 version = "0.26.3"
-authors = ["Airbus CERT <cert@airbus.com>"]
+authors = ["Wharflab"]
 license = "MIT"
 readme = "README.md"
-keywords = ["incremental", "parsing", "tree-sitter", "powershell"]
+keywords = ["incremental", "parsing", "tree-sitter", "powershell", "pwsh"]
 categories = ["parser-implementations", "parsing", "text-editors"]
-repository = "https://github.com/airbus-cert/tree-sitter-powershell"
+repository = "https://github.com/wharflab/tree-sitter-powershell"
 edition = "2021"
 autoexamples = false
 

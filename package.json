@@ -1,11 +1,11 @@
 {
-  "name": "tree-sitter-powershell",
+  "name": "tree-sitter-pwsh",
   "version": "0.26.3",
-  "description": "A Powershell grammar for tree-sitter",
+  "description": "PowerShell grammar for tree-sitter",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wharflab/tree-sitter-powershell.git"
+    "url": "git+https://github.com/wharflab/tree-sitter-pwsh.git"
   },
   "license": "MIT",
   "main": "bindings/node",
@@ -14,7 +14,8 @@
     "incremental",
     "parsing",
     "tree-sitter",
-    "powershell"
+    "powershell",
+    "pwsh"
   ],
   "files": [
     "grammar.js",
