@@ -12,17 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
-        with:
-          cache: npm
-          node-version: ${{vars.NODE_VERSION}}
-
-      - name: Install modules
-        run: npm ci --legacy-peer-deps
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Run corpus tests
-        run: npx tree-sitter test
+        run: tree-sitter test
 
   parse-sample:
     runs-on: ubuntu-latest
@@ -30,21 +24,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
-        with:
-          cache: npm
-          node-version: ${{vars.NODE_VERSION}}
-
-      - name: Install modules
-        run: npm ci --legacy-peer-deps
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
 
       - name: Download TheBigTestFile.ps1
         run: curl -fsSL -o /tmp/TheBigTestFile.ps1 https://raw.githubusercontent.com/PowerShell/EditorSyntax/master/examples/TheBigTestFile.ps1
 
       - name: Parse TheBigTestFile.ps1
         run: |
-          OUTPUT=$(npx tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1)
+          OUTPUT=$(tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1)
           ERROR_COUNT=$(echo "$OUTPUT" | grep -c 'ERROR' || true)
           echo "Parse errors: $ERROR_COUNT"
           # Expect no more than 19 errors (8 intentional + known limitations)
