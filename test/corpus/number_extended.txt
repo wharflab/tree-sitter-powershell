@@ -231,3 +231,29 @@ Hexadecimal unsigned
                             (unary_expression
                               (integer_literal
                                 (hexadecimal_integer_literal)))))))))))))))))
+
+===
+BigInteger suffix
+===
+
+1n
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))))
