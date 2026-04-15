@@ -29,7 +29,15 @@ export default grammar({
   ],
 
   rules: {
-    program: ($) => seq(optional($.param_block), $.statement_list),
+    program: ($) =>
+      seq(
+        optional($.using_directive_list),
+        optional($.param_block),
+        optional($.statement_list),
+      ),
+
+    using_directive_list: ($) =>
+      repeat1(seq($.using_statement, $._statement_terminator)),
 
     // Comments
     comment: ($) =>
@@ -395,7 +403,6 @@ export default grammar({
           $.inlinescript_statement,
           $.parallel_statement,
           $.sequence_statement,
-          seq($.using_statement, $._statement_terminator),
           seq($.pipeline, $._statement_terminator),
           $.empty_statement,
         ),

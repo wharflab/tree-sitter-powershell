@@ -215,10 +215,6 @@
             "named": true
           },
           {
-            "type": "using_statement",
-            "named": true
-          },
-          {
             "type": "while_statement",
             "named": true
           }
@@ -1555,10 +1551,6 @@
           "named": true
         },
         {
-          "type": "using_statement",
-          "named": true
-        },
-        {
           "type": "while_statement",
           "named": true
         }
@@ -2569,7 +2561,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "param_block",
@@ -2577,6 +2569,10 @@
         },
         {
           "type": "statement_list",
+          "named": true
+        },
+        {
+          "type": "using_directive_list",
           "named": true
         }
       ]
@@ -2959,10 +2955,6 @@
         },
         {
           "type": "try_statement",
-          "named": true
-        },
-        {
-          "type": "using_statement",
           "named": true
         },
         {
@@ -3483,6 +3475,21 @@
         },
         {
           "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "using_directive_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "using_statement",
           "named": true
         }
       ]

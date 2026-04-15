@@ -7,7 +7,7 @@ using namespace System.IO
 ---
 
 (program
-  (statement_list
+  (using_directive_list
     (using_statement
       (using_expression
         (type_name
@@ -24,7 +24,7 @@ using module PSReadLine
 ---
 
 (program
-  (statement_list
+  (using_directive_list
     (using_statement
       (using_expression
         (type_name
@@ -39,7 +39,7 @@ using assembly 'System.Drawing.dll'
 ---
 
 (program
-  (statement_list
+  (using_directive_list
     (using_statement
       (using_expression
         (string_literal
@@ -54,7 +54,7 @@ using namespace System.Collections.Generic
 ---
 
 (program
-  (statement_list
+  (using_directive_list
     (using_statement
       (using_expression
         (type_name
