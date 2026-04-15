@@ -1,0 +1,126 @@
+===
+Using namespace
+===
+
+using namespace System.IO
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (type_name
+        (type_name
+          (type_identifier))
+        (type_identifier)))))
+
+===
+Using module
+===
+
+using module PSReadLine
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (type_name
+        (type_identifier)))))
+
+===
+Using assembly with string
+===
+
+using assembly 'System.Drawing.dll'
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (verbatim_string_characters))))
+
+===
+Using namespace with deep path
+===
+
+using namespace System.Collections.Generic
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (type_name
+        (type_name
+          (type_name
+            (type_identifier))
+          (type_identifier))
+        (type_identifier)))))
+
+===
+Using static
+===
+
+using static System.Math
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (type_name
+        (type_name
+          (type_identifier))
+        (type_identifier)))))
+
+===
+Using module with hashtable
+===
+
+using module @{ ModuleName = 'PSReadLine'; RequiredVersion = '2.0' }
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (hash_literal_expression
+        (hash_literal_body
+          (hash_entry
+            (key_expression
+              (simple_name))
+            (pipeline
+              (pipeline_chain
+                (ternary_expression
+                  (null_coalesce_expression
+                    (logical_expression
+                      (bitwise_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (string_literal
+                                        (verbatim_string_characters))))))))))))))))
+          (hash_entry
+            (key_expression
+              (simple_name))
+            (pipeline
+              (pipeline_chain
+                (ternary_expression
+                  (null_coalesce_expression
+                    (logical_expression
+                      (bitwise_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (string_literal
+                                        (verbatim_string_characters)))))))))))))))))))))

@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Run corpus tests
+        run: tree-sitter test
+
+  parse-sample:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Download TheBigTestFile.ps1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/PowerShell/EditorSyntax/contents/examples/TheBigTestFile.ps1 --jq '.content' | base64 -d > /tmp/TheBigTestFile.ps1
+
+      - name: Parse TheBigTestFile.ps1
+        id: parse
+        continue-on-error: true
+        run: tree-sitter parse /tmp/TheBigTestFile.ps1 2>&1 | tee /tmp/parse-output.txt
+
+      - name: Check error count
+        run: |
+          ERROR_COUNT=$(grep -c 'ERROR' /tmp/parse-output.txt || true)
+          echo "Parse errors: $ERROR_COUNT"
+          if [ "$ERROR_COUNT" -gt 19 ]; then
+            echo "::error::Too many parse errors ($ERROR_COUNT > 19)"
+            grep 'ERROR' /tmp/parse-output.txt
+            exit 1
+          fi
+          echo "Within acceptable threshold"

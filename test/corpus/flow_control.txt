@@ -1,0 +1,128 @@
+===
+Throw with string
+===
+
+throw "Error occurred"
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal))))))))))))))))))
+
+===
+Return with value
+===
+
+return 42
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (integer_literal
+                                  (decimal_integer_literal))))))))))))))))))
+
+===
+Return without value
+===
+
+return
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement)))
+
+===
+Exit with code
+===
+
+exit 1
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (integer_literal
+                                  (decimal_integer_literal))))))))))))))))))
+
+===
+Break without label
+===
+
+break
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement)))
+
+===
+Continue without label
+===
+
+continue
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement)))
+
+===
+Throw without value
+===
+
+throw
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement)))

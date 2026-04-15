@@ -9,43 +9,46 @@ if ($a -gt 2) {
 ---
 
 (program
- (statement_list
-  (if_statement
-    (pipeline
-      (pipeline_chain
-        (logical_expression
-          (bitwise_expression
-            (comparison_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (variable))))))))
-              (comparison_operator)
-              (additive_expression
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))))))))))))
-    (statement_block
-     (statement_list
+  (statement_list
+    (if_statement
       (pipeline
         (pipeline_chain
-          (command
-            (command_name)
-            (command_elements
-              (command_argument_sep)
-              (array_literal_expression
-                (unary_expression
-                  (string_literal
-                    (expandable_string_literal
-                      (variable))))))))))))))
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable))))))))
+                    (comparison_operator)
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (integer_literal
+                                  (decimal_integer_literal)))))))))))))))
+      (statement_block
+        (statement_list
+          (pipeline
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal
+                          (variable))))))))))))))
+
 ===
 If else
 ===
@@ -65,40 +68,28 @@ else {
     (if_statement
       (pipeline
         (pipeline_chain
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
-    (statement_block
-      (statement_list
-        (pipeline
-          (pipeline_chain
-            (command
-              (command_name)
-              (command_elements
-                (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (string_literal
-                      (expandable_string_literal
-                        (variable)))))))))))
-    (else_clause
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable))))))))
+                    (comparison_operator)
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (integer_literal
+                                  (decimal_integer_literal)))))))))))))))
       (statement_block
         (statement_list
           (pipeline
@@ -109,29 +100,45 @@ else {
                   (command_argument_sep)
                   (array_literal_expression
                     (unary_expression
-                      (parenthesized_expression
-                      (pipeline
-                        (pipeline_chain
-                          (logical_expression
-                            (bitwise_expression
-                              (comparison_expression
-                                (additive_expression
-                                  (additive_expression
-                                    (multiplicative_expression
-                                      (format_expression
-                                        (range_expression
-                                          (array_literal_expression
-                                            (unary_expression
-                                              (string_literal
-                                                (expandable_string_literal
-                                                  (variable)))))))))
-                                  (multiplicative_expression
-                                    (format_expression
-                                      (range_expression
-                                        (array_literal_expression
-                                          (unary_expression
-                                            (string_literal
-                                              (expandable_string_literal))))))))))))))))))))))))))
+                      (string_literal
+                        (expandable_string_literal
+                          (variable)))))))))))
+      (else_clause
+        (statement_block
+          (statement_list
+            (pipeline
+              (pipeline_chain
+                (command
+                  (command_name)
+                  (command_elements
+                    (command_argument_sep)
+                    (array_literal_expression
+                      (unary_expression
+                        (parenthesized_expression
+                          (pipeline
+                            (pipeline_chain
+                              (ternary_expression
+                                (null_coalesce_expression
+                                  (logical_expression
+                                    (bitwise_expression
+                                      (comparison_expression
+                                        (additive_expression
+                                          (additive_expression
+                                            (multiplicative_expression
+                                              (format_expression
+                                                (range_expression
+                                                  (array_literal_expression
+                                                    (unary_expression
+                                                      (string_literal
+                                                        (expandable_string_literal
+                                                          (variable)))))))))
+                                          (multiplicative_expression
+                                            (format_expression
+                                              (range_expression
+                                                (array_literal_expression
+                                                  (unary_expression
+                                                    (string_literal
+                                                      (expandable_string_literal))))))))))))))))))))))))))))
 
 ===
 If elseif else
@@ -155,43 +162,8 @@ else {
     (if_statement
       (pipeline
         (pipeline_chain
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
-      (statement_block
-        (statement_list
-          (pipeline
-            (pipeline_chain
-              (command
-                (command_name)
-                (command_elements
-                  (command_argument_sep)
-                  (array_literal_expression
-                    (unary_expression
-                      (string_literal
-                        (expandable_string_literal
-                          (variable)))))))))))
-      (elseif_clauses
-        (elseif_clause
-          (pipeline
-            (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
               (logical_expression
                 (bitwise_expression
                   (comparison_expression
@@ -211,7 +183,46 @@ else {
                             (array_literal_expression
                               (unary_expression
                                 (integer_literal
-                                  (decimal_integer_literal)))))))))))))
+                                  (decimal_integer_literal)))))))))))))))
+      (statement_block
+        (statement_list
+          (pipeline
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal
+                          (variable)))))))))))
+      (elseif_clauses
+        (elseif_clause
+          (pipeline
+            (pipeline_chain
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (variable))))))))
+                        (comparison_operator)
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (integer_literal
+                                      (decimal_integer_literal)))))))))))))))
           (statement_block
             (statement_list
               (pipeline
@@ -222,9 +233,9 @@ else {
                       (command_argument_sep)
                       (array_literal_expression
                         (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)))))))))))))
+                          (string_literal
+                            (expandable_string_literal
+                              (variable)))))))))))))
       (else_clause
         (statement_block
           (statement_list
@@ -236,29 +247,31 @@ else {
                     (command_argument_sep)
                     (array_literal_expression
                       (unary_expression
-                      (parenthesized_expression
-                        (pipeline
-                          (pipeline_chain
-                            (logical_expression
-                              (bitwise_expression
-                                (comparison_expression
-                                  (additive_expression
-                                    (additive_expression
-                                      (multiplicative_expression
-                                        (format_expression
-                                          (range_expression
-                                            (array_literal_expression
-                                              (unary_expression
-                                                (string_literal
-                                                  (expandable_string_literal
-                                                    (variable)))))))))
-                                    (multiplicative_expression
-                                      (format_expression
-                                        (range_expression
-                                          (array_literal_expression
-                                            (unary_expression
-                                              (string_literal
-                                                (expandable_string_literal))))))))))))))))))))))))))
+                        (parenthesized_expression
+                          (pipeline
+                            (pipeline_chain
+                              (ternary_expression
+                                (null_coalesce_expression
+                                  (logical_expression
+                                    (bitwise_expression
+                                      (comparison_expression
+                                        (additive_expression
+                                          (additive_expression
+                                            (multiplicative_expression
+                                              (format_expression
+                                                (range_expression
+                                                  (array_literal_expression
+                                                    (unary_expression
+                                                      (string_literal
+                                                        (expandable_string_literal
+                                                          (variable)))))))))
+                                          (multiplicative_expression
+                                            (format_expression
+                                              (range_expression
+                                                (array_literal_expression
+                                                  (unary_expression
+                                                    (string_literal
+                                                      (expandable_string_literal))))))))))))))))))))))))))))
 
 ===
 Switch Test 1
@@ -280,17 +293,19 @@ switch (3)
       (switch_condition
         (pipeline
           (pipeline_chain
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal))))))))))))))
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal))))))))))))))))
       (switch_body
         (switch_clauses
           (switch_clause
@@ -301,17 +316,19 @@ switch (3)
               (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal))))))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -320,17 +337,19 @@ switch (3)
               (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal))))))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -339,17 +358,19 @@ switch (3)
               (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal))))))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -358,17 +379,19 @@ switch (3)
               (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))))))))
 
 ===
 Switch Test 2
@@ -391,20 +414,22 @@ switch (4, 2)
       (switch_condition
         (pipeline
           (pipeline_chain
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal))))))))))))))
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal)))
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal))))))))))))))))
       (switch_body
         (switch_clauses
           (switch_clause
@@ -415,17 +440,19 @@ switch (4, 2)
               statement_list: (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))
                 (empty_statement)
                 (flow_control_statement))))
           (switch_clause
@@ -436,17 +463,19 @@ switch (4, 2)
               statement_list: (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))
                 (empty_statement)
                 (flow_control_statement))))
           (switch_clause
@@ -457,17 +486,19 @@ switch (4, 2)
               statement_list: (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))
                 (empty_statement)
                 (flow_control_statement))))
           (switch_clause
@@ -478,17 +509,19 @@ switch (4, 2)
               statement_list: (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))
                 (empty_statement)
                 (flow_control_statement))))
           (switch_clause
@@ -499,18 +532,19 @@ switch (4, 2)
               statement_list: (statement_list
                 (pipeline
                   (pipeline_chain
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))))))))))))
-
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))))))))
 
 ===
 Switch Test 3
@@ -530,16 +564,18 @@ switch ($fontstyle) {
       (switch_condition
         (pipeline
           (pipeline_chain
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable)))))))))))))
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable)))))))))))))))
       (switch_body
         (switch_clauses
           (switch_clause
@@ -549,29 +585,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -579,29 +619,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -609,29 +653,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -639,29 +687,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable))))))))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable))))))))))))))))))))))))
 
 ===
 Switch Test 4
@@ -681,16 +733,18 @@ switch ($fontstyle) {
       (switch_condition
         (pipeline
           (pipeline_chain
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable)))))))))))))
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable)))))))))))))))
       (switch_body
         (switch_clauses
           (switch_clause
@@ -700,29 +754,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -730,29 +788,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -760,29 +822,33 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable)))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable)))))))))))))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -790,26 +856,30 @@ switch ($fontstyle) {
                 (pipeline
                   (assignment_expression
                     (left_assignment_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))
                     (assignement_operator)
                     (pipeline
                       (pipeline_chain
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (variable))))))))))))))))))))))
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable))))))))))))))))))))))))

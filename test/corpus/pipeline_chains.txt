@@ -76,25 +76,27 @@ echo toto > tmp1 && 1+1 | write-output > tmp2
             (command_argument_sep))))
       (pipeline_chain_tail)
       (pipeline_chain
-        (logical_expression
-          (bitwise_expression
-            (comparison_expression
-              (additive_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))))))))))
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (integer_literal
+                                  (decimal_integer_literal))))))))
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))
         (command
           command_name: (command_name)
           command_elements: (command_elements
