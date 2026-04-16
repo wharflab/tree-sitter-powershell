@@ -1,11 +1,11 @@
 [build-system]
-requires = ["setuptools>=62.4.0", "wheel"]
+requires = ["setuptools>=80"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-pwsh"
 description = "PowerShell grammar for tree-sitter"
-version = "0.26.3"
+dynamic = ["version"]
 keywords = ["incremental", "parsing", "tree-sitter", "powershell", "pwsh"]
 classifiers = [
   "Intended Audience :: Developers",
