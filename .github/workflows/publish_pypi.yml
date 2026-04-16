@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.event_name == 'pull_request' && 'testpypi' || 'pypi' }}
-      url: ${{ github.event_name == 'pull_request' && format('https://test.pypi.org/project/{0}/', github.event.repository.name) || format('https://pypi.org/project/{0}/', github.event.repository.name) }}
+      url: ${{ github.event_name == 'pull_request' && 'https://test.pypi.org/project/tree-sitter-pwsh/' || 'https://pypi.org/project/tree-sitter-pwsh/' }}
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v8

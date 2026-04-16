@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment:
       name: npm
-      url: https://www.npmjs.com/package/${{github.event.repository.name}}/
+      url: https://www.npmjs.com/package/tree-sitter-pwsh/
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -118,7 +118,6 @@ jobs:
         continue-on-error: true
         run: mv -v prebuilds/*.wasm .
       - name: Sync version from tree-sitter.json
-        continue-on-error: ${{ github.event_name == 'pull_request' }}
-        run: npm version --no-git-tag-version "$(jq -r .metadata.version tree-sitter.json)"
+        run: npm version --no-git-tag-version --allow-same-version "$(jq -r .metadata.version tree-sitter.json)"
       - name: Publish to npm
         run: npm publish ${{ github.event_name == 'pull_request' && '--dry-run' || '' }}
