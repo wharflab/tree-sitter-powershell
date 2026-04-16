@@ -1,12 +1,6 @@
 // swift-tools-version:5.3
 
-import Foundation
 import PackageDescription
-
-var sources = ["src/parser.c"]
-if FileManager.default.fileExists(atPath: "src/scanner.c") {
-    sources.append("src/scanner.c")
-}
 
 let package = Package(
     name: "TreeSitterPowershell",
@@ -21,12 +15,52 @@ let package = Package(
             name: "TreeSitterPowershell",
             dependencies: [],
             path: ".",
-            sources: sources,
+            exclude: [
+                ".editorconfig",
+                ".envrc",
+                ".gitattributes",
+                ".github",
+                ".zed",
+                "binding.gyp",
+                "bindings/c",
+                "bindings/go",
+                "bindings/node",
+                "bindings/python",
+                "bindings/rust",
+                "Cargo.lock",
+                "Cargo.toml",
+                "CMakeLists.txt",
+                "eslint.config.mjs",
+                "flake.lock",
+                "flake.nix",
+                "go-compat",
+                "go.mod",
+                "go.sum",
+                "grammar.js",
+                "LICENSE",
+                "Makefile",
+                "node_types.go",
+                "package-lock.json",
+                "package.json",
+                "pyproject.toml",
+                "queries.go",
+                "queries_test.go",
+                "README.md",
+                "setup.py",
+                "src/grammar.json",
+                "src/node-types.json",
+                "test",
+                "tree-sitter.json",
+            ],
+            sources: [
+                "src/parser.c",
+                "src/scanner.c",
+            ],
             resources: [
-                .copy("queries")
+                .copy("queries"),
             ],
             publicHeadersPath: "bindings/swift",
-            cSettings: [.headerSearchPath("src")]
+            cSettings: [.headerSearchPath("src")],
         ),
         .testTarget(
             name: "TreeSitterPowershellTests",
@@ -34,8 +68,8 @@ let package = Package(
                 "SwiftTreeSitter",
                 "TreeSitterPowershell",
             ],
-            path: "bindings/swift/TreeSitterPowershellTests"
-        )
+            path: "bindings/swift/TreeSitterPowershellTests",
+        ),
     ],
     cLanguageStandard: .c11
 )
