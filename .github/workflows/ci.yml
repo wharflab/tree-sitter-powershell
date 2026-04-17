@@ -41,6 +41,7 @@ jobs:
         run: |
           ERROR_COUNT=$(grep -c 'ERROR' /tmp/parse-output.txt || true)
           echo "Parse errors: $ERROR_COUNT"
+          # TODO: Keep lowering this threshold as remaining TheBigTestFile regressions are fixed.
           if [ "$ERROR_COUNT" -gt 12 ]; then
             echo "::error::Too many parse errors ($ERROR_COUNT > 12)"
             grep 'ERROR' /tmp/parse-output.txt
