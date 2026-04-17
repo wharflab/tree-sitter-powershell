@@ -31,8 +31,12 @@ export default grammar({
   rules: {
     program: ($) =>
       seq(
-        optional($.using_directive_list),
-        optional($.requires_directive_list),
+        optional(
+          choice(
+            seq($.requires_directive_list, optional($.using_directive_list)),
+            seq($.using_directive_list, optional($.requires_directive_list)),
+          ),
+        ),
         optional($.param_block),
         optional($.statement_list),
       ),
@@ -685,10 +689,13 @@ export default grammar({
     sequence_statement: ($) => seq(reservedWord('sequence'), $.statement_block),
 
     requires_statement: ($) =>
-      seq($.requires_keyword, repeat1($.requires_argument)),
+      seq($.requires_keyword, repeat1($.requires_argument_group)),
 
     requires_keyword: () =>
       token(prec(PREC.KEYWORD, new RegExp(`#${caseInsensitive('requires')}`))),
+
+    requires_argument_group: ($) =>
+      seq($.requires_argument, repeat(seq(',', $.requires_argument))),
 
     requires_argument: ($) =>
       choice(
@@ -698,7 +705,6 @@ export default grammar({
         $.real_literal,
         $.integer_literal,
         $.generic_token,
-        ',',
       ),
 
     using_statement: ($) =>

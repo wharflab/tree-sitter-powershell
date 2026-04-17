@@ -27,14 +27,20 @@ static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
 static bool is_inline_trivia(int32_t lookahead)
 {
+    if (lookahead >= 0x2000 && lookahead <= 0x200B) return true;
+
     switch (lookahead) {
         case ' ':
         case '\t':
         case '\f':
         case '\v':
+        case 0x1680:
         case 0x00A0:
+        case 0x202F:
+        case 0x205F:
         case 0x200B:
         case 0x2060:
+        case 0x3000:
         case 0xFEFF:
             return true;
         default:
@@ -64,10 +70,6 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 static bool scan_for_clause_break(TSLexer *lexer, const bool *valid_symbols)
 {
     if (!valid_symbols[FOR_CLAUSE_BREAK]) return false;
-
-    while (is_inline_trivia(lexer->lookahead)) {
-        skip(lexer);
-    }
 
     if (lexer->lookahead == '\r') {
         lexer->advance(lexer, false);

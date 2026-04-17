@@ -9,20 +9,51 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "using_directive_list"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "requires_directive_list"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "requires_directive_list"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "using_directive_list"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "using_directive_list"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "requires_directive_list"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -4036,7 +4067,7 @@
           "type": "REPEAT1",
           "content": {
             "type": "SYMBOL",
-            "name": "requires_argument"
+            "name": "requires_argument_group"
           }
         }
       ]
@@ -4051,6 +4082,31 @@
           "value": "#[rR][eE][qQ][uU][iI][rR][eE][sS]"
         }
       }
+    },
+    "requires_argument_group": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "requires_argument"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "requires_argument"
+              }
+            ]
+          }
+        }
+      ]
     },
     "requires_argument": {
       "type": "CHOICE",
@@ -4078,10 +4134,6 @@
         {
           "type": "SYMBOL",
           "name": "generic_token"
-        },
-        {
-          "type": "STRING",
-          "value": ","
         }
       ]
     },

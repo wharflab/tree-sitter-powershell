@@ -2747,7 +2747,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "command_parameter",
@@ -2777,6 +2777,21 @@
     }
   },
   {
+    "type": "requires_argument_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "requires_argument",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "requires_directive_list",
     "named": true,
     "fields": {},
@@ -2800,7 +2815,7 @@
       "required": true,
       "types": [
         {
-          "type": "requires_argument",
+          "type": "requires_argument_group",
           "named": true
         },
         {
