@@ -6,18 +6,18 @@ Parses `.ps1` and `.psm1` files into a concrete syntax tree for syntax highlight
 
 ## Features
 
-- **Control flow** &mdash; `if`/`elseif`/`else`, `switch` (-Regex, -Wildcard, -Exact, -CaseSensitive), `foreach`, `for`, `while`, `do`/`while`/`until`
-- **Functions** &mdash; `function`, `filter`, `workflow` with `param()` blocks, attributes, validation, named blocks (`begin`/`process`/`end`/`clean`)
-- **Classes &amp; enums** &mdash; properties, methods, constructors with `: base()`/`: this()` chaining, `hidden`/`static` attributes, inheritance
+- **Pipelines and commands** &mdash; pipes `|`, chain operators `&&` `||`, redirections `>` `>>` `2>&1`, invocation `&` `.`, splatting `@params`
+- **Directives** &mdash; `using namespace`, `using module` (including hashtable specs), `using assembly`, `using static`, and top-of-file `#Requires`
+- **Strings and interpolation** &mdash; expandable strings `"$var $(expr)"`, verbatim strings, here-strings `@"` / `@'`, and PowerShell-style escaping
+- **Functions and named blocks** &mdash; `function`, `filter`, `workflow` with `param()` blocks, attributes, validation, and `begin`/`process`/`end`/`clean`
+- **Control flow** &mdash; `if`/`elseif`/`else`, `switch` (`-Regex`, `-Wildcard`, `-Exact`, `-CaseSensitive`), `foreach`, `for`, `while`, `do`/`while`/`until`
 - **Error handling** &mdash; `try`/`catch`/`finally` with typed catch clauses, `trap`, `throw`, `break`, `continue`, `return`, `exit`
-- **Pipelines** &mdash; pipes `|`, chain operators `&&` `||`, redirections `>` `>>` `2>&1`, invocation `&` `.`, splatting `@params`
 - **Expressions** &mdash; ternary `? :`, null-coalescing `??`/`??=`, comparison/string/type/containment operators, `-f` format, range `..`
-- **Types** &mdash; full .NET type system: generics `[Dictionary[string, int]]`, arrays `[int[]]`, nested types `Array+Enumerator`, backtick-arity `` Dictionary`2 ``
-- **Strings** &mdash; expandable `"$var $(expr)"`, verbatim `'literal'`, here-strings `@"` / `@'`, escape sequences
-- **Numbers** &mdash; decimal, hex `0x`, scientific `1.5e10`, all suffixes (`u`, `ul`, `s`, `us`, `y`, `uy`, `n`, `l`, `d`), multipliers (`kb`/`mb`/`gb`/`tb`/`pb`)
-- **`using` directives** &mdash; `using namespace`, `using module` (with hashtable specs), `using assembly`, `using static`
-- **Variables** &mdash; `$var`, `$scope:var`, `${braced}` (with backtick escapes), `@splatted`, special vars `$$` `$^` `$?` `$_`
-- **Case-insensitive** &mdash; all keywords and operators match regardless of casing
+- **Types** &mdash; common .NET type forms including generics `[Dictionary[string, int]]`, arrays `[int[]]`, nested types `Array+Enumerator`, and backtick arity `` Dictionary`2 ``
+- **Variables** &mdash; `$var`, `$scope:var`, `${braced}` with backtick escapes, `@splatted`, and special vars `$$` `$^` `$?` `$_`
+- **Classes and enums** &mdash; properties, methods, constructors with `: base()`/`: this()` chaining, `hidden`/`static` attributes, and inheritance clauses
+- **Numbers** &mdash; decimal, hex `0x`, scientific `1.5e10`, numeric suffixes (`u`, `ul`, `s`, `us`, `y`, `uy`, `n`, `l`, `d`), and size multipliers (`kb`/`mb`/`gb`/`tb`/`pb`)
+- **Case-insensitive keywords and operators** &mdash; parses PowerShell casing variations without normalization
 
 ## Example
 
@@ -158,6 +158,7 @@ The grammar ships with a `queries/highlights.scm` file for use in editors that s
 
 - [PowerShell Language Specification](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-01?view=powershell-7.5)
 - [PowerShell/EditorSyntax](https://github.com/PowerShell/EditorSyntax) &mdash; used as a real-world parsing benchmark
+- [PowerShell/tree-sitter-PowerShell](https://github.com/PowerShell/tree-sitter-PowerShell) &mdash; archived PowerShell grammar repo; provided a significant part of the corpus coverage and the `TheBigTestFile.ps1` benchmark target
 - Originally forked from [airbus-cert/tree-sitter-powershell](https://github.com/airbus-cert/tree-sitter-powershell)
 
 ## License

@@ -1,0 +1,183 @@
+===
+Requires : multiline modules hashtable
+===
+
+#Requires -ShellId MyLocalShell
+#Requires -PSEdition Core
+#Requires -Assembly System
+#Requires -Modules PSWorkflow @{
+    ModuleName="PSScheduledJob"
+    ModuleVersion="1.0.0.0"
+}
+
+throw "Do not run this file!"
+
+---
+
+(program
+  (requires_directive_list
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (generic_token))))
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (generic_token))))
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (generic_token))))
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (generic_token)))
+      (requires_argument_group
+        (requires_argument
+          (hash_literal_expression
+            (hash_literal_body
+              (hash_entry
+                (key_expression
+                  (simple_name))
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))
+              (hash_entry
+                (key_expression
+                  (simple_name))
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))))))
+  (statement_list
+    (flow_control_statement
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (string_literal
+                                (expandable_string_literal))))))))))))))))))
+
+===
+Requires : before using
+===
+
+#Requires -Version 5.1
+using namespace System
+
+---
+
+(program
+  (requires_directive_list
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (real_literal)))))
+  (using_directive_list
+    (using_statement
+      (type_name
+        (type_identifier)))))
+
+===
+Requires : comma separated modules
+===
+
+#Requires -Modules A, B, C
+
+---
+
+(program
+  (requires_directive_list
+    (requires_statement
+      (requires_keyword)
+      (requires_argument_group
+        (requires_argument
+          (command_parameter)))
+      (requires_argument_group
+        (requires_argument
+          (generic_token))
+        (requires_argument
+          (generic_token))
+        (requires_argument
+          (generic_token))))))
+
+===
+Requires : not accepted after statements
+===
+
+throw "first"
+#Requires -Modules Pester
+
+---
+
+(program
+  (statement_list
+    (flow_control_statement
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal)))))))))))))))))
+  (comment))

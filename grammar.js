@@ -10,7 +10,7 @@ const PREC = {
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_terminator],
+  externals: ($) => [$._statement_boundary, $._for_clause_break],
 
   extras: ($) => [
     $.comment,
@@ -31,13 +31,21 @@ export default grammar({
   rules: {
     program: ($) =>
       seq(
-        optional($.using_directive_list),
+        optional(
+          choice(
+            seq($.requires_directive_list, optional($.using_directive_list)),
+            seq($.using_directive_list, optional($.requires_directive_list)),
+          ),
+        ),
         optional($.param_block),
         optional($.statement_list),
       ),
 
     using_directive_list: ($) =>
-      repeat1(seq($.using_statement, $._statement_terminator)),
+      repeat1(seq($.using_statement, $._statement_boundary)),
+
+    requires_directive_list: ($) =>
+      prec.right(repeat1(seq($.requires_statement, $._statement_boundary))),
 
     // Comments
     comment: ($) =>
@@ -109,22 +117,38 @@ export default grammar({
         $.verbatim_here_string_characters,
       ),
 
+    _expandable_string_content: ($) =>
+      choice(
+        token.immediate(/[^\$\"`]+/),
+        $.variable,
+        $.sub_expression,
+        token.immediate(/\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/),
+        token.immediate(/`.{1}|`\r?\n/),
+        token.immediate('""'),
+        token.immediate('$'),
+      ),
+
+    _expandable_string_leading_text: () => token(seq('"', /[^\$\"`]+/)),
+
+    _expandable_string_leading_literal_dollar: () =>
+      token(seq('"', /\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/)),
+
     expandable_string_literal: ($) =>
-      seq(
-        /\"(\s*\#*)*/, // this is a trick to avoid tree-sitter allowing comment between tokens, as string should be tokenize but powershell allow subexpression inside it...
-        repeat(
+      choice(
+        '""',
+        seq(
           choice(
-            token.immediate(/[^\$\"`]+/),
-            $.variable,
-            $.sub_expression,
-            token.immediate(/\$(`.{1}|`\r?\n|[\s\\])/),
-            token.immediate(/`.{1}|`\r?\n/),
-            token.immediate('""'),
-            token.immediate('$'),
+            $._expandable_string_leading_text,
+            $._expandable_string_leading_literal_dollar,
+            seq('"', $.variable),
+            seq('"', $.sub_expression),
+            seq('"', token.immediate(/`.{1}|`\r?\n/)),
+            seq('"', token.immediate('""')),
+            seq('"', token.immediate('$')),
           ),
+          repeat($._expandable_string_content),
+          token.immediate('"'),
         ),
-        repeat(token.immediate('$')),
-        token.immediate(/(\s*\#*)*\"/),
       ),
 
     expandable_here_string_literal: ($) =>
@@ -137,6 +161,7 @@ export default grammar({
             $.sub_expression,
             token.immediate(/(\r?\n)+[^\"\r\n]/),
             token.immediate(/(\r?\n)+\"[^@]/),
+            token.immediate(/\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\r\n`]*)/),
             token.immediate('$'),
             token.immediate(/`.{1}|`\r?\n/),
           ),
@@ -338,7 +363,7 @@ export default grammar({
       choice(
         field('script_block_body', $.script_block_body),
         seq(
-          seq($.param_block, $._statement_terminator, repeat(';')),
+          seq($.param_block, $._statement_boundary, repeat(';')),
           field('script_block_body', optional($.script_block_body)),
         ),
       ),
@@ -396,14 +421,14 @@ export default grammar({
           $.function_statement,
           $.class_statement,
           $.enum_statement,
-          seq($.flow_control_statement, $._statement_terminator),
+          seq($.flow_control_statement, $._statement_boundary),
           $.trap_statement,
           $.try_statement,
           $.data_statement,
           $.inlinescript_statement,
           $.parallel_statement,
           $.sequence_statement,
-          seq($.pipeline, $._statement_terminator),
+          seq($.pipeline, $._statement_boundary),
           $.empty_statement,
         ),
       ),
@@ -480,7 +505,7 @@ export default grammar({
       seq(
         $.switch_clause_condition,
         $.statement_block,
-        $._statement_terminator,
+        $._statement_boundary,
         repeat(';'),
       ),
 
@@ -505,37 +530,48 @@ export default grammar({
       seq(
         reservedWord('for'),
         '(',
-        optional(
+        choice(
           seq(
-            optional(
-              seq(
-                field('for_initializer', $.for_initializer),
-                $._statement_terminator,
-              ),
-            ),
-            optional(
-              seq(
-                choice(';', token.immediate(/\r?\n/)),
-                optional(
-                  seq(
-                    field('for_condition', $.for_condition),
-                    $._statement_terminator,
-                  ),
-                ),
-                optional(
-                  seq(
-                    choice(';', token.immediate(/\r?\n/)),
-                    optional(
-                      seq(
-                        field('for_iterator', $.for_iterator),
-                        $._statement_terminator,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            field('for_initializer', $.for_initializer),
+            forClauseSeparator($),
+            field('for_condition', $.for_condition),
+            forClauseSeparator($),
+            field('for_iterator', $.for_iterator),
           ),
+          seq(
+            field('for_initializer', $.for_initializer),
+            forClauseSeparator($),
+            field('for_condition', $.for_condition),
+            ';',
+          ),
+          seq(
+            field('for_initializer', $.for_initializer),
+            forClauseSeparator($),
+            ';',
+            field('for_iterator', $.for_iterator),
+          ),
+          seq(
+            field('for_initializer', $.for_initializer),
+            ';',
+            ';',
+          ),
+          seq(
+            ';',
+            field('for_condition', $.for_condition),
+            forClauseSeparator($),
+            field('for_iterator', $.for_iterator),
+          ),
+          seq(
+            ';',
+            field('for_condition', $.for_condition),
+            ';',
+          ),
+          seq(
+            ';',
+            ';',
+            field('for_iterator', $.for_iterator),
+          ),
+          seq(';', ';'),
         ),
         ')',
         $.statement_block,
@@ -652,6 +688,25 @@ export default grammar({
 
     sequence_statement: ($) => seq(reservedWord('sequence'), $.statement_block),
 
+    requires_statement: ($) =>
+      seq($.requires_keyword, repeat1($.requires_argument_group)),
+
+    requires_keyword: () =>
+      token(prec(PREC.KEYWORD, new RegExp(`#${caseInsensitive('requires')}`))),
+
+    requires_argument_group: ($) =>
+      seq($.requires_argument, repeat(seq(',', $.requires_argument))),
+
+    requires_argument: ($) =>
+      choice(
+        $.command_parameter,
+        $.hash_literal_expression,
+        $.string_literal,
+        $.real_literal,
+        $.integer_literal,
+        $.generic_token,
+      ),
+
     using_statement: ($) =>
       seq(
         reservedWord('using'),
@@ -737,13 +792,13 @@ export default grammar({
           choice(
             /[^\$"`]+/,
             $.variable,
-            /\$`(.{1}|`\r?\n)/,
+            /\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^"`][^\$"`]*)/,
             /`.{1}|`\r?\n/,
             '""',
             $.sub_expression,
+            '$',
           ),
         ),
-        repeat('$'),
         '"',
       ),
 
@@ -893,7 +948,7 @@ export default grammar({
           choice(
             seq(
               $.class_property_definition,
-              $._statement_terminator,
+              $._statement_boundary,
               repeat(';'),
             ),
             $.class_method_definition,
@@ -908,7 +963,7 @@ export default grammar({
         token(reservedWord('enum')),
         $.simple_name,
         '{',
-        repeat(seq($.enum_member, $._statement_terminator, repeat(';'))),
+        repeat(seq($.enum_member, $._statement_boundary, repeat(';'))),
         '}',
       ),
 
@@ -1098,7 +1153,7 @@ export default grammar({
         $.key_expression,
         '=',
         $._statement,
-        $._statement_terminator,
+        $._statement_boundary,
         repeat(';'),
       ),
 
@@ -1350,6 +1405,16 @@ function reservedWord(word) {
  */
 function reserved(regex) {
   return prec(PREC.KEYWORD, new RegExp(regex));
+}
+
+/**
+ * A `for (...)` clause boundary between two present clauses.
+ * Empty clauses still require a literal `;` to avoid newline/formatting ambiguity.
+ *
+ * @param {$} $
+ */
+function forClauseSeparator($) {
+  return choice(';', $._for_clause_break);
 }
 
 /**

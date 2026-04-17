@@ -771,3 +771,370 @@ for ($i = 0
                                 (array_literal_expression
                                   (unary_expression
                                     (variable)))))))))))))))))))
+
+===
+For loop : mixed separators
+===
+
+for ($i = 0;
+  $i -lt 10
+  $i++) { $i }
+
+---
+
+(program
+  (statement_list
+    (for_statement
+      for_initializer: (for_initializer
+        (pipeline
+          (assignment_expression
+            (left_assignment_expression
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable)))))))))))))
+            (assignement_operator)
+            value: (pipeline
+              (pipeline_chain
+                (ternary_expression
+                  (null_coalesce_expression
+                    (logical_expression
+                      (bitwise_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (integer_literal
+                                        (decimal_integer_literal))))))))))))))))))
+      for_condition: (for_condition
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable))))))))
+                      (comparison_operator)
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal))))))))))))))))
+      for_iterator: (for_iterator
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (post_increment_expression
+                                    (variable))))))))))))))))
+      (statement_block
+        statement_list: (statement_list
+          (pipeline
+            (pipeline_chain
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable)))))))))))))))))))
+
+===
+For loop : invalid initializer only
+===
+
+for ($i = 0) { $i }
+
+---
+
+(program
+  (ERROR
+    (ERROR
+      (for_initializer
+        (pipeline
+          (assignment_expression
+            (left_assignment_expression
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (variable)))))))))))))
+            (assignement_operator)
+            value: (pipeline
+              (pipeline_chain
+                (ternary_expression
+                  (null_coalesce_expression
+                    (logical_expression
+                      (bitwise_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (integer_literal
+                                        (decimal_integer_literal)))))))))))))))))))
+    (for_initializer
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (script_block_expression
+                                  (script_block
+                                    script_block_body: (script_block_body
+                                      statement_list: (statement_list
+                                        (pipeline
+                                          (pipeline_chain
+                                            (ternary_expression
+                                              (null_coalesce_expression
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
+                                                                (unary_expression
+                                                                  (variable))))))))))))))))))))))))))))))))))
+
+===
+For loop : invalid condition only
+===
+
+for ($i -lt 10) { $i }
+
+---
+
+(program
+  (ERROR
+    (for_initializer
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable))))))))
+                    (comparison_operator)
+                    (ERROR
+                      (integer_literal
+                        (decimal_integer_literal)))
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (script_block_expression
+                                  (script_block
+                                    script_block_body: (script_block_body
+                                      statement_list: (statement_list
+                                        (pipeline
+                                          (pipeline_chain
+                                            (ternary_expression
+                                              (null_coalesce_expression
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
+                                                                (unary_expression
+                                                                  (variable))))))))))))))))))))))))))))))))))
+
+===
+For loop : invalid iterator only
+===
+
+for ($i++) { $i }
+
+---
+
+(program
+  (ERROR
+    (ERROR
+      (post_increment_expression
+        (variable)))
+    (for_initializer
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (script_block_expression
+                                  (script_block
+                                    script_block_body: (script_block_body
+                                      statement_list: (statement_list
+                                        (pipeline
+                                          (pipeline_chain
+                                            (ternary_expression
+                                              (null_coalesce_expression
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
+                                                                (unary_expression
+                                                                  (variable))))))))))))))))))))))))))))))))))
+
+===
+For loop : invalid missing second separator
+===
+
+for ($i = 0; $i -lt 10) { $i }
+
+---
+
+(program
+  (ERROR
+    (for_initializer
+      (pipeline
+        (assignment_expression
+          (left_assignment_expression
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable)))))))))))))
+          (assignement_operator)
+          value: (pipeline
+            (pipeline_chain
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (integer_literal
+                                      (decimal_integer_literal))))))))))))))))))
+    (for_condition
+      (pipeline
+        (pipeline_chain
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable))))))))
+                    (comparison_operator)
+                    (ERROR
+                      (integer_literal
+                        (decimal_integer_literal)))
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (script_block_expression
+                                  (script_block
+                                    script_block_body: (script_block_body
+                                      statement_list: (statement_list
+                                        (pipeline
+                                          (pipeline_chain
+                                            (ternary_expression
+                                              (null_coalesce_expression
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
+                                                                (unary_expression
+                                                                  (variable))))))))))))))))))))))))))))))))))
