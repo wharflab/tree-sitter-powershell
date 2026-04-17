@@ -2568,6 +2568,10 @@
           "named": true
         },
         {
+          "type": "requires_directive_list",
+          "named": true
+        },
+        {
           "type": "statement_list",
           "named": true
         },
@@ -2732,6 +2736,75 @@
       "types": [
         {
           "type": "redirection",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "requires_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "command_parameter",
+          "named": true
+        },
+        {
+          "type": "generic_token",
+          "named": true
+        },
+        {
+          "type": "hash_literal_expression",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "real_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "requires_directive_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "requires_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "requires_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "requires_argument",
+          "named": true
+        },
+        {
+          "type": "requires_keyword",
           "named": true
         }
       ]
@@ -4270,6 +4343,10 @@
   },
   {
     "type": "real_literal",
+    "named": true
+  },
+  {
+    "type": "requires_keyword",
     "named": true
   },
   {

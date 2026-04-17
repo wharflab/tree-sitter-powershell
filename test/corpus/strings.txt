@@ -542,10 +542,10 @@ Strings : Regexp
                                 (expandable_string_literal)))))))))))))))))
 
 ===
-Strings : Avoid comments
+Strings : Dollar hash stays text
 ===
 
-"# #"
+"$##"
 
 ---
 
@@ -568,10 +568,10 @@ Strings : Avoid comments
                                 (expandable_string_literal)))))))))))))))))
 
 ===
-Strings : Avoid comments 2
+Strings : Hash is text in expandable string
 ===
 
-"# $foo #"
+"{this is not a #comment}"
 
 ---
 
@@ -591,5 +591,63 @@ Strings : Avoid comments 2
                           (array_literal_expression
                             (unary_expression
                               (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+                                (expandable_string_literal)))))))))))))))))
+
+===
+Strings : Hash-prefixed expandable string
+===
+
+"#.#"
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (string_literal
+                                (expandable_string_literal)))))))))))))))))
+
+===
+Strings : Format string with dollar hash
+===
+
+"{0:$## Please}" -f 14
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal))))))
+                        (format_operator)
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))))
