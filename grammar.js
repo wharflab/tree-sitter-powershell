@@ -342,7 +342,19 @@ export default grammar({
         $.braced_variable,
       ),
 
-    braced_variable: ($) => /\$\{([^}`]|`[}\s\S])+\}/,
+    braced_variable: ($) =>
+      token(
+        seq(
+          '${',
+          // A braced variable body accepts any character except `}` or a
+          // trailing backtick; `` ` `` escapes the next character (including
+          // `}`) so identifiers like `${vjOj`Q`gX}` or `${foo`}bar}` parse.
+          // Written as an alternation because tree-sitter's regex engine
+          // rejects `\s`/`\S` shorthands inside character classes.
+          repeat1(choice(seq('`', choice(/./, /\s/)), /[^}`]/, /\s/)),
+          '}',
+        ),
+      ),
 
     // Commands
     generic_token: ($) =>
