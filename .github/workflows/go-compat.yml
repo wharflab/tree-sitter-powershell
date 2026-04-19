@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: stable
+          # Disable the module/build cache: a stale compiled object from
+          # a prior run on main (which shipped ABI 15) was being reused
+          # even after src/parser.c was regenerated at ABI 14 locally.
+          cache: false
 
       - name: Run Go compatibility acceptance test
         run: bash go-compat/acceptance.sh
