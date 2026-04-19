@@ -9,7 +9,7 @@ go 1.23
 // that would break pinned consumers.
 require (
 	github.com/tree-sitter/go-tree-sitter v0.24.0
-	github.com/wharflab/tree-sitter-powershell v0.0.0
+	github.com/wharflab/tree-sitter-powershell v0.29.0
 )
 
 require github.com/mattn/go-pointer v0.0.1 // indirect
