@@ -48,3 +48,28 @@ jobs:
             exit 1
           fi
           echo "Within acceptable threshold"
+
+  parse-pscx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Parse Pscx.Utility.psm1 fixture
+        shell: bash
+        run: |
+          set -o pipefail
+          tree-sitter parse test/fixtures/Pscx.Utility.psm1 2>&1 | tee /tmp/pscx-output.txt
+
+      - name: Assert zero ERROR or MISSING nodes
+        run: |
+          ISSUE_COUNT=$(grep -Ec 'ERROR|MISSING' /tmp/pscx-output.txt || true)
+          echo "Parse recovery nodes: $ISSUE_COUNT"
+          if [ "$ISSUE_COUNT" -ne 0 ]; then
+            echo "::error::Pscx.Utility.psm1 must parse with zero ERROR/MISSING nodes (found $ISSUE_COUNT)"
+            grep -E 'ERROR|MISSING' /tmp/pscx-output.txt
+            exit 1
+          fi

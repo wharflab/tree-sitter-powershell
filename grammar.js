@@ -891,8 +891,40 @@ export default grammar({
         choice(
           seq($.command_argument_sep, optional($.generic_token)),
           seq($.command_argument_sep, $.array_literal_expression),
+          seq($.command_argument_sep, $.expandable_bareword),
+          seq($.command_argument_sep, $.bareword_argument_list),
           $.parenthesized_expression,
           $.script_block_expression,
+        ),
+      ),
+
+    // A bareword argument whose prefix is a variable immediately followed
+    // (no whitespace) by generic-token characters. Matches patterns like
+    // `$Path\Command` or `$Root/sub/path.txt` in command argument position.
+    expandable_bareword: ($) =>
+      seq($.variable, alias($._expandable_bareword_tail, $.generic_token)),
+
+    // The leading character must not start a distinct expression form such
+    // as member access (`.`), element access (`[`), a script block (`{`),
+    // another variable (`$`), a string literal (`"` / `'`), or a backtick
+    // escape. Once the tail has started, only whitespace, pipes, and other
+    // command terminators end it.
+    _expandable_bareword_tail: ($) =>
+      token.immediate(/[^\&\s\(\)\}\|;,\$\[\{\.\"\'`][^\&\s\(\)\}\|;,]*/),
+
+    // A comma-separated list of command arguments that starts with a
+    // bareword (generic token). Used for commands like
+    // `Select-Object PSPath, PSChildName`.
+    bareword_argument_list: ($) =>
+      prec.right(
+        seq(
+          $.generic_token,
+          repeat1(
+            seq(
+              ',',
+              choice($.generic_token, $.expandable_bareword, $.unary_expression),
+            ),
+          ),
         ),
       ),
 

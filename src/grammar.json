@@ -4910,12 +4910,105 @@
             ]
           },
           {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "command_argument_sep"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expandable_bareword"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "command_argument_sep"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "bareword_argument_list"
+              }
+            ]
+          },
+          {
             "type": "SYMBOL",
             "name": "parenthesized_expression"
           },
           {
             "type": "SYMBOL",
             "name": "script_block_expression"
+          }
+        ]
+      }
+    },
+    "expandable_bareword": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "variable"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expandable_bareword_tail"
+          },
+          "named": true,
+          "value": "generic_token"
+        }
+      ]
+    },
+    "_expandable_bareword_tail": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\&\\s\\(\\)\\}\\|;,\\$\\[\\{\\.\\\"\\'`][^\\&\\s\\(\\)\\}\\|;,]*"
+      }
+    },
+    "bareword_argument_list": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "generic_token"
+          },
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "generic_token"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "expandable_bareword"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "unary_expression"
+                    }
+                  ]
+                }
+              ]
+            }
           }
         ]
       }
