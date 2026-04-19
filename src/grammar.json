@@ -4968,7 +4968,7 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\\&\\s\\(\\)\\}\\|;,\\$][^\\&\\s\\(\\)\\}\\|;,]*"
+        "value": "[^\\&\\s\\(\\)\\}\\|;,\\$\\[\\{\\.\\\"\\'`][^\\&\\s\\(\\)\\}\\|;,]*"
       }
     },
     "bareword_argument_list": {
@@ -4996,6 +4996,10 @@
                     {
                       "type": "SYMBOL",
                       "name": "generic_token"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "expandable_bareword"
                     },
                     {
                       "type": "SYMBOL",

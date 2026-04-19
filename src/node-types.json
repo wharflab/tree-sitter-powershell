@@ -332,6 +332,10 @@
       "required": true,
       "types": [
         {
+          "type": "expandable_bareword",
+          "named": true
+        },
+        {
           "type": "generic_token",
           "named": true
         },

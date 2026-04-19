@@ -904,8 +904,13 @@ export default grammar({
     expandable_bareword: ($) =>
       seq($.variable, alias($._expandable_bareword_tail, $.generic_token)),
 
+    // The leading character must not start a distinct expression form such
+    // as member access (`.`), element access (`[`), a script block (`{`),
+    // another variable (`$`), a string literal (`"` / `'`), or a backtick
+    // escape. Once the tail has started, only whitespace, pipes, and other
+    // command terminators end it.
     _expandable_bareword_tail: ($) =>
-      token.immediate(/[^\&\s\(\)\}\|;,\$][^\&\s\(\)\}\|;,]*/),
+      token.immediate(/[^\&\s\(\)\}\|;,\$\[\{\.\"\'`][^\&\s\(\)\}\|;,]*/),
 
     // A comma-separated list of command arguments that starts with a
     // bareword (generic token). Used for commands like
@@ -914,7 +919,12 @@ export default grammar({
       prec.right(
         seq(
           $.generic_token,
-          repeat1(seq(',', choice($.generic_token, $.unary_expression))),
+          repeat1(
+            seq(
+              ',',
+              choice($.generic_token, $.expandable_bareword, $.unary_expression),
+            ),
+          ),
         ),
       ),
 
