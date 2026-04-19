@@ -48,3 +48,25 @@ jobs:
             exit 1
           fi
           echo "Within acceptable threshold"
+
+  parse-pscx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Parse Pscx.Utility.psm1 fixture
+        run: tree-sitter parse test/fixtures/Pscx.Utility.psm1 2>&1 | tee /tmp/pscx-output.txt
+
+      - name: Assert zero errors
+        run: |
+          ERROR_COUNT=$(grep -c 'ERROR' /tmp/pscx-output.txt || true)
+          echo "Parse errors: $ERROR_COUNT"
+          if [ "$ERROR_COUNT" -ne 0 ]; then
+            echo "::error::Pscx.Utility.psm1 must parse with zero errors (found $ERROR_COUNT)"
+            grep 'ERROR' /tmp/pscx-output.txt
+            exit 1
+          fi
