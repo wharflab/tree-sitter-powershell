@@ -20,6 +20,8 @@ func main() {
 		fail("Language() returned nil")
 	}
 
+	fmt.Printf("grammar ABI version: %d\n", lang.Version())
+
 	parser := sitter.NewParser()
 	defer parser.Close()
 
