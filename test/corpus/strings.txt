@@ -680,6 +680,35 @@ Strings : hash after variable in expandable string
                                   (variable))))))))))))))))))
 
 ===
+Strings : hash after variable across newline in expandable string
+===
+
+"$var
+# not a comment
+line3"
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (string_literal
+                                (expandable_string_literal
+                                  (variable))))))))))))))))))
+
+===
 Strings : triple-quoted expandable string
 ===
 
