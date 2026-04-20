@@ -71,6 +71,37 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
             skip(lexer);
             continue;
         }
+        // Comments (line `#...` and block `<# ... #>`) are extras to PowerShell
+        // and must not terminate a pipeline that continues on a subsequent line
+        // with a leading `|`, `||`, or `&&`.
+        if (lexer->lookahead == '#') {
+            skip(lexer);
+            while (lexer->lookahead != 0 && lexer->lookahead != '\n' && lexer->lookahead != '\r') {
+                skip(lexer);
+            }
+            continue;
+        }
+        if (lexer->lookahead == '<') {
+            // Only `<#` starts a block comment; a bare `<` isn't our concern
+            // and the main lexer will handle it (though it's not grammatical
+            // at statement boundaries today).
+            skip(lexer);
+            if (lexer->lookahead != '#') return saw_newline;
+            skip(lexer);
+            for (;;) {
+                if (lexer->lookahead == 0) return true;
+                if (lexer->lookahead == '#') {
+                    skip(lexer);
+                    if (lexer->lookahead == '>') {
+                        skip(lexer);
+                        break;
+                    }
+                    continue;
+                }
+                skip(lexer);
+            }
+            continue;
+        }
         if (saw_newline) {
             // PowerShell 7 pipeline continuation: a line-initial `|`, `||`, or `&&`
             // continues the current pipeline, so suppress the boundary.

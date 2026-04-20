@@ -106,6 +106,83 @@ $MarkdownBuilder
                   (verbatim_string_characters))))))))))
 
 ===
+Line-initial pipe continuation across line comment
+===
+
+$x
+# continues below
+| Add-Line -Content ''
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (variable))))))))))))
+        (comment)
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (verbatim_string_characters))))))))))
+
+===
+Line-initial pipe continuation across block comment
+===
+
+$x
+<# spans
+   lines #>
+| Add-Line -Content ''
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (variable))))))))))))
+        (comment)
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (verbatim_string_characters))))))))))
+
+===
 Line-initial pipe continuation inside script block
 ===
 
