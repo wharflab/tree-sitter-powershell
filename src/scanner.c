@@ -56,14 +56,63 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
     // This token has no characters -- everything is lookahead to determine its existence.
     lexer->mark_end(lexer);
 
+    bool saw_newline = false;
     for (;;) {
         if (lexer->lookahead == 0) return true;
         if (lexer->lookahead == '}') return true;
         if (lexer->lookahead == ')') return true;
         if (lexer->lookahead == ';') return true;
-        if (lexer->lookahead == '\n' || lexer->lookahead == '\r') return true;
-        if (!is_inline_trivia(lexer->lookahead)) return false;
-        skip(lexer);
+        if (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+            saw_newline = true;
+            skip(lexer);
+            continue;
+        }
+        if (is_inline_trivia(lexer->lookahead)) {
+            skip(lexer);
+            continue;
+        }
+        // Comments (line `#...` and block `<# ... #>`) are extras to PowerShell
+        // and must not terminate a pipeline that continues on a subsequent line
+        // with a leading `|`, `||`, or `&&`.
+        if (lexer->lookahead == '#') {
+            skip(lexer);
+            while (lexer->lookahead != 0 && lexer->lookahead != '\n' && lexer->lookahead != '\r') {
+                skip(lexer);
+            }
+            continue;
+        }
+        if (lexer->lookahead == '<') {
+            // Only `<#` starts a block comment; a bare `<` isn't our concern
+            // and the main lexer will handle it (though it's not grammatical
+            // at statement boundaries today).
+            skip(lexer);
+            if (lexer->lookahead != '#') return saw_newline;
+            skip(lexer);
+            for (;;) {
+                if (lexer->lookahead == 0) return true;
+                if (lexer->lookahead == '#') {
+                    skip(lexer);
+                    if (lexer->lookahead == '>') {
+                        skip(lexer);
+                        break;
+                    }
+                    continue;
+                }
+                skip(lexer);
+            }
+            continue;
+        }
+        if (saw_newline) {
+            // PowerShell 7 pipeline continuation: a line-initial `|`, `||`, or `&&`
+            // continues the current pipeline, so suppress the boundary.
+            if (lexer->lookahead == '|') return false;
+            if (lexer->lookahead == '&') {
+                skip(lexer);
+                return lexer->lookahead != '&';
+            }
+            return true;
+        }
+        return false;
     }
 }
 

@@ -24,7 +24,7 @@
 
 - `test` — `tree-sitter test` (corpus).
 - `parse-sample` — downloads `TheBigTestFile.ps1` from `PowerShell/EditorSyntax`; fails when `grep -c 'ERROR'` output **exceeds 12**. Lower the threshold as errors are fixed.
-- `parse-pscx` — parses `test/fixtures/Pscx.Utility.psm1` with `set -o pipefail` and requires **zero** `ERROR`/`MISSING` nodes.
+- `parse-fixtures` — iterates every `*.ps1` / `*.psm1` in `test/fixtures/` and requires **zero** `ERROR`/`MISSING` nodes per file. Drop a new script into `test/fixtures/` to add it to this gate.
 - `go-compat` — uses pinned `go-tree-sitter v0.24.0`; the canary that catches ABI bumps.
 
 ## Grammar patterns

@@ -6,16 +6,17 @@ Parses `.ps1` and `.psm1` files into a concrete syntax tree for syntax highlight
 
 ## Features
 
-- **Pipelines and commands** &mdash; pipes `|`, chain operators `&&` `||`, redirections `>` `>>` `2>&1`, invocation `&` `.`, splatting `@params`
-- **Directives** &mdash; `using namespace`, `using module` (including hashtable specs), `using assembly`, `using static`, and top-of-file `#Requires`
-- **Strings and interpolation** &mdash; expandable strings `"$var $(expr)"`, verbatim strings, here-strings `@"` / `@'`, and PowerShell-style escaping
+- **Pipelines and commands** &mdash; pipes `|`, chain operators `&&` `||`, PowerShell 7 line-initial pipe continuation (`\n| Cmd`), redirections `>` `>>` `2>&1`, invocation `&` `.`, splatting `@params`, barewords (including expandable `$var.suffix` forms), verbatim arguments `--%`
+- **Directives** &mdash; `using namespace`, `using module` (type names, relative bareword paths like `.\Foo.psm1`, and hashtable specs), `using assembly`, `using static`, and top-of-file `#Requires`
+- **Strings and interpolation** &mdash; expandable strings `"$var $(expr)"`, verbatim strings, here-strings `@"` / `@'`, sub-expressions `$(...)`, array sub-expressions `@(...)`, hashtable literals `@{}`, and PowerShell-style escaping
 - **Functions and named blocks** &mdash; `function`, `filter`, `workflow` with `param()` blocks, attributes, validation, and `begin`/`process`/`end`/`clean`
 - **Control flow** &mdash; `if`/`elseif`/`else`, `switch` (`-Regex`, `-Wildcard`, `-Exact`, `-CaseSensitive`), `foreach`, `for`, `while`, `do`/`while`/`until`
 - **Error handling** &mdash; `try`/`catch`/`finally` with typed catch clauses, `trap`, `throw`, `break`, `continue`, `return`, `exit`
+- **Workflow and data blocks** &mdash; `data` sections, `inlinescript`, `parallel`, and `sequence` statement blocks
 - **Expressions** &mdash; ternary `? :`, null-coalescing `??`/`??=`, comparison/string/type/containment operators, `-f` format, range `..`
 - **Types** &mdash; common .NET type forms including generics `[Dictionary[string, int]]`, arrays `[int[]]`, nested types `Array+Enumerator`, and backtick arity `` Dictionary`2 ``
 - **Variables** &mdash; `$var`, `$scope:var`, `${braced}` with backtick escapes, `@splatted`, and special vars `$$` `$^` `$?` `$_`
-- **Classes and enums** &mdash; properties, methods, constructors with `: base()`/`: this()` chaining, `hidden`/`static` attributes, and inheritance clauses
+- **Classes and enums** &mdash; attribute-decorated declarations (`[Flags()] enum`, `[Attr()] class`), properties, methods, constructors with `: base()`/`: this()` chaining, `hidden`/`static` modifiers, and inheritance clauses with generic bases (`: IComparer[Object]`)
 - **Numbers** &mdash; decimal, hex `0x`, scientific `1.5e10`, numeric suffixes (`u`, `ul`, `s`, `us`, `y`, `uy`, `n`, `l`, `d`), and size multipliers (`kb`/`mb`/`gb`/`tb`/`pb`)
 - **Case-insensitive keywords and operators** &mdash; parses PowerShell casing variations without normalization
 

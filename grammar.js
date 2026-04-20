@@ -729,7 +729,7 @@ export default grammar({
           ),
           seq(
             reservedWord('module'),
-            choice($.type_name, $.verbatim_string_characters, $.hash_literal_expression),
+            choice($.type_name, $.verbatim_string_characters, $.hash_literal_expression, $.command_name),
           ),
           seq(
             reservedWord('assembly'),
@@ -984,9 +984,10 @@ export default grammar({
 
     class_statement: ($) =>
       seq(
+        optional($.attribute_list),
         token(reservedWord('class')),
         $.simple_name,
-        optional(seq(':', $.simple_name, repeat(seq(',', $.simple_name)))),
+        optional(seq(':', $.type_spec, repeat(seq(',', $.type_spec)))),
         '{',
         repeat(
           choice(
@@ -1004,6 +1005,7 @@ export default grammar({
     // Enums
     enum_statement: ($) =>
       seq(
+        optional($.attribute_list),
         token(reservedWord('enum')),
         $.simple_name,
         '{',

@@ -49,6 +49,33 @@ enum Enum2
         (simple_name)))))
 
 ===
+Enum : with attribute
+===
+
+[Flags()] enum E { A = 1; B = 2 }
+
+---
+
+(program
+  (statement_list
+    (enum_statement
+      (attribute_list
+        (attribute
+          (attribute_name
+            (type_spec
+              (type_name
+                (type_identifier))))))
+      (simple_name)
+      (enum_member
+        (simple_name)
+        (integer_literal
+          (decimal_integer_literal)))
+      (enum_member
+        (simple_name)
+        (integer_literal
+          (decimal_integer_literal))))))
+
+===
 Enum : Complex enum
 ===
 
