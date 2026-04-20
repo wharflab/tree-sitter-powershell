@@ -1,3 +1,6 @@
+/// <reference types="tree-sitter-cli/dsl"/>
+// @ts-check
+
 const PREC = {
   KEYWORD: 1,
   UNARY: 2,
@@ -1449,7 +1452,7 @@ function reservedWord(word) {
 /**
  * Create a reserved regex keyword
  *
- * @param {regex} regex
+ * @param {string} regex
  */
 function reserved(regex) {
   return prec(PREC.KEYWORD, new RegExp(regex));
@@ -1459,7 +1462,7 @@ function reserved(regex) {
  * A `for (...)` clause boundary between two present clauses.
  * Empty clauses still require a literal `;` to avoid newline/formatting ambiguity.
  *
- * @param {$} $
+ * @param {GrammarSymbols<string>} $
  */
 function forClauseSeparator($) {
   return choice(';', $._for_clause_break);
