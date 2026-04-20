@@ -8,12 +8,15 @@
       "path": ".",
       "file-types": [
         "ps1",
-        "psm1"
+        "psm1",
+        "psd1",
+        "pssc",
+        "psrc"
       ],
       "highlights": [
         "queries/highlights.scm"
       ],
-      "injection-regex": "^(ps1|psm1)$"
+      "injection-regex": "(?i)^(powershell|pwsh|ps1|psm1|psd1|pssc|psrc)$"
     }
   ],
   "metadata": {
