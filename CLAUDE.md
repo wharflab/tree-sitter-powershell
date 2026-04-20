@@ -2,9 +2,9 @@
 
 ## Generating the parser
 
-- **Use the pinned CLI**: `node_modules/.bin/tree-sitter generate` — the globally installed `tree-sitter` will produce wrong ABI.
-- `npm run generate` also regenerates `node_types.go` via `tree-sitter-go-types`. Prefer it over bare `tree-sitter generate` when grammar changes affect node types.
-- Pinned CLI is `tree-sitter-cli@0.24.7` → emits `LANGUAGE_VERSION 14`. Do not ship `LANGUAGE_VERSION 15` — downstream Go consumers on `go-tree-sitter v0.24.0` reject it with `Incompatible language version 15`.
+- **Always use `npm run generate`** — it pins `--abi 14` and also regenerates `node_types.go` via `tree-sitter-go-types`. Never run bare `tree-sitter generate`; CLI ≥0.26 defaults to ABI 15, which breaks `go-tree-sitter v0.24.0` consumers with `Incompatible language version 15. Expected minimum 13, maximum 14`.
+- The go-compat CI job fails any PR where `src/parser.c` `LANGUAGE_VERSION` != 14.
+- Only the committed `src/parser.c` needs ABI 14. The npm/crates/pypi publish workflows regenerate at the CLI default (ABI 15); their runtimes accept newer ABIs.
 - Always commit `src/parser.c`, `src/grammar.json`, `src/node-types.json`, `src/tree_sitter/parser.h`, and `src/tree_sitter/array.h` together. They must come from the same CLI invocation — mismatched `parser.c` / `parser.h` fails to compile with `error: unknown type name 'TSMapSlice'` or similar.
 
 ## Testing
