@@ -590,6 +590,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_list",
+          "named": true
+        },
+        {
           "type": "class_method_definition",
           "named": true
         },
@@ -599,6 +603,10 @@
         },
         {
           "type": "simple_name",
+          "named": true
+        },
+        {
+          "type": "type_spec",
           "named": true
         }
       ]
@@ -1135,6 +1143,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attribute_list",
+          "named": true
+        },
         {
           "type": "enum_member",
           "named": true
@@ -3649,6 +3661,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "command_name",
+          "named": true
+        },
         {
           "type": "hash_literal_expression",
           "named": true

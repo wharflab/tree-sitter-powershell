@@ -56,14 +56,32 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
     // This token has no characters -- everything is lookahead to determine its existence.
     lexer->mark_end(lexer);
 
+    bool saw_newline = false;
     for (;;) {
         if (lexer->lookahead == 0) return true;
         if (lexer->lookahead == '}') return true;
         if (lexer->lookahead == ')') return true;
         if (lexer->lookahead == ';') return true;
-        if (lexer->lookahead == '\n' || lexer->lookahead == '\r') return true;
-        if (!is_inline_trivia(lexer->lookahead)) return false;
-        skip(lexer);
+        if (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+            saw_newline = true;
+            skip(lexer);
+            continue;
+        }
+        if (is_inline_trivia(lexer->lookahead)) {
+            skip(lexer);
+            continue;
+        }
+        if (saw_newline) {
+            // PowerShell 7 pipeline continuation: a line-initial `|`, `||`, or `&&`
+            // continues the current pipeline, so suppress the boundary.
+            if (lexer->lookahead == '|') return false;
+            if (lexer->lookahead == '&') {
+                skip(lexer);
+                return lexer->lookahead != '&';
+            }
+            return true;
+        }
+        return false;
     }
 }
 

@@ -4258,6 +4258,10 @@
                     {
                       "type": "SYMBOL",
                       "name": "hash_literal_expression"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "command_name"
                     }
                   ]
                 }
@@ -5352,6 +5356,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attribute_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "TOKEN",
           "content": {
             "type": "ALIAS",
@@ -5383,7 +5399,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "simple_name"
+                  "name": "type_spec"
                 },
                 {
                   "type": "REPEAT",
@@ -5396,7 +5412,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "simple_name"
+                        "name": "type_spec"
                       }
                     ]
                   }
@@ -5453,6 +5469,18 @@
     "enum_statement": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attribute_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "TOKEN",
           "content": {

@@ -12,6 +12,84 @@ class MyClass {}
       (simple_name))))
 
 ===
+Class : with base class
+===
+
+class Foo : Bar {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (type_spec
+        (type_name
+          (type_identifier))))))
+
+===
+Class : with multiple base types
+===
+
+class Foo : Bar, Baz {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (type_spec
+        (type_name
+          (type_identifier)))
+      (type_spec
+        (type_name
+          (type_identifier))))))
+
+===
+Class : with generic base type
+===
+
+class Foo : Bar, IComparer[Object] {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (type_spec
+        (type_name
+          (type_identifier)))
+      (type_spec
+        (generic_type_name
+          (type_name
+            (type_identifier)))
+        (generic_type_arguments
+          (type_spec
+            (type_name
+              (type_identifier))))))))
+
+===
+Class : with attribute
+===
+
+[SomeAttribute()] class Foo {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (attribute_list
+        (attribute
+          (attribute_name
+            (type_spec
+              (type_name
+                (type_identifier))))))
+      (simple_name))))
+
+===
 Class : string property
 ===
 

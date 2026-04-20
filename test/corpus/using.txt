@@ -76,6 +76,32 @@ using static System.Math
         (type_identifier)))))
 
 ===
+Using module with relative bareword path
+===
+
+using module .\Foo.psm1
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (command_name))))
+
+===
+Using module with parent-relative bareword path
+===
+
+using module ../Foo/Bar.psm1
+
+---
+
+(program
+  (using_directive_list
+    (using_statement
+      (command_name))))
+
+===
 Using module with hashtable
 ===
 
