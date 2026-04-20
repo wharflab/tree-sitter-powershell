@@ -7,6 +7,7 @@
 enum TOKEN_TYPE {
     STATEMENT_BOUNDARY,
     FOR_CLAUSE_BREAK,
+    EXPANDABLE_STRING_IMMCONTENT,
 };
 
 /* --- API --- */
@@ -139,12 +140,44 @@ static bool scan_for_clause_break(TSLexer *lexer, const bool *valid_symbols)
     return true;
 }
 
+static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_symbols)
+{
+    if (!valid_symbols[EXPANDABLE_STRING_IMMCONTENT]) return false;
+
+    // Error recovery enables every external symbol at once. If both
+    // STATEMENT_BOUNDARY and FOR_CLAUSE_BREAK are also valid we're
+    // speculating outside any string context — bail so recovery doesn't
+    // swallow whole lines as string content.
+    if (valid_symbols[STATEMENT_BOUNDARY] && valid_symbols[FOR_CLAUSE_BREAK]) {
+        return false;
+    }
+
+    bool advanced = false;
+    // Expandable strings may span multiple lines. Stopping at `\r`/`\n`
+    // would let the `comment` extra fire at the start of the next line and
+    // eat a leading `#` — the exact bug this external token exists to
+    // prevent.
+    while (lexer->lookahead != 0 &&
+           lexer->lookahead != '$' &&
+           lexer->lookahead != '`' &&
+           lexer->lookahead != '"') {
+        lexer->advance(lexer, false);
+        advanced = true;
+    }
+    if (!advanced) return false;
+
+    lexer->result_symbol = EXPANDABLE_STRING_IMMCONTENT;
+    lexer->mark_end(lexer);
+    return true;
+}
+
 /* --- API Implementation --- */
 
 bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
     (void)payload;
 
+    if (scan_expandable_string_immcontent(lexer, valid_symbols)) return true;
     if (scan_for_clause_break(lexer, valid_symbols)) return true;
     return scan_statement_boundary(lexer, valid_symbols);
 }

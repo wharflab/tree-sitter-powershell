@@ -26,8 +26,13 @@
 - `parse-sample` — downloads `TheBigTestFile.ps1` from `PowerShell/EditorSyntax`; fails when `grep -c 'ERROR'` output **exceeds 12**. Lower the threshold as errors are fixed.
 - `parse-fixtures` — iterates every `*.ps1` / `*.psm1` in `test/fixtures/` and requires **zero** `ERROR`/`MISSING` nodes per file. Drop a new script into `test/fixtures/` to add it to this gate.
 - `go-compat` — uses pinned `go-tree-sitter v0.24.0`; the canary that catches ABI bumps.
+- `swift-compat` — runs `swift build` on ubuntu + macOS.
+- `lint` — ESLint on `grammar.js`; only runs when `grammar.js`, `eslint.config.mjs`, `package.json`, or `package-lock.json` change.
 
 ## Grammar patterns
 
 - Generic token rule: `/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/` — the exclusion set at the start is stricter than the interior; mirror this when introducing new bareword-like rules.
 - When introducing a rule that can be lexed ambiguously with an existing one (e.g. `expandable_bareword` vs `element_access`), exclude the ambiguity-triggering leading chars (`[`, `{`, `.`, `$`, `"`, `'`, backtick) from the new rule's leading character class. Add regression tests that exercise the existing form in the same context.
+- `extras` (`$.comment`, `/\s/`) beat `token.immediate` content matchers — this is how `#` after `$var` in `"$var # text"` used to be eaten as a comment. When string/bareword content must win over the comment extra, use an external scanner token in `src/scanner.c` (see `_expandable_string_immcontent`).
+- External scanner tokens should bail out during error recovery. Tree-sitter speculatively enables every external symbol at once while recovering; if your scanner happily consumes characters in that mode it will swallow whole lines as fake content and blow up the `parse-sample` error count. Detect recovery by observing `STATEMENT_BOUNDARY && FOR_CLAUSE_BREAK` both valid and return `false` — see `scan_expandable_string_immcontent`.
+- Error-recovery corpus tests (e.g. `For loop : invalid ...` in `test/corpus/loops.txt`) assert the exact shape of the `ERROR`-wrapped tree. Grammar changes can shift recovery behavior; regenerate these expectations against the actual parse output when touching related rules.
