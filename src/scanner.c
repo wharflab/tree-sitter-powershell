@@ -7,6 +7,7 @@
 enum TOKEN_TYPE {
     STATEMENT_BOUNDARY,
     FOR_CLAUSE_BREAK,
+    EXPANDABLE_STRING_IMMCONTENT,
 };
 
 /* --- API --- */
@@ -139,12 +140,34 @@ static bool scan_for_clause_break(TSLexer *lexer, const bool *valid_symbols)
     return true;
 }
 
+static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_symbols)
+{
+    if (!valid_symbols[EXPANDABLE_STRING_IMMCONTENT]) return false;
+
+    bool advanced = false;
+    while (lexer->lookahead != 0 &&
+           lexer->lookahead != '$' &&
+           lexer->lookahead != '`' &&
+           lexer->lookahead != '"' &&
+           lexer->lookahead != '\r' &&
+           lexer->lookahead != '\n') {
+        lexer->advance(lexer, false);
+        advanced = true;
+    }
+    if (!advanced) return false;
+
+    lexer->result_symbol = EXPANDABLE_STRING_IMMCONTENT;
+    lexer->mark_end(lexer);
+    return true;
+}
+
 /* --- API Implementation --- */
 
 bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
     (void)payload;
 
+    if (scan_expandable_string_immcontent(lexer, valid_symbols)) return true;
     if (scan_for_clause_break(lexer, valid_symbols)) return true;
     return scan_statement_boundary(lexer, valid_symbols);
 }

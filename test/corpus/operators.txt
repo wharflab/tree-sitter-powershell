@@ -677,3 +677,136 @@ $a -as $a
                           (array_literal_expression
                             (unary_expression
                               (variable))))))))))))))))
+
+===
+Bitwise -bor in method argument list
+===
+
+$win32::SetWindowPos($hWnd, 0, 0, 0, 0, 0, $win32::SWP_NOSIZE -bor $win32::SWP_NOMOVE)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (invokation_expression
+                                (variable)
+                                (member_name
+                                  (simple_name))
+                                (argument_list
+                                  argument_expression_list: (argument_expression_list
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (variable))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))
+                                    (argument_expression
+                                      (ternary_argument_expression
+                                        (null_coalesce_argument_expression
+                                          (logical_argument_expression
+                                            (bitwise_argument_expression
+                                              (bitwise_argument_expression
+                                                (comparison_argument_expression
+                                                  (additive_argument_expression
+                                                    (multiplicative_argument_expression
+                                                      (format_argument_expression
+                                                        (range_argument_expression
+                                                          (unary_expression
+                                                            (member_access
+                                                              (variable)
+                                                              (member_name
+                                                                (simple_name))))))))))
+                                              (comparison_argument_expression
+                                                (additive_argument_expression
+                                                  (multiplicative_argument_expression
+                                                    (format_argument_expression
+                                                      (range_argument_expression
+                                                        (unary_expression
+                                                          (member_access
+                                                            (variable)
+                                                            (member_name
+                                                              (simple_name))))))))))))))))))))))))))))))))

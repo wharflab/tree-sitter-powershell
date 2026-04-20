@@ -10,7 +10,7 @@ const PREC = {
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_boundary, $._for_clause_break],
+  externals: ($) => [$._statement_boundary, $._for_clause_break, $._expandable_string_immcontent],
 
   extras: ($) => [
     $.comment,
@@ -24,7 +24,6 @@ export default grammar({
     [$._literal, $.member_name],
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
-    [$.expandable_string_literal],
     [$.path_command_name, $._value],
   ],
 
@@ -119,7 +118,7 @@ export default grammar({
 
     _expandable_string_content: ($) =>
       choice(
-        token.immediate(/[^\$\"`]+/),
+        $._expandable_string_immcontent,
         $.variable,
         $.sub_expression,
         token.immediate(/\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/),
@@ -128,26 +127,29 @@ export default grammar({
         token.immediate('$'),
       ),
 
-    _expandable_string_leading_text: () => token(seq('"', /[^\$\"`]+/)),
+    _expandable_string_leading_text: () => token(seq('"', /[^\$\"`]+|""/)),
 
     _expandable_string_leading_literal_dollar: () =>
       token(seq('"', /\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/)),
 
     expandable_string_literal: ($) =>
-      choice(
-        '""',
-        seq(
-          choice(
-            $._expandable_string_leading_text,
-            $._expandable_string_leading_literal_dollar,
-            seq('"', $.variable),
-            seq('"', $.sub_expression),
-            seq('"', token.immediate(/`.{1}|`\r?\n/)),
-            seq('"', token.immediate('""')),
-            seq('"', token.immediate('$')),
+      prec(
+        1,
+        choice(
+          seq(
+            choice(
+              $._expandable_string_leading_text,
+              $._expandable_string_leading_literal_dollar,
+              seq('"', $.variable),
+              seq('"', $.sub_expression),
+              seq('"', token.immediate(/`.{1}|`\r?\n/)),
+              seq('"', token.immediate('""')),
+              seq('"', token.immediate('$')),
+            ),
+            repeat($._expandable_string_content),
+            token.immediate('"'),
           ),
-          repeat($._expandable_string_content),
-          token.immediate('"'),
+          '""',
         ),
       ),
 
@@ -185,7 +187,7 @@ export default grammar({
     simple_name: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     // Type names
-    type_identifier: ($) => /[a-zA-Z0-9_]+(`[0-9]+)?/,
+    type_identifier: ($) => /[a-zA-Z0-9_]+(`{1,2}[0-9]+)?/,
 
     type_name: ($) =>
       choice(
@@ -1325,9 +1327,9 @@ export default grammar({
           seq(
             $.bitwise_argument_expression,
             choice(
-              reservedWord('-and'),
-              reservedWord('-or'),
-              reservedWord('-xor'),
+              reservedWord('-band'),
+              reservedWord('-bor'),
+              reservedWord('-bxor'),
             ),
             $.comparison_argument_expression,
           ),
