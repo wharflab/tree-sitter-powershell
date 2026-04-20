@@ -144,13 +144,13 @@ static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_
 {
     if (!valid_symbols[EXPANDABLE_STRING_IMMCONTENT]) return false;
 
-    // Only consume newlines when we're confidently inside an expandable
-    // string — i.e. no other external token is simultaneously valid. During
-    // error recovery tree-sitter speculatively enables multiple externals at
-    // once; treating newlines as content there would swallow block structure
-    // (`{ ... }`) that follows a syntax error.
-    bool inside_string = !valid_symbols[STATEMENT_BOUNDARY] &&
-                         !valid_symbols[FOR_CLAUSE_BREAK];
+    // Error recovery enables every external symbol at once. If both
+    // STATEMENT_BOUNDARY and FOR_CLAUSE_BREAK are also valid we're
+    // speculating outside any string context — bail so recovery doesn't
+    // swallow whole lines as string content.
+    if (valid_symbols[STATEMENT_BOUNDARY] && valid_symbols[FOR_CLAUSE_BREAK]) {
+        return false;
+    }
 
     bool advanced = false;
     // Expandable strings may span multiple lines. Stopping at `\r`/`\n`
@@ -161,10 +161,6 @@ static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_
            lexer->lookahead != '$' &&
            lexer->lookahead != '`' &&
            lexer->lookahead != '"') {
-        if (!inside_string &&
-            (lexer->lookahead == '\r' || lexer->lookahead == '\n')) {
-            break;
-        }
         lexer->advance(lexer, false);
         advanced = true;
     }
