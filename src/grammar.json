@@ -2666,7 +2666,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_statement_boundary"
+          "name": "_attribute_statement_boundary"
         }
       ]
     },
@@ -7807,6 +7807,10 @@
     {
       "type": "SYMBOL",
       "name": "_statement_boundary"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_attribute_statement_boundary"
     },
     {
       "type": "SYMBOL",

@@ -39,7 +39,12 @@ const psDollarLiteral = (lineTerminator = '') =>
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_boundary, $._for_clause_break, $._expandable_string_immcontent],
+  externals: ($) => [
+    $._statement_boundary,
+    $._attribute_statement_boundary,
+    $._for_clause_break,
+    $._expandable_string_immcontent,
+  ],
 
   extras: ($) => [
     $.comment,
@@ -488,7 +493,7 @@ export default grammar({
     empty_statement: ($) => prec(PREC.EMPTY, ';'),
 
     attribute_statement: ($) =>
-      seq(alias($._attribute_expression, $.attribute), $._statement_boundary),
+      seq(alias($._attribute_expression, $.attribute), $._attribute_statement_boundary),
 
     if_statement: ($) =>
       prec.left(
