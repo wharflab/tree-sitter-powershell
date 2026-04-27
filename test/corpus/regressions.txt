@@ -70,6 +70,11 @@ function *Die($M, $C=0) { throw $M }
 Unquoted bracket-bang argument to command
 :skip
 ; source: mvelazc0/BadZure/legacy/Invoke-BadZure.ps1
+; deferred: '[' at argument position is reserved for type_literal /
+; attributed_type_literal; falling back to generic_token when the bracket
+; content is not a valid type needs GLR disambiguation that conflicts
+; with existing element_access/expandable_bareword handling. Requires
+; its own targeted effort.
 ===
 
 Write-Host [!] Creating Users
@@ -356,6 +361,9 @@ echo x ` `
 Adjacent (expr).Member followed directly by empty string as argument
 :skip
 ; source: SpotX-Official/SpotX/run.ps1
+; deferred: this is a specific case of adjacent-token concatenation in
+; command arguments (see also #27 / regression 'Adjacent quoted string +
+; variable chain'). Needs external-scanner-assisted argument tokenizer.
 ===
 
 Write-Host ($lang).Incorrect"" -ForegroundColor Red
@@ -366,7 +374,6 @@ Write-Host ($lang).Incorrect"" -ForegroundColor Red
 
 ===
 Unix absolute-path command invocation
-:skip
 ; source: adamdriscoll/selenium-powershell/Internal/init.ps1
 ===
 
@@ -374,7 +381,25 @@ Unix absolute-path command invocation
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Empty scriptblock literal as right-hand side of assignment

@@ -4686,7 +4686,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[^\\{\\}\\(\\);,\\|\\&`\"'\\s\\r\\n\\[\\]\\+\\-\\/\\$@<\\!]+"
+              "value": "[^\\{\\}\\(\\);,\\|\\&`\"'\\s\\r\\n\\[\\]\\+\\-\\$@<\\!]+"
             },
             {
               "type": "PATTERN",
@@ -4831,7 +4831,7 @@
     },
     "path_command_name_token": {
       "type": "PATTERN",
-      "value": "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_\\p{Nd}?\\-\\.\\\\]+",
+      "value": "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_\\p{Nd}?\\-\\.\\\\\\/]+",
       "flags": "u"
     },
     "path_command_name": {

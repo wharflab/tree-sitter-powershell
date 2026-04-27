@@ -849,7 +849,7 @@ export default grammar({
     command_name: ($) =>
       seq(
         choice(
-          /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\/\$@<\!]+/,
+          /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\$@<\!]+/,
           // tree-sitter does not allow to control lexer
           // each start keyword into _statement rule must be present here
           // https://github.com/airbus-cert/tree-sitter-powershell/issues/24
@@ -887,7 +887,7 @@ export default grammar({
         ),
       ),
 
-    path_command_name_token: ($) => psRegex(`[${PS_COMMAND_NAME_CHARS}\\-\\.\\\\]+`),
+    path_command_name_token: ($) => psRegex(`[${PS_COMMAND_NAME_CHARS}\\-\\.\\\\\\/]+`),
 
     // Use to parse command path
     path_command_name: ($) =>
