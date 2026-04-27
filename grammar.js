@@ -849,7 +849,7 @@ export default grammar({
     command_name: ($) =>
       seq(
         choice(
-          /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!]+/,
+          /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\$@<\!]+/,
           // tree-sitter does not allow to control lexer
           // each start keyword into _statement rule must be present here
           // https://github.com/airbus-cert/tree-sitter-powershell/issues/24
@@ -887,7 +887,7 @@ export default grammar({
         ),
       ),
 
-    path_command_name_token: ($) => psRegex(`[${PS_COMMAND_NAME_CHARS}\\-\\.\\\\]+`),
+    path_command_name_token: ($) => psRegex(`[${PS_COMMAND_NAME_CHARS}\\-\\.\\\\\\/]+`),
 
     // Use to parse command path
     path_command_name: ($) =>
@@ -1219,7 +1219,7 @@ export default grammar({
       seq('@(', field('statements', optional($.statement_list)), ')'),
 
     script_block_expression: ($) =>
-      seq('{', optional($.param_block), $.script_block, '}'),
+      seq('{', optional($.param_block), optional($.script_block), '}'),
 
     hash_literal_expression: ($) =>
       seq('@{', optional($.hash_literal_body), '}'),
@@ -1422,7 +1422,8 @@ export default grammar({
         ),
       ),
 
-    type_literal: ($) => seq('[', $.type_spec, ']'),
+    type_literal: ($) =>
+      seq('[', $.type_spec, optional($.assembly_qualifier), ']'),
 
     type_spec: ($) =>
       choice(
@@ -1430,6 +1431,25 @@ export default grammar({
         seq($.generic_type_name, $.generic_type_arguments, ']'),
         $.type_name,
       ),
+
+    // Assembly-qualified type name tail at the outermost `[...]`, e.g.
+    // `[Int32, mscorlib]`, or with full AssemblyQualifiedName metadata:
+    // `[Foo, Bar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]`.
+    assembly_qualifier: ($) => seq(',', $.assembly_name),
+
+    assembly_name: ($) =>
+      seq($.type_name, repeat(seq(',', $.assembly_attribute))),
+
+    // An AssemblyName metadata entry: `Key=Value`. PowerShell's parser
+    // accepts the values emitted by AssemblyName.FullName: dotted
+    // versions, identifiers (`neutral`, `null`, `Yes`, `MSIL`), and hex
+    // public-key tokens.
+    assembly_attribute: ($) =>
+      seq($.assembly_attribute_name, '=', $.assembly_attribute_value),
+
+    assembly_attribute_name: ($) => $.simple_name,
+
+    assembly_attribute_value: ($) => /[A-Za-z0-9._]+/,
 
     dimension: ($) => repeat1(','),
 

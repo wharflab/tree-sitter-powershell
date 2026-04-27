@@ -4686,7 +4686,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[^\\{\\}\\(\\);,\\|\\&`\"'\\s\\r\\n\\[\\]\\+\\-\\*\\/\\$@<\\!]+"
+              "value": "[^\\{\\}\\(\\);,\\|\\&`\"'\\s\\r\\n\\[\\]\\+\\-\\$@<\\!]+"
             },
             {
               "type": "PATTERN",
@@ -4831,7 +4831,7 @@
     },
     "path_command_name_token": {
       "type": "PATTERN",
-      "value": "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_\\p{Nd}?\\-\\.\\\\]+",
+      "value": "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_\\p{Nd}?\\-\\.\\\\\\/]+",
       "flags": "u"
     },
     "path_command_name": {
@@ -6443,8 +6443,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "script_block"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "script_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -7243,6 +7251,18 @@
           "name": "type_spec"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "assembly_qualifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "]"
         }
@@ -7298,6 +7318,69 @@
           "name": "type_name"
         }
       ]
+    },
+    "assembly_qualifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "SYMBOL",
+          "name": "assembly_name"
+        }
+      ]
+    },
+    "assembly_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "type_name"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "assembly_attribute"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "assembly_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assembly_attribute_name"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "assembly_attribute_value"
+        }
+      ]
+    },
+    "assembly_attribute_name": {
+      "type": "SYMBOL",
+      "name": "simple_name"
+    },
+    "assembly_attribute_value": {
+      "type": "PATTERN",
+      "value": "[A-Za-z0-9._]+"
     },
     "dimension": {
       "type": "REPEAT1",
