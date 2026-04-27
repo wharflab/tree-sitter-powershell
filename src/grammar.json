@@ -2167,8 +2167,20 @@
             "value": "`[^\\r\\n]"
           },
           {
-            "type": "PATTERN",
-            "value": "[^\\&\\s\\(\\)\\}\\|;,]*"
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "`[^\\r\\n]"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^\\&\\s\\(\\)\\}\\|;,`]+"
+                }
+              ]
+            }
           }
         ]
       }
