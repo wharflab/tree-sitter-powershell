@@ -90,6 +90,28 @@ static bool is_inline_trivia(int32_t lookahead)
     }
 }
 
+static bool skip_line_continuation(TSLexer *lexer)
+{
+    if (lexer->lookahead != '`') {
+        return false;
+    }
+
+    skip(lexer);
+    if (lexer->lookahead == '\r') {
+        skip(lexer);
+        if (lexer->lookahead == '\n') {
+            skip(lexer);
+        }
+        return true;
+    }
+    if (lexer->lookahead == '\n') {
+        skip(lexer);
+        return true;
+    }
+
+    return false;
+}
+
 static void skip_line_comment(TSLexer *lexer)
 {
     skip(lexer);
@@ -157,6 +179,9 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
         }
         if (is_inline_trivia(lexer->lookahead)) {
             skip(lexer);
+            continue;
+        }
+        if (skip_line_continuation(lexer)) {
             continue;
         }
         // Comments (line `#...` and block `<# ... #>`) are extras to PowerShell
