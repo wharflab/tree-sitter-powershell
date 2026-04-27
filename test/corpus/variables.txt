@@ -619,3 +619,28 @@ ${
                             (unary_expression
                               (variable
                                 (braced_variable)))))))))))))))))
+
+===
+Variable : Splat question mark variable
+===
+
+@?
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (ternary_expression
+          (null_coalesce_expression
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (variable))))))))))))))))

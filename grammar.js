@@ -10,6 +10,32 @@ const PREC = {
   PARAM: 6,
 };
 
+const PS_IDENTIFIER_START_CHARS = '\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_';
+const PS_DECIMAL_DIGIT_CHARS = '\\p{Nd}';
+const PS_IDENTIFIER_FOLLOW_CHARS = `${PS_IDENTIFIER_START_CHARS}${PS_DECIMAL_DIGIT_CHARS}`;
+const PS_VARIABLE_CHARS = PS_IDENTIFIER_FOLLOW_CHARS;
+const PS_COMMAND_NAME_CHARS = `${PS_VARIABLE_CHARS}?`;
+const PS_PARAMETER_FIRST_CHARS = `${PS_IDENTIFIER_START_CHARS}?\\-`;
+const PS_PARAMETER_FOLLOW_CHARS = '^\\{\\}\\(\\);,\\|&\\.\\[:\\s';
+const PS_DOLLAR_LITERAL_START_CHARS = `({${PS_COMMAND_NAME_CHARS}\\$\\^"\``;
+
+/** @param {string} pattern */
+const psRegex = (pattern) => new RegExp(pattern, 'u');
+
+const psIdentifier = () =>
+  psRegex(`[${PS_IDENTIFIER_START_CHARS}][${PS_IDENTIFIER_FOLLOW_CHARS}]*`);
+
+const psTypeIdentifier = () =>
+  psRegex(`[${PS_IDENTIFIER_START_CHARS}][${PS_IDENTIFIER_FOLLOW_CHARS}]*(\`{1,2}[0-9]+)?`);
+
+const psVariablePart = () => psRegex(`[${PS_VARIABLE_CHARS}]+`);
+
+const psDecimalDigits = () => psRegex(`[${PS_DECIMAL_DIGIT_CHARS}]+`);
+
+/** @param {string} [lineTerminator] */
+const psDollarLiteral = (lineTerminator = '') =>
+  psRegex(`\\$(\`.{1}|\`\\r?\\n|[^${PS_DOLLAR_LITERAL_START_CHARS}${lineTerminator}][^\\$"${lineTerminator}\`]*)`);
+
 export default grammar({
   name: 'powershell',
 
@@ -69,7 +95,7 @@ export default grammar({
     decimal_integer_literal: ($) =>
       token(
         seq(
-          /[0-9]+/,
+          psDecimalDigits(),
           optional(/[yY]|[uU][yYsSlL]|[uUsSdDnNlL]/),
           optional(/[kKmMgGtTpP][bB]/),
         ),
@@ -90,20 +116,20 @@ export default grammar({
       token(
         choice(
           seq(
-            /[0-9]+\.[0-9]+/,
-            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            seq(psDecimalDigits(), '.', psDecimalDigits()),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits()))),
             optional(/[dDlL]/),
             optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
-            /\.[0-9]+/,
-            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            seq('.', psDecimalDigits()),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits()))),
             optional(/[dDlL]/),
             optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
-            /[0-9]+/,
-            token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/)),
+            psDecimalDigits(),
+            token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits())),
             optional(/[dDlL]/),
             optional(/[kKmMgGtTpP][bB]/),
           ),
@@ -124,7 +150,7 @@ export default grammar({
         $._expandable_string_immcontent,
         $.variable,
         $.sub_expression,
-        token.immediate(/\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/),
+        token.immediate(psDollarLiteral()),
         token.immediate(/`.{1}|`\r?\n/),
         token.immediate('""'),
         token.immediate('$'),
@@ -133,7 +159,7 @@ export default grammar({
     _expandable_string_leading_text: () => token(seq('"', /[^\$\"`]+|""/)),
 
     _expandable_string_leading_literal_dollar: () =>
-      token(seq('"', /\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\"`]*)/)),
+      token(seq('"', psDollarLiteral())),
 
     expandable_string_literal: ($) =>
       prec(
@@ -166,7 +192,7 @@ export default grammar({
             $.sub_expression,
             token.immediate(/(\r?\n)+[^\"\r\n]/),
             token.immediate(/(\r?\n)+\"[^@]/),
-            token.immediate(/\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^\"`][^\$\r\n`]*)/),
+            token.immediate(psDollarLiteral('\\r\\n')),
             token.immediate('$'),
             token.immediate(/`.{1}|`\r?\n/),
           ),
@@ -187,10 +213,10 @@ export default grammar({
       ),
 
     // Simple names
-    simple_name: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    simple_name: ($) => psIdentifier(),
 
     // Type names
-    type_identifier: ($) => /[a-zA-Z0-9_]+(`{1,2}[0-9]+)?/,
+    type_identifier: ($) => psTypeIdentifier(),
 
     type_name: ($) =>
       choice(
@@ -316,12 +342,12 @@ export default grammar({
                   reservedWord('script:'),
                   reservedWord('using:'),
                   reservedWord('workflow:'),
-                  /[a-zA-Z0-9_]+/,
+                  psVariablePart(),
                 ),
                 ':',
               ),
             ),
-            /[a-zA-Z0-9_]+|\?/,
+            choice(psVariablePart(), '?'),
           ),
         ),
         token(
@@ -336,12 +362,12 @@ export default grammar({
                   reservedWord('script:'),
                   reservedWord('using:'),
                   reservedWord('workflow:'),
-                  /[a-zA-Z0-9_]+/,
+                  psVariablePart(),
                 ),
                 ':',
               ),
             ),
-            /[a-zA-Z0-9_]+|\?/,
+            choice(psVariablePart(), '?'),
           ),
         ),
         $.braced_variable,
@@ -368,7 +394,8 @@ export default grammar({
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
 
     // Parameters
-    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`][a-zA-Z0-9_?\-`]*/, '--')),
+    command_parameter: ($) =>
+      token(choice(seq(/-+/, psRegex(`[${PS_PARAMETER_FIRST_CHARS}][${PS_PARAMETER_FOLLOW_CHARS}]*`)), '--')),
 
     _verbatim_command_argument_chars: ($) =>
       repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
@@ -649,7 +676,7 @@ export default grammar({
         seq(reservedWord('exit'), optional($.pipeline)),
       ),
 
-    label: ($) => token(seq(':', /[a-zA-Z_][a-zA-Z0-9_]*/)),
+    label: ($) => token(seq(':', psIdentifier())),
 
     label_expression: ($) => choice($.label, $.unary_expression),
 
@@ -809,7 +836,7 @@ export default grammar({
           choice(
             /[^\$"`]+/,
             $.variable,
-            /\$(`.{1}|`\r?\n|[^({a-zA-Z0-9_?$^"`][^\$"`]*)/,
+            psDollarLiteral(),
             /`.{1}|`\r?\n/,
             '""',
             $.sub_expression,
@@ -860,7 +887,7 @@ export default grammar({
         ),
       ),
 
-    path_command_name_token: ($) => /[0-9a-zA-Z_?\-\.\\]+/,
+    path_command_name_token: ($) => psRegex(`[${PS_COMMAND_NAME_CHARS}\\-\\.\\\\]+`),
 
     // Use to parse command path
     path_command_name: ($) =>

@@ -490,6 +490,26 @@ download toto
             (generic_token)))))))
 
 ===
+Command parameter name can start with hyphen
+===
+
+Invoke-Thing --- value
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
 Cmdlet with parenthesized_expression as parameter without any white space
 ===
 
