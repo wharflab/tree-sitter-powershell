@@ -66,6 +66,7 @@ const (
 	NodeEmptyStatement = "empty_statement"
 	NodeEnumMember = "enum_member"
 	NodeEnumStatement = "enum_statement"
+	NodeEscapeCharacter = "escape_character"
 	NodeExpandableBareword = "expandable_bareword"
 	NodeExpandableHereStringLiteral = "expandable_here_string_literal"
 	NodeExpandableStringLiteral = "expandable_string_literal"

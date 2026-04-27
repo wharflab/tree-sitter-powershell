@@ -210,7 +210,6 @@ Native command with /flag:"$(expr)" colon-prefixed interpolated argument
 
 ===
 Backtick-n escape sequence used as bareword argument
-:skip
 ; source: LesFerch/WinSetView/src/317/WinSetView.ps1
 ===
 
@@ -218,7 +217,15 @@ Write-Host `n'hello'`n
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (escape_character)))))))
 
 ===
 Adjacent quoted string + variable chain forming a single command argument

@@ -391,6 +391,13 @@ export default grammar({
     generic_token: ($) =>
       token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
 
+    // A backtick escape sequence used in bareword command-argument position,
+    // e.g. `n (newline), `r (carriage-return). The tail absorbs any immediately-
+    // adjacent bareword characters so that adjacent-token forms like `n'hello'`n
+    // parse as one unit when there is no whitespace between them.
+    escape_character: ($) =>
+      token(seq(/`[^\r\n]/, /[^\&\s\(\)\}\|;,]*/)),
+
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
 
     // Parameters
@@ -925,6 +932,7 @@ export default grammar({
           seq($.command_argument_sep, $.array_literal_expression),
           seq($.command_argument_sep, $.expandable_bareword),
           seq($.command_argument_sep, $.bareword_argument_list),
+          seq($.command_argument_sep, $.escape_character),
           $.parenthesized_expression,
           $.script_block_expression,
         ),
