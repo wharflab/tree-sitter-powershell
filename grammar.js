@@ -566,7 +566,8 @@ export default grammar({
         seq(reservedWord('-file'), $.switch_filename),
       ),
 
-    switch_filename: ($) => choice($._command_token, $._primary_expression),
+    switch_filename: ($) =>
+      choice($._primary_expression, $._switch_condition_token),
 
     switch_body: ($) => seq('{', optional($.switch_clauses), '}'),
 
@@ -581,7 +582,10 @@ export default grammar({
       ),
 
     switch_clause_condition: ($) =>
-      choice($._command_token, $._primary_expression),
+      choice($._primary_expression, $._switch_condition_token),
+
+    _switch_condition_token: ($) =>
+      token(/[^\(\)\{\}\s;\&"'][^\(\)\{\}\s;\&]*/),
 
     foreach_statement: ($) =>
       seq(

@@ -351,7 +351,6 @@ Get-Item -Path $x\a-*, $y\b-*
 
 ===
 switch case with $(...) or ${...} inside expandable string pattern
-:skip
 ; source: microsoft/sql-server-samples runassessment.ps1, black7375/Firefox-UI-Fix install.ps1
 ===
 
@@ -363,7 +362,106 @@ switch ('x') {
 
 ---
 
-(program)
+(program
+  (statement_list
+    (switch_statement
+      (switch_condition
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal
+                                    (verbatim_string_characters))))))))))))))))
+      (switch_body
+        (switch_clauses
+          (switch_clause
+            (switch_clause_condition
+              (string_literal
+                (expandable_string_literal
+                  (sub_expression
+                    (statement_list
+                      (pipeline
+                        (pipeline_chain
+                          (ternary_expression
+                            (null_coalesce_expression
+                              (logical_expression
+                                (bitwise_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (format_expression
+                                          (range_expression
+                                            (array_literal_expression
+                                              (unary_expression
+                                                (variable)))))))))))))))))))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (verbatim_string_characters))))))))))))))))))
+          (switch_clause
+            (switch_clause_condition
+              (string_literal
+                (expandable_string_literal
+                  (variable
+                    (braced_variable)))))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (verbatim_string_characters))))))))))))))))))
+          (switch_clause
+            (switch_clause_condition)
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (verbatim_string_characters)))))))))))))))))))))))
 
 ===
 Native command with /flag:"$(expr)" colon-prefixed interpolated argument

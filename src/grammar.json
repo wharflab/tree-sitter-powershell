@@ -3004,11 +3004,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_command_token"
+          "name": "_primary_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "_primary_expression"
+          "name": "_switch_condition_token"
         }
       ]
     },
@@ -3073,13 +3073,20 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_command_token"
+          "name": "_primary_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "_primary_expression"
+          "name": "_switch_condition_token"
         }
       ]
+    },
+    "_switch_condition_token": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\(\\)\\{\\}\\s;\\&\"'][^\\(\\)\\{\\}\\s;\\&]*"
+      }
     },
     "foreach_statement": {
       "type": "SEQ",
