@@ -912,7 +912,6 @@ $z = [System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 
 ===
 Backtick-escaped space followed by line-continuation backtick
-:skip
 ; source: Sitecore/docker-images/Build.ps1
 ===
 
@@ -921,7 +920,21 @@ echo x ` `
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (escape_character)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Adjacent (expr).Member followed directly by empty string as argument

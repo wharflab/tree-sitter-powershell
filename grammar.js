@@ -416,9 +416,10 @@ export default grammar({
     // A backtick escape sequence used in bareword command-argument position,
     // e.g. `n (newline), `r (carriage-return). The tail absorbs any immediately-
     // adjacent bareword characters so that adjacent-token forms like `n'hello'`n
-    // parse as one unit when there is no whitespace between them.
+    // parse as one unit when there is no whitespace between them. A trailing
+    // backtick before a newline must remain available to line-continuation extras.
     escape_character: ($) =>
-      token(seq(/`[^\r\n]/, /[^\&\s\(\)\}\|;,]*/)),
+      token(seq(/`[^\r\n]/, repeat(choice(/`[^\r\n]/, /[^\&\s\(\)\}\|;,`]+/)))),
 
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
 
