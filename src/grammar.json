@@ -3008,7 +3008,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_switch_condition_token"
+          "name": "_switch_filename_token"
         }
       ]
     },
@@ -3080,6 +3080,13 @@
           "name": "_switch_condition_token"
         }
       ]
+    },
+    "_switch_filename_token": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\(\\)\\{\\}\\[\\]\\$\\@`\\s;\\&\"'][^\\(\\)\\{\\}\\s;\\&]*"
+      }
     },
     "_switch_condition_token": {
       "type": "TOKEN",

@@ -472,6 +472,10 @@ switch -file $path {
     default { "ok" }
 }
 
+switch -regex -file .\somefile.txt {
+    default { "path" }
+}
+
 switch ($x) {
     $pat { "variable" }
     @(1) { "array" }
@@ -486,6 +490,32 @@ switch ($x) {
       (switch_condition
         (switch_filename
           (variable)))
+      (switch_body
+        (switch_clauses
+          (switch_clause
+            (switch_clause_condition)
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))))))
+    (switch_statement
+      (switch_parameters
+        (switch_parameter))
+      (switch_condition
+        (switch_filename))
       (switch_body
         (switch_clauses
           (switch_clause
