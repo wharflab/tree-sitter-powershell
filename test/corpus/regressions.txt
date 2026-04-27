@@ -239,6 +239,7 @@ Assembly-qualified type literal
 
 $x = [System.String, System.Private.CoreLib]
 $y = [System.Collections.Generic.List[string], System.Private.CoreLib].FullName
+$z = [System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
 
 ---
 
@@ -341,7 +342,58 @@ $y = [System.Collections.Generic.List[string], System.Private.CoreLib].FullName
                                               (type_identifier))
                                             (type_identifier)))))
                                     (member_name
-                                      (simple_name))))))))))))))))))))
+                                      (simple_name))))))))))))))))))
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable)))))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (type_literal
+                                    (type_spec
+                                      (type_name
+                                        (type_name
+                                          (type_identifier))
+                                        (type_identifier)))
+                                    (assembly_qualifier
+                                      (assembly_name
+                                        (type_name
+                                          (type_identifier))
+                                        (assembly_attribute
+                                          (assembly_attribute_name
+                                            (simple_name))
+                                          (assembly_attribute_value))
+                                        (assembly_attribute
+                                          (assembly_attribute_name
+                                            (simple_name))
+                                          (assembly_attribute_value))
+                                        (assembly_attribute
+                                          (assembly_attribute_name
+                                            (simple_name))
+                                          (assembly_attribute_value))))))))))))))))))))))
 
 ===
 Backtick-escaped space followed by line-continuation backtick

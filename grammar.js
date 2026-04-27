@@ -1433,11 +1433,23 @@ export default grammar({
       ),
 
     // Assembly-qualified type name tail at the outermost `[...]`, e.g.
-    // `[Int32, mscorlib]` or
-    // `[System.Collections.Generic.List[string], System.Private.CoreLib]`.
+    // `[Int32, mscorlib]`, or with full AssemblyQualifiedName metadata:
+    // `[Foo, Bar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]`.
     assembly_qualifier: ($) => seq(',', $.assembly_name),
 
-    assembly_name: ($) => $.type_name,
+    assembly_name: ($) =>
+      seq($.type_name, repeat(seq(',', $.assembly_attribute))),
+
+    // An AssemblyName metadata entry: `Key=Value`. PowerShell's parser
+    // accepts the values emitted by AssemblyName.FullName: dotted
+    // versions, identifiers (`neutral`, `null`, `Yes`, `MSIL`), and hex
+    // public-key tokens.
+    assembly_attribute: ($) =>
+      seq($.assembly_attribute_name, '=', $.assembly_attribute_value),
+
+    assembly_attribute_name: ($) => $.simple_name,
+
+    assembly_attribute_value: ($) => /[A-Za-z0-9._]+/,
 
     dimension: ($) => repeat1(','),
 
