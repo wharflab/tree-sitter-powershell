@@ -6443,8 +6443,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "script_block"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "script_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

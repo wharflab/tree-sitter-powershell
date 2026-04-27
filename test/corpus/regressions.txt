@@ -1,10 +1,3 @@
-; Regression tests for parse failures on real-world PowerShell syntax.
-; Each test is currently marked :skip because the grammar does not yet
-; accept the input. When the grammar is fixed, remove :skip and run
-; `npx tree-sitter test -u --file-name regressions.txt` to populate the
-; expected tree. The source: link in each header points to the real
-; script the pattern was minimised from.
-
 ===
 Function name with symbolic leading char
 :skip
@@ -228,7 +221,6 @@ Unix absolute-path command invocation
 
 ===
 Empty scriptblock literal as right-hand side of assignment
-:skip
 ; source: gregoryfmartin/Eldoria/Classes/Mapping/MapTileObject.ps1
 ===
 
@@ -237,4 +229,68 @@ $y.z = {}
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable)))))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (script_block_expression))))))))))))))))
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (member_access
+                                  (variable)
+                                  (member_name
+                                    (simple_name)))))))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (script_block_expression))))))))))))))))))
