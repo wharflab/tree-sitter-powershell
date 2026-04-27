@@ -10,12 +10,31 @@ enum TOKEN_TYPE {
     EXPANDABLE_STRING_IMMCONTENT,
 };
 
+enum UnicodeCodePoint {
+    UNICODE_NO_BREAK_SPACE = 0x00A0,
+    UNICODE_OGHAM_SPACE_MARK = 0x1680,
+    UNICODE_EN_QUAD = 0x2000,
+    UNICODE_ZERO_WIDTH_SPACE = 0x200B,
+    UNICODE_NARROW_NO_BREAK_SPACE = 0x202F,
+    UNICODE_MEDIUM_MATHEMATICAL_SPACE = 0x205F,
+    UNICODE_WORD_JOINER = 0x2060,
+    UNICODE_IDEOGRAPHIC_SPACE = 0x3000,
+    UNICODE_BYTE_ORDER_MARK = 0xFEFF,
+};
+
+enum BlockCommentScanResult {
+    BLOCK_COMMENT_NOT_STARTED,
+    BLOCK_COMMENT_TERMINATED,
+    BLOCK_COMMENT_UNTERMINATED,
+};
+
 /* --- API --- */
 
-void *tree_sitter_powershell_external_scanner_create();
+void *tree_sitter_powershell_external_scanner_create(void);
 
-void tree_sitter_powershell_external_scanner_destroy(void *p);
+void tree_sitter_powershell_external_scanner_destroy(void *payload);
 
+// NOLINTNEXTLINE(readability-non-const-parameter): Tree-sitter external scanner ABI requires char *.
 unsigned tree_sitter_powershell_external_scanner_serialize(void *payload, char *buffer);
 
 void tree_sitter_powershell_external_scanner_deserialize(void *payload, const char *buffer, unsigned length);
@@ -26,32 +45,101 @@ bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer,
 
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
-static bool is_inline_trivia(int32_t lookahead)
+static bool is_newline(int32_t lookahead)
 {
-    if (lookahead >= 0x2000 && lookahead <= 0x200B) return true;
+    if (lookahead == '\n') {
+        return true;
+    }
+    return lookahead == '\r';
+}
 
+static bool is_statement_boundary_lookahead(int32_t lookahead)
+{
     switch (lookahead) {
-        case ' ':
-        case '\t':
-        case '\f':
-        case '\v':
-        case 0x1680:
-        case 0x00A0:
-        case 0x202F:
-        case 0x205F:
-        case 0x200B:
-        case 0x2060:
-        case 0x3000:
-        case 0xFEFF:
+        case 0:
+        case '}':
+        case ')':
+        case ';':
             return true;
         default:
             return false;
     }
 }
 
+static bool is_inline_trivia(int32_t lookahead)
+{
+    if (lookahead >= UNICODE_EN_QUAD && lookahead <= UNICODE_ZERO_WIDTH_SPACE) {
+        return true;
+    }
+
+    switch (lookahead) {
+        case ' ':
+        case '\t':
+        case '\f':
+        case '\v':
+        case UNICODE_OGHAM_SPACE_MARK:
+        case UNICODE_NO_BREAK_SPACE:
+        case UNICODE_NARROW_NO_BREAK_SPACE:
+        case UNICODE_MEDIUM_MATHEMATICAL_SPACE:
+        case UNICODE_WORD_JOINER:
+        case UNICODE_IDEOGRAPHIC_SPACE:
+        case UNICODE_BYTE_ORDER_MARK:
+            return true;
+        default:
+            return false;
+    }
+}
+
+static void skip_line_comment(TSLexer *lexer)
+{
+    skip(lexer);
+    while (lexer->lookahead != 0 && !is_newline(lexer->lookahead)) {
+        skip(lexer);
+    }
+}
+
+static enum BlockCommentScanResult scan_block_comment(TSLexer *lexer)
+{
+    skip(lexer);
+    if (lexer->lookahead != '#') {
+        return BLOCK_COMMENT_NOT_STARTED;
+    }
+
+    skip(lexer);
+    for (;;) {
+        if (lexer->lookahead == 0) {
+            return BLOCK_COMMENT_UNTERMINATED;
+        }
+        if (lexer->lookahead == '#') {
+            skip(lexer);
+            if (lexer->lookahead == '>') {
+                skip(lexer);
+                return BLOCK_COMMENT_TERMINATED;
+            }
+            continue;
+        }
+        skip(lexer);
+    }
+}
+
+static bool has_line_initial_pipeline_continuation(TSLexer *lexer)
+{
+    if (lexer->lookahead == '|') {
+        return true;
+    }
+    if (lexer->lookahead != '&') {
+        return false;
+    }
+
+    skip(lexer);
+    return lexer->lookahead == '&';
+}
+
 static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 {
-    if (!valid_symbols[STATEMENT_BOUNDARY]) return false;
+    if (!valid_symbols[STATEMENT_BOUNDARY]) {
+        return false;
+    }
 
     lexer->result_symbol = STATEMENT_BOUNDARY;
     // This token has no characters -- everything is lookahead to determine its existence.
@@ -59,11 +147,10 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 
     bool saw_newline = false;
     for (;;) {
-        if (lexer->lookahead == 0) return true;
-        if (lexer->lookahead == '}') return true;
-        if (lexer->lookahead == ')') return true;
-        if (lexer->lookahead == ';') return true;
-        if (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+        if (is_statement_boundary_lookahead(lexer->lookahead)) {
+            return true;
+        }
+        if (is_newline(lexer->lookahead)) {
             saw_newline = true;
             skip(lexer);
             continue;
@@ -76,40 +163,27 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
         // and must not terminate a pipeline that continues on a subsequent line
         // with a leading `|`, `||`, or `&&`.
         if (lexer->lookahead == '#') {
-            skip(lexer);
-            while (lexer->lookahead != 0 && lexer->lookahead != '\n' && lexer->lookahead != '\r') {
-                skip(lexer);
-            }
+            skip_line_comment(lexer);
             continue;
         }
         if (lexer->lookahead == '<') {
             // Only `<#` starts a block comment; a bare `<` isn't our concern
             // and the main lexer will handle it (though it's not grammatical
             // at statement boundaries today).
-            skip(lexer);
-            if (lexer->lookahead != '#') return saw_newline;
-            skip(lexer);
-            for (;;) {
-                if (lexer->lookahead == 0) return true;
-                if (lexer->lookahead == '#') {
-                    skip(lexer);
-                    if (lexer->lookahead == '>') {
-                        skip(lexer);
-                        break;
-                    }
-                    continue;
-                }
-                skip(lexer);
+            enum BlockCommentScanResult block_comment = scan_block_comment(lexer);
+            if (block_comment == BLOCK_COMMENT_TERMINATED) {
+                continue;
             }
-            continue;
+            if (block_comment == BLOCK_COMMENT_UNTERMINATED) {
+                return true;
+            }
+            return saw_newline;
         }
         if (saw_newline) {
             // PowerShell 7 pipeline continuation: a line-initial `|`, `||`, or `&&`
             // continues the current pipeline, so suppress the boundary.
-            if (lexer->lookahead == '|') return false;
-            if (lexer->lookahead == '&') {
-                skip(lexer);
-                return lexer->lookahead != '&';
+            if (has_line_initial_pipeline_continuation(lexer)) {
+                return false;
             }
             return true;
         }
@@ -119,11 +193,15 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 
 static bool scan_for_clause_break(TSLexer *lexer, const bool *valid_symbols)
 {
-    if (!valid_symbols[FOR_CLAUSE_BREAK]) return false;
+    if (!valid_symbols[FOR_CLAUSE_BREAK]) {
+        return false;
+    }
 
     if (lexer->lookahead == '\r') {
         lexer->advance(lexer, false);
-        if (lexer->lookahead == '\n') lexer->advance(lexer, false);
+        if (lexer->lookahead == '\n') {
+            lexer->advance(lexer, false);
+        }
     } else if (lexer->lookahead == '\n') {
         lexer->advance(lexer, false);
     } else {
@@ -142,7 +220,9 @@ static bool scan_for_clause_break(TSLexer *lexer, const bool *valid_symbols)
 
 static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_symbols)
 {
-    if (!valid_symbols[EXPANDABLE_STRING_IMMCONTENT]) return false;
+    if (!valid_symbols[EXPANDABLE_STRING_IMMCONTENT]) {
+        return false;
+    }
 
     // Error recovery enables every external symbol at once. If both
     // STATEMENT_BOUNDARY and FOR_CLAUSE_BREAK are also valid we're
@@ -164,7 +244,9 @@ static bool scan_expandable_string_immcontent(TSLexer *lexer, const bool *valid_
         lexer->advance(lexer, false);
         advanced = true;
     }
-    if (!advanced) return false;
+    if (!advanced) {
+        return false;
+    }
 
     lexer->result_symbol = EXPANDABLE_STRING_IMMCONTENT;
     lexer->mark_end(lexer);
@@ -177,21 +259,26 @@ bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer,
 {
     (void)payload;
 
-    if (scan_expandable_string_immcontent(lexer, valid_symbols)) return true;
-    if (scan_for_clause_break(lexer, valid_symbols)) return true;
+    if (scan_expandable_string_immcontent(lexer, valid_symbols)) {
+        return true;
+    }
+    if (scan_for_clause_break(lexer, valid_symbols)) {
+        return true;
+    }
     return scan_statement_boundary(lexer, valid_symbols);
 }
 
-void *tree_sitter_powershell_external_scanner_create()
+void *tree_sitter_powershell_external_scanner_create(void)
 {
     return NULL;
 }
 
-void tree_sitter_powershell_external_scanner_destroy(void *p)
+void tree_sitter_powershell_external_scanner_destroy(void *payload)
 {
-    (void)p;
+    (void)payload;
 }
 
+// NOLINTNEXTLINE(readability-non-const-parameter): Tree-sitter external scanner ABI requires char *.
 unsigned tree_sitter_powershell_external_scanner_serialize(void *payload, char *buffer)
 {
     (void)payload;
