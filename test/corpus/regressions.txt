@@ -1,0 +1,240 @@
+; Regression tests for parse failures on real-world PowerShell syntax.
+; Each test is currently marked :skip because the grammar does not yet
+; accept the input. When the grammar is fixed, remove :skip and run
+; `npx tree-sitter test -u --file-name regressions.txt` to populate the
+; expected tree. The source: link in each header points to the real
+; script the pattern was minimised from.
+
+===
+Function name with symbolic leading char
+:skip
+; source: nightroman/Invoke-Build/Invoke-Build.ps1
+===
+
+function *Die($M, $C=0) { throw $M }
+*Die 'x' 1
+
+---
+
+(program)
+
+===
+Unquoted bracket-bang argument to command
+:skip
+; source: mvelazc0/BadZure/legacy/Invoke-BadZure.ps1
+===
+
+Write-Host [!] Creating Users
+
+---
+
+(program)
+
+===
+param default of type literal followed by next param with @() default
+:skip
+; source: mikefrobbins/PowerShell/MrToolkit/Public/New-DynamicParam.ps1
+===
+
+param(
+    [System.Type]$T = [int],
+    [string[]]$B = @()
+)
+
+---
+
+(program)
+
+===
+Function body with only an attribute then a comment
+:skip
+; source: texhex/BiosSledgehammer/MPSXM.psm1
+===
+
+function Get-Thing {
+    [OutputType([datetime])]
+    #param()
+    [DateTime]::Now
+}
+
+---
+
+(program)
+
+===
+Trailing bare dash as native-command argument
+:skip
+; source: jyn514/cohost-backup/extract.ps1
+===
+
+echo x | download -
+
+---
+
+(program)
+
+===
+Comma-separated bareword cmdlet arguments
+:skip
+; source: guyrleech/Microsoft/URL checker.ps1
+===
+
+Add-Type -AssemblyName PresentationCore , PresentationFramework , System.Windows.Forms , System.Web
+
+---
+
+(program)
+
+===
+Native command argument containing equals sign
+:skip
+; source: silverqx/TinyORM/tools/deploy.ps1
+===
+
+git --untracked-files=normal
+
+---
+
+(program)
+
+===
+Nested backtick line continuations inside pipeline
+:skip
+; source: rhysd/ghci-color/ghci-color.ps1
+===
+
+gci | `
+  % { $_ `
+    -replace 'a', 'b' `
+  }
+
+---
+
+(program)
+
+===
+Expandable bareword path with backslash and glob as comma-separated args
+:skip
+; source: silverqx/TinyORM/tools/deploy.ps1
+===
+
+Get-Item -Path $x\a-*, $y\b-*
+
+---
+
+(program)
+
+===
+switch case with $(...) or ${...} inside expandable string pattern
+:skip
+; source: microsoft/sql-server-samples runassessment.ps1, black7375/Firefox-UI-Fix install.ps1
+===
+
+switch ('x') {
+    "$($n)" { 'a' }
+    "${b}"  { 'c' }
+    default { 'd' }
+}
+
+---
+
+(program)
+
+===
+Native command with /flag:"$(expr)" colon-prefixed interpolated argument
+:skip
+; source: 0x6d69636b/windows_hardening/HardeningKitty.psm1
+===
+
+&$BinaryAuditpol /set /subcategory:"$($x)" /success:$($y) /failure:$($z) | Out-Null
+
+---
+
+(program)
+
+===
+Backtick-n escape sequence used as bareword argument
+:skip
+; source: LesFerch/WinSetView/src/317/WinSetView.ps1
+===
+
+Write-Host `n'hello'`n
+
+---
+
+(program)
+
+===
+Adjacent quoted string + variable chain forming a single command argument
+:skip
+; source: NetSPI/PowerShell/PowerSkype.ps1
+===
+
+Write-Host 'Auth: '$domain\$username' - '$password -ForegroundColor Red
+
+---
+
+(program)
+
+===
+Assembly-qualified type literal
+:skip
+; source: PowerShell/PowerShell test/powershell/Language/Parser/Parsing.Tests.ps1
+===
+
+$x = [System.String, System.Private.CoreLib]
+$y = [System.Collections.Generic.List[string], System.Private.CoreLib].FullName
+
+---
+
+(program)
+
+===
+Backtick-escaped space followed by line-continuation backtick
+:skip
+; source: Sitecore/docker-images/Build.ps1
+===
+
+echo x ` `
+    -y z
+
+---
+
+(program)
+
+===
+Adjacent (expr).Member followed directly by empty string as argument
+:skip
+; source: SpotX-Official/SpotX/run.ps1
+===
+
+Write-Host ($lang).Incorrect"" -ForegroundColor Red
+
+---
+
+(program)
+
+===
+Unix absolute-path command invocation
+:skip
+; source: adamdriscoll/selenium-powershell/Internal/init.ps1
+===
+
+/usr/bin/stat -f "%A" "/tmp"
+
+---
+
+(program)
+
+===
+Empty scriptblock literal as right-hand side of assignment
+:skip
+; source: gregoryfmartin/Eldoria/Classes/Mapping/MapTileObject.ps1
+===
+
+$x = {}
+$y.z = {}
+
+---
+
+(program)
