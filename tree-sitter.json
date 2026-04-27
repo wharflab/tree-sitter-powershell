@@ -20,7 +20,7 @@
     }
   ],
   "metadata": {
-    "version": "0.34.2",
+    "version": "0.34.3",
     "license": "MIT",
     "description": "PowerShell grammar for tree-sitter",
     "authors": [
