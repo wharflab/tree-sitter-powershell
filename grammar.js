@@ -962,12 +962,12 @@ export default grammar({
       token.immediate(/[^\&\s\(\)\}\|;,\$\[\{\.\"\'`][^\&\s\(\)\}\|;,]*/),
 
     // A comma-separated list of command arguments that starts with a
-    // bareword (generic token). Used for commands like
-    // `Select-Object PSPath, PSChildName`.
+    // bareword or expandable bareword. Used for commands like
+    // `Select-Object PSPath, PSChildName` and `Get-Item $x\a-*, $y\b-*`.
     bareword_argument_list: ($) =>
       prec.right(
         seq(
-          $.generic_token,
+          choice($.generic_token, $.expandable_bareword),
           repeat1(
             seq(
               ',',
