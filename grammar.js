@@ -1176,16 +1176,7 @@ export default grammar({
     expression_with_unary_operator: ($) =>
       choice(
         seq(',', $.unary_expression),
-        seq(reservedWord('-not'), $.unary_expression),
-        seq('!', $.unary_expression),
-        seq(reservedWord('-bnot'), $.unary_expression),
-        seq('+', $.unary_expression),
-        seq('-', $.unary_expression),
-        $.pre_increment_expression,
-        $.pre_decrement_expression,
-        $.cast_expression,
-        seq(reservedWord('-split'), $.unary_expression),
-        seq(reservedWord('-join'), $.unary_expression),
+        ...nonCommaUnaryExpressionOperators($),
       ),
 
     pre_increment_expression: ($) => seq('++', $.unary_expression),
@@ -1215,18 +1206,7 @@ export default grammar({
       ),
 
     _non_comma_expression_with_unary_operator: ($) =>
-      choice(
-        seq(reservedWord('-not'), $.unary_expression),
-        seq('!', $.unary_expression),
-        seq(reservedWord('-bnot'), $.unary_expression),
-        seq('+', $.unary_expression),
-        seq('-', $.unary_expression),
-        $.pre_increment_expression,
-        $.pre_decrement_expression,
-        $.cast_expression,
-        seq(reservedWord('-split'), $.unary_expression),
-        seq(reservedWord('-join'), $.unary_expression),
-      ),
+      choice(...nonCommaUnaryExpressionOperators($)),
 
     attributed_variable: ($) => seq($.type_literal, $.variable),
 
@@ -1555,6 +1535,24 @@ function reserved(regex) {
  */
 function forClauseSeparator($) {
   return choice(';', $._for_clause_break);
+}
+
+/**
+ * @param {GrammarSymbols<string>} $
+ */
+function nonCommaUnaryExpressionOperators($) {
+  return [
+    seq(reservedWord('-not'), $.unary_expression),
+    seq('!', $.unary_expression),
+    seq(reservedWord('-bnot'), $.unary_expression),
+    seq('+', $.unary_expression),
+    seq('-', $.unary_expression),
+    $.pre_increment_expression,
+    $.pre_decrement_expression,
+    $.cast_expression,
+    seq(reservedWord('-split'), $.unary_expression),
+    seq(reservedWord('-join'), $.unary_expression),
+  ];
 }
 
 /**
