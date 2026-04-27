@@ -242,7 +242,6 @@ echo x | download -
 
 ===
 Comma-separated bareword cmdlet arguments
-:skip
 ; source: guyrleech/Microsoft/URL checker.ps1
 ===
 
@@ -250,7 +249,21 @@ Add-Type -AssemblyName PresentationCore , PresentationFramework , System.Windows
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (bareword_argument_list
+              (generic_token)
+              (generic_token)
+              (generic_token)
+              (generic_token))))))))
 
 ===
 Native command argument containing equals sign

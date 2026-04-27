@@ -1075,12 +1075,17 @@ export default grammar({
           choice($.generic_token, $.expandable_bareword),
           repeat1(
             seq(
-              ',',
+              $._bareword_argument_list_separator,
               choice($.generic_token, $.expandable_bareword, $.unary_expression),
             ),
           ),
         ),
       ),
+
+    // Keep spaces around the comma in one token so `foo , bar` does not
+    // reduce `foo` as a complete command argument before seeing the comma.
+    _bareword_argument_list_separator: () =>
+      token(prec(PREC.PARAM + 1, choice(/ +, */, /, */))),
 
     verbatim_command_argument: ($) =>
       seq('--%', $._verbatim_command_argument_chars),

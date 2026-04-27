@@ -5619,8 +5619,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": ","
+                  "type": "SYMBOL",
+                  "name": "_bareword_argument_list_separator"
                 },
                 {
                   "type": "CHOICE",
@@ -5643,6 +5643,26 @@
             }
           }
         ]
+      }
+    },
+    "_bareword_argument_list_separator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 7,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": " +, *"
+            },
+            {
+              "type": "PATTERN",
+              "value": ", *"
+            }
+          ]
+        }
       }
     },
     "verbatim_command_argument": {
