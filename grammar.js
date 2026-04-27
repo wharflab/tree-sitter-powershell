@@ -587,7 +587,7 @@ export default grammar({
     switch_clause_condition: ($) => switchPattern($),
 
     _switch_condition_token: ($) =>
-      token(/[^\(\)\{\}\s;\&"'][^\(\)\{\}\s;\&]*/),
+      token(/[^\(\)\{\}\[\]\$\@\.`\s;\&"'][^\(\)\{\}\s;\&]*/),
 
     foreach_statement: ($) =>
       seq(

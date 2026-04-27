@@ -464,6 +464,148 @@ switch ('x') {
                                             (verbatim_string_characters)))))))))))))))))))))))
 
 ===
+switch patterns starting with primary-expression tokens
+; source: #48 review
+===
+
+switch -file $path {
+    default { "ok" }
+}
+
+switch ($x) {
+    $pat { "variable" }
+    @(1) { "array" }
+    [int] { "type" }
+}
+
+---
+
+(program
+  (statement_list
+    (switch_statement
+      (switch_condition
+        (switch_filename
+          (variable)))
+      (switch_body
+        (switch_clauses
+          (switch_clause
+            (switch_clause_condition)
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))))))
+    (switch_statement
+      (switch_condition
+        (pipeline
+          (pipeline_chain
+            (ternary_expression
+              (null_coalesce_expression
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable)))))))))))))))
+      (switch_body
+        (switch_clauses
+          (switch_clause
+            (switch_clause_condition
+              (variable))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))
+          (switch_clause
+            (switch_clause_condition
+              (array_expression
+                (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (integer_literal
+                                              (decimal_integer_literal))))))))))))))))))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal))))))))))))))))))
+          (switch_clause
+            (switch_clause_condition
+              (type_literal
+                (type_spec
+                  (type_name
+                    (type_identifier)))))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))))))))
+
+===
 Native command with /flag:"$(expr)" colon-prefixed interpolated argument
 :skip
 ; source: 0x6d69636b/windows_hardening/HardeningKitty.psm1
