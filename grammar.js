@@ -80,7 +80,7 @@ export default grammar({
       token(
         choice(
           /#[^\r\n]*/,
-          seq('<#', repeat(choice(/[^#`]+/, /#+[^>#]/, /`.{1}|`\r?\n/)), /#+>/),
+          seq('<#', repeat(choice(/[^#`]+/, /#+[^>#]/, /`.|`\r?\n/)), /#+>/),
         ),
       ),
 
@@ -96,18 +96,18 @@ export default grammar({
       token(
         seq(
           psDecimalDigits(),
-          optional(/[yY]|[uU][yYsSlL]|[uUsSdDnNlL]/),
-          optional(/[kKmMgGtTpP][bB]/),
+          optional(/y|u[ysl]|[usdnl]/i),
+          optional(/[kmgtp]b/i),
         ),
       ),
 
     hexadecimal_integer_literal: ($) =>
       token(
         seq(
-          /0[xX]/,
-          /[0-9a-fA-F]+/,
-          optional(/[yY]|[uU][yYsSlL]|[uUsSnNlL]/),
-          optional(/[kKmMgGtTpP][bB]/),
+          /0x/i,
+          /[0-9a-f]+/i,
+          optional(/y|u[ysl]|[usnl]/i),
+          optional(/[kmgtp]b/i),
         ),
       ),
 
@@ -117,21 +117,21 @@ export default grammar({
         choice(
           seq(
             seq(psDecimalDigits(), '.', psDecimalDigits()),
-            optional(token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits()))),
-            optional(/[dDlL]/),
-            optional(/[kKmMgGtTpP][bB]/),
+            optional(token(seq(/e/i, optional(choice('+', '-')), psDecimalDigits()))),
+            optional(/[dl]/i),
+            optional(/[kmgtp]b/i),
           ),
           seq(
             seq('.', psDecimalDigits()),
-            optional(token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits()))),
-            optional(/[dDlL]/),
-            optional(/[kKmMgGtTpP][bB]/),
+            optional(token(seq(/e/i, optional(choice('+', '-')), psDecimalDigits()))),
+            optional(/[dl]/i),
+            optional(/[kmgtp]b/i),
           ),
           seq(
             psDecimalDigits(),
-            token(seq(/[eE]/, optional(choice('+', '-')), psDecimalDigits())),
-            optional(/[dDlL]/),
-            optional(/[kKmMgGtTpP][bB]/),
+            token(seq(/e/i, optional(choice('+', '-')), psDecimalDigits())),
+            optional(/[dl]/i),
+            optional(/[kmgtp]b/i),
           ),
         ),
       ),
@@ -151,12 +151,12 @@ export default grammar({
         $.variable,
         $.sub_expression,
         token.immediate(psDollarLiteral()),
-        token.immediate(/`.{1}|`\r?\n/),
+        token.immediate(/`.|`\r?\n/),
         token.immediate('""'),
         token.immediate('$'),
       ),
 
-    _expandable_string_leading_text: () => token(seq('"', /[^\$\"`]+|""/)),
+    _expandable_string_leading_text: () => token(seq('"', /[^$"`]+|""/)),
 
     _expandable_string_leading_literal_dollar: () =>
       token(seq('"', psDollarLiteral())),
@@ -171,7 +171,7 @@ export default grammar({
               $._expandable_string_leading_literal_dollar,
               seq('"', $.variable),
               seq('"', $.sub_expression),
-              seq('"', token.immediate(/`.{1}|`\r?\n/)),
+              seq('"', token.immediate(/`.|`\r?\n/)),
               seq('"', token.immediate('""')),
               seq('"', token.immediate('$')),
             ),
@@ -184,20 +184,20 @@ export default grammar({
 
     expandable_here_string_literal: ($) =>
       seq(
-        /@\" *\r?\n/,
+        /@" *\r?\n/,
         repeat(
           choice(
-            token.immediate(/[^\$\r\n`]+/),
+            token.immediate(/[^$\r\n`]+/),
             $.variable,
             $.sub_expression,
-            token.immediate(/(\r?\n)+[^\"\r\n]/),
-            token.immediate(/(\r?\n)+\"[^@]/),
+            token.immediate(/(\r?\n)+[^"\r\n]/),
+            token.immediate(/(\r?\n)+"[^@]/),
             token.immediate(psDollarLiteral('\\r\\n')),
             token.immediate('$'),
-            token.immediate(/`.{1}|`\r?\n/),
+            token.immediate(/`.|`\r?\n/),
           ),
         ),
-        token.immediate(/(\r?\n)+\"@/),
+        token.immediate(/(\r?\n)+"@/),
       ),
 
     verbatim_string_characters: ($) =>
@@ -206,9 +206,9 @@ export default grammar({
     verbatim_here_string_characters: ($) =>
       token(
         seq(
-          /@\'\s*\r?\n/,
-          repeat(choice(/[^\r\n]/, /(\r?\n)+[^\'\r\n]/, /\r?\n\'[^@]/)),
-          /(\r?\n)+\'@/,
+          /@'\s*\n/,
+          repeat(choice(/[^\r\n]/, /(\r?\n)+[^'\r\n]/, /\r?\n'[^@]/)),
+          /(\r?\n)+'@/,
         ),
       ),
 
@@ -389,16 +389,16 @@ export default grammar({
 
     // Commands
     generic_token: ($) =>
-      token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
+      token(/[^()$"'\-{}@|[`&\s][^&\s()}|;,]*/),
 
-    _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
+    _command_token: ($) => token(/[^(){}\s;&]+/),
 
     // Parameters
     command_parameter: ($) =>
       token(choice(seq(/-+/, psRegex(`[${PS_PARAMETER_FIRST_CHARS}][${PS_PARAMETER_FOLLOW_CHARS}]*`)), '--')),
 
     _verbatim_command_argument_chars: ($) =>
-      repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
+      repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^|\r\n]+/)),
 
     // Grammar
 
@@ -834,10 +834,10 @@ export default grammar({
       seq(
         repeat(
           choice(
-            /[^\$"`]+/,
+            /[^$"`]+/,
             $.variable,
             psDollarLiteral(),
-            /`.{1}|`\r?\n/,
+            /`.|`\r?\n/,
             '""',
             $.sub_expression,
             '$',
@@ -849,7 +849,7 @@ export default grammar({
     command_name: ($) =>
       seq(
         choice(
-          /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!]+/,
+          /[^{}();,|&`"'\s[\]+\-*/$@<!]+/,
           // tree-sitter does not allow to control lexer
           // each start keyword into _statement rule must be present here
           // https://github.com/airbus-cert/tree-sitter-powershell/issues/24
@@ -879,7 +879,7 @@ export default grammar({
         ),
         repeat(
           choice(
-            token.immediate(/[^\{\}\(\);,\|\&"'\s\r\n]+/),
+            token.immediate(/[^{}();,|&"'\s]+/),
             seq(token.immediate('"'), $._expandable_string_literal_immediate),
             token.immediate('""'),
             token.immediate('\'\''),
@@ -942,7 +942,7 @@ export default grammar({
     // escape. Once the tail has started, only whitespace, pipes, and other
     // command terminators end it.
     _expandable_bareword_tail: ($) =>
-      token.immediate(/[^\&\s\(\)\}\|;,\$\[\{\.\"\'`][^\&\s\(\)\}\|;,]*/),
+      token.immediate(/[^&\s()}|;,$[{."'`][^&\s()}|;,]*/),
 
     // A comma-separated list of command arguments that starts with a
     // bareword (generic token). Used for commands like

@@ -1,3 +1,17 @@
 {
-    "sarif-viewer.connectToGithubCodeScanning": "off"
+    "sarif-viewer.connectToGithubCodeScanning": "off",
+    "prettier.enable": false,
+    "oxc.enable.oxfmt": false,
+    "oxc.enable": false,
+    "eslint.format.enable": true,
+    "[javascript]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+      }
+    },
+    "cSpell.words": [
+      "prec"
+    ]
 }
+

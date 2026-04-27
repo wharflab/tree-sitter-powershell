@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "cs128.cs128-clang-tidy",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.cpptools"
+    ]
+}
