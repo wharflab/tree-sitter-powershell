@@ -16,6 +16,7 @@ Parses `.ps1` and `.psm1` files into a concrete syntax tree for syntax highlight
 - **Expressions** &mdash; ternary `? :`, null-coalescing `??`/`??=`, logical (`-and`/`-or`/`-xor`), bitwise (`-band`/`-bor`/`-bxor`), comparison/string/type/containment operators, `-f` format, range `..`
 - **Types** &mdash; common .NET type forms including generics `[Dictionary[string, int]]`, arrays `[int[]]`, nested types `Array+Enumerator`, and double-backtick arity `` List``1 ``
 - **Variables** &mdash; `$var`, `$scope:var`, `${braced}` with backtick escapes, `@splatted`, and special vars `$$` `$^` `$?` `$_`
+- **Unicode-aware source** &mdash; Unicode identifiers, variables, parameters, type/class/enum names, and decimal digits
 - **Classes and enums** &mdash; attribute-decorated declarations (`[Flags()] enum`, `[Attr()] class`), properties, methods, constructors with `: base()`/`: this()` chaining, `hidden`/`static` modifiers, and inheritance clauses with generic bases (`: IComparer[Object]`)
 - **Numbers** &mdash; decimal, hex `0x`, scientific `1.5e10`, numeric suffixes (`u`, `ul`, `s`, `us`, `y`, `uy`, `n`, `l`, `d`), and size multipliers (`kb`/`mb`/`gb`/`tb`/`pb`)
 - **Case-insensitive keywords and operators** &mdash; parses PowerShell casing variations without normalization
