@@ -84,7 +84,6 @@ Write-Host [!] Creating Users
 
 ===
 param default of type literal followed by next param with @() default
-:skip
 ; source: mikefrobbins/PowerShell/MrToolkit/Public/New-DynamicParam.ps1
 ===
 
@@ -95,7 +94,57 @@ param(
 
 ---
 
-(program)
+(program
+  (param_block
+    (parameter_list
+      (script_parameter
+        (attribute_list
+          (attribute
+            (type_literal
+              (type_spec
+                (type_name
+                  (type_name
+                    (type_identifier))
+                  (type_identifier))))))
+        (variable)
+        (script_parameter_default
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (type_literal
+                                  (type_spec
+                                    (type_name
+                                      (type_identifier)))))))))))))))))
+      (script_parameter
+        (attribute_list
+          (attribute
+            (type_literal
+              (type_spec
+                (array_type_name
+                  (type_name
+                    (type_identifier)))))))
+        (variable)
+        (script_parameter_default
+          (ternary_expression
+            (null_coalesce_expression
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (array_expression)))))))))))))))))
 
 ===
 Function body with only an attribute then a comment
