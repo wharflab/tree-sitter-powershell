@@ -1422,7 +1422,8 @@ export default grammar({
         ),
       ),
 
-    type_literal: ($) => seq('[', $.type_spec, ']'),
+    type_literal: ($) =>
+      seq('[', $.type_spec, optional($.assembly_qualifier), ']'),
 
     type_spec: ($) =>
       choice(
@@ -1430,6 +1431,13 @@ export default grammar({
         seq($.generic_type_name, $.generic_type_arguments, ']'),
         $.type_name,
       ),
+
+    // Assembly-qualified type name tail at the outermost `[...]`, e.g.
+    // `[Int32, mscorlib]` or
+    // `[System.Collections.Generic.List[string], System.Private.CoreLib]`.
+    assembly_qualifier: ($) => seq(',', $.assembly_name),
+
+    assembly_name: ($) => $.type_name,
 
     dimension: ($) => repeat1(','),
 

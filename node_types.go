@@ -12,6 +12,8 @@ const (
 	NodeArrayExpression = "array_expression"
 	NodeArrayLiteralExpression = "array_literal_expression"
 	NodeArrayTypeName = "array_type_name"
+	NodeAssemblyName = "assembly_name"
+	NodeAssemblyQualifier = "assembly_qualifier"
 	NodeAssignementOperator = "assignement_operator"
 	NodeAssignmentExpression = "assignment_expression"
 	NodeAttribute = "attribute"
