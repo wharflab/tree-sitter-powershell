@@ -298,7 +298,6 @@ Add-Type -AssemblyName PresentationCore , PresentationFramework , System.Windows
 
 ===
 Native command argument containing equals sign
-:skip
 ; source: silverqx/TinyORM/tools/deploy.ps1
 ===
 
@@ -306,7 +305,15 @@ git --untracked-files=normal
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)))))))
 
 ===
 Nested backtick line continuations inside pipeline
