@@ -398,7 +398,6 @@ Write-Host `n'hello'`n
 
 ===
 Adjacent quoted string + variable chain forming a single command argument
-:skip
 ; source: NetSPI/PowerShell/PowerSkype.ps1
 ===
 
@@ -406,7 +405,26 @@ Write-Host 'Auth: '$domain\$username' - '$password -ForegroundColor Red
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (concatenated_command_argument
+              (string_literal
+                (verbatim_string_characters))
+              (variable)
+              (generic_token)
+              (variable)
+              (verbatim_string_characters)
+              (variable))
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Assembly-qualified type literal
@@ -586,18 +604,48 @@ echo x ` `
 
 ===
 Adjacent (expr).Member followed directly by empty string as argument
-:skip
 ; source: SpotX-Official/SpotX/run.ps1
-; deferred: this is a specific case of adjacent-token concatenation in
-; command arguments (see also #27 / regression 'Adjacent quoted string +
-; variable chain'). Needs external-scanner-assisted argument tokenizer.
+; see also #27 / regression 'Adjacent quoted string + variable chain'
 ===
 
 Write-Host ($lang).Incorrect"" -ForegroundColor Red
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (concatenated_command_argument
+              (array_literal_expression
+                (unary_expression
+                  (member_access
+                    (parenthesized_expression
+                      (pipeline
+                        (pipeline_chain
+                          (ternary_expression
+                            (null_coalesce_expression
+                              (logical_expression
+                                (bitwise_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (format_expression
+                                          (range_expression
+                                            (array_literal_expression
+                                              (unary_expression
+                                                (variable)))))))))))))))
+                    (member_name
+                      (simple_name)))))
+              (expandable_string_literal))
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Unix absolute-path command invocation

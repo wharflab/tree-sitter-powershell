@@ -52,6 +52,7 @@ const (
 	NodeComparisonArgumentExpression = "comparison_argument_expression"
 	NodeComparisonExpression = "comparison_expression"
 	NodeComparisonOperator = "comparison_operator"
+	NodeConcatenatedCommandArgument = "concatenated_command_argument"
 	NodeDataCommand = "data_command"
 	NodeDataCommandsAllowed = "data_commands_allowed"
 	NodeDataCommandsList = "data_commands_list"

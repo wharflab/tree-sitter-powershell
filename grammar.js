@@ -30,6 +30,17 @@ const psTypeIdentifier = () =>
 
 const psVariablePart = () => psRegex(`[${PS_VARIABLE_CHARS}]+`);
 
+const psVariableScope = () =>
+  choice(
+    new RegExp(caseInsensitive('global')),
+    new RegExp(caseInsensitive('local')),
+    new RegExp(caseInsensitive('private')),
+    new RegExp(caseInsensitive('script')),
+    new RegExp(caseInsensitive('using')),
+    new RegExp(caseInsensitive('workflow')),
+    psVariablePart(),
+  );
+
 const psDecimalDigits = () => psRegex(`[${PS_DECIMAL_DIGIT_CHARS}]+`);
 
 /** @param {string} [lineTerminator] */
@@ -937,6 +948,7 @@ export default grammar({
       prec.right(
         PREC.PARAM,
         choice(
+          seq($.command_argument_sep, $.concatenated_command_argument),
           seq($.command_argument_sep, optional($.generic_token)),
           seq($.command_argument_sep, $.array_literal_expression),
           seq($.command_argument_sep, $.expandable_bareword),
@@ -946,6 +958,92 @@ export default grammar({
           $.script_block_expression,
         ),
       ),
+
+    // PowerShell command mode concatenates adjacent quoted strings, variables,
+    // and bareword fragments into one argument when there is no whitespace.
+    concatenated_command_argument: ($) =>
+      prec.right(
+        PREC.PARAM,
+        choice(
+          seq($.string_literal, repeat1($._immediate_command_argument_fragment)),
+          seq(
+            $._concatenated_command_argument_head,
+            $._immediate_string_command_argument_fragment,
+            repeat($._immediate_command_argument_fragment),
+          ),
+        ),
+      ),
+
+    _concatenated_command_argument_head: ($) =>
+      choice(
+        $.array_literal_expression,
+        $.expandable_bareword,
+        $.generic_token,
+        $.escape_character,
+      ),
+
+    _immediate_command_argument_fragment: ($) =>
+      choice(
+        $._immediate_non_string_command_argument_fragment,
+        $._immediate_string_command_argument_fragment,
+      ),
+
+    _immediate_non_string_command_argument_fragment: ($) =>
+      choice(
+        alias($._immediate_variable, $.variable),
+        alias($._immediate_bareword_argument_fragment, $.generic_token),
+        alias($._immediate_escape_character, $.escape_character),
+      ),
+
+    _immediate_string_command_argument_fragment: ($) =>
+      choice(
+        alias($._immediate_expandable_string_literal, $.expandable_string_literal),
+        alias($._immediate_verbatim_string_characters, $.verbatim_string_characters),
+      ),
+
+    _immediate_variable: ($) =>
+      choice(
+        token.immediate('$$'),
+        token.immediate('$^'),
+        token.immediate('$?'),
+        token.immediate('$_'),
+        token.immediate(
+          seq(
+            '$',
+            optional(seq(psVariableScope(), ':')),
+            choice(psVariablePart(), '?'),
+          ),
+        ),
+        token.immediate(
+          seq(
+            '@',
+            optional(seq(psVariableScope(), ':')),
+            choice(psVariablePart(), '?'),
+          ),
+        ),
+        $._immediate_braced_variable,
+      ),
+
+    _immediate_braced_variable: ($) =>
+      token.immediate(
+        seq(
+          '${',
+          repeat1(choice(seq('`', choice(/./, /\s/)), /[^}`]/, /\s/)),
+          '}',
+        ),
+      ),
+
+    _immediate_expandable_string_literal: () =>
+      token.immediate(seq('"', repeat(choice(/[^"`]+/, /`.{1}|`\r?\n/, '""')), '"')),
+
+    _immediate_verbatim_string_characters: () =>
+      token.immediate(seq(/'/, repeat(choice(/[^']+/, /''/)), /'/)),
+
+    _immediate_bareword_argument_fragment: () =>
+      token.immediate(/[^\&\s\(\)\}\|;,\$"'`]+/),
+
+    _immediate_escape_character: () =>
+      token.immediate(seq(/`[^\r\n]/, /[^\&\s\(\)\}\|;,\$"'`]*/)),
 
     // A bareword argument whose prefix is a variable immediately followed
     // (no whitespace) by generic-token characters. Matches patterns like
