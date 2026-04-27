@@ -2584,6 +2584,10 @@
             "name": "enum_statement"
           },
           {
+            "type": "SYMBOL",
+            "name": "attribute_statement"
+          },
+          {
             "type": "SEQ",
             "members": [
               {
@@ -2647,6 +2651,24 @@
         "type": "STRING",
         "value": ";"
       }
+    },
+    "attribute_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_attribute_expression"
+          },
+          "named": true,
+          "value": "attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_attribute_statement_boundary"
+        }
+      ]
     },
     "if_statement": {
       "type": "PREC_LEFT",
@@ -7621,45 +7643,49 @@
         "name": "attribute"
       }
     },
+    "_attribute_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attribute_name"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "attribute_arguments"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
     "attribute": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "["
-            },
-            {
-              "type": "SYMBOL",
-              "name": "attribute_name"
-            },
-            {
-              "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "attribute_arguments"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "STRING",
-              "value": ")"
-            },
-            {
-              "type": "STRING",
-              "value": "]"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_attribute_expression"
         },
         {
           "type": "SYMBOL",
@@ -7781,6 +7807,10 @@
     {
       "type": "SYMBOL",
       "name": "_statement_boundary"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_attribute_statement_boundary"
     },
     {
       "type": "SYMBOL",

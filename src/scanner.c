@@ -6,6 +6,7 @@
 
 enum TOKEN_TYPE {
     STATEMENT_BOUNDARY,
+    ATTRIBUTE_STATEMENT_BOUNDARY,
     FOR_CLAUSE_BREAK,
     EXPANDABLE_STRING_IMMCONTENT,
 };
@@ -157,6 +158,120 @@ static bool has_line_initial_pipeline_continuation(TSLexer *lexer)
     return lexer->lookahead == '&';
 }
 
+static bool has_param_block_lookahead(TSLexer *lexer)
+{
+    const char *keyword = "param";
+    for (unsigned i = 0; keyword[i] != '\0'; i++) {
+        int32_t lookahead = lexer->lookahead;
+        if (lookahead >= 'A' && lookahead <= 'Z') {
+            lookahead = lookahead - 'A' + 'a';
+        }
+        if (lookahead != keyword[i]) {
+            return false;
+        }
+        skip(lexer);
+    }
+
+    while (is_inline_trivia(lexer->lookahead)) {
+        skip(lexer);
+    }
+
+    return lexer->lookahead == '(';
+}
+
+static void skip_quoted_string(TSLexer *lexer, int32_t quote)
+{
+    skip(lexer);
+    while (lexer->lookahead != 0) {
+        if (lexer->lookahead == '`') {
+            skip(lexer);
+            if (lexer->lookahead != 0) {
+                skip(lexer);
+            }
+            continue;
+        }
+        if (lexer->lookahead == quote) {
+            skip(lexer);
+            if (quote == '\'' && lexer->lookahead == '\'') {
+                skip(lexer);
+                continue;
+            }
+            if (quote == '"' && lexer->lookahead == '"') {
+                skip(lexer);
+                continue;
+            }
+            return;
+        }
+        skip(lexer);
+    }
+}
+
+static bool skip_attribute_form(TSLexer *lexer)
+{
+    if (lexer->lookahead != '[') {
+        return false;
+    }
+
+    unsigned depth = 0;
+    do {
+        if (lexer->lookahead == 0) {
+            return false;
+        }
+        if (lexer->lookahead == '\'' || lexer->lookahead == '"') {
+            skip_quoted_string(lexer, lexer->lookahead);
+            continue;
+        }
+        if (lexer->lookahead == '[') {
+            depth++;
+        } else if (lexer->lookahead == ']') {
+            depth--;
+        } else if (lexer->lookahead == '`') {
+            skip(lexer);
+            if (lexer->lookahead == 0) {
+                return false;
+            }
+        }
+        skip(lexer);
+    } while (depth > 0);
+
+    return true;
+}
+
+static bool has_attribute_list_param_block_lookahead(TSLexer *lexer)
+{
+    while (skip_attribute_form(lexer)) {
+        bool saw_newline = false;
+        for (;;) {
+            if (is_newline(lexer->lookahead)) {
+                saw_newline = true;
+                skip(lexer);
+                continue;
+            }
+            if (is_inline_trivia(lexer->lookahead)) {
+                skip(lexer);
+                continue;
+            }
+            if (lexer->lookahead == '#') {
+                skip_line_comment(lexer);
+                continue;
+            }
+            if (lexer->lookahead == '<') {
+                enum BlockCommentScanResult block_comment = scan_block_comment(lexer);
+                if (block_comment == BLOCK_COMMENT_TERMINATED) {
+                    continue;
+                }
+                break;
+            }
+            break;
+        }
+        if (!saw_newline) {
+            break;
+        }
+    }
+
+    return has_param_block_lookahead(lexer);
+}
+
 static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 {
     if (!valid_symbols[STATEMENT_BOUNDARY]) {
@@ -213,6 +328,57 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
             return true;
         }
         return false;
+    }
+}
+
+static bool scan_attribute_statement_boundary(TSLexer *lexer)
+{
+    lexer->result_symbol = ATTRIBUTE_STATEMENT_BOUNDARY;
+    lexer->mark_end(lexer);
+
+    bool saw_newline = false;
+    for (;;) {
+        if (is_statement_boundary_lookahead(lexer->lookahead)) {
+            return true;
+        }
+        if (is_newline(lexer->lookahead)) {
+            saw_newline = true;
+            skip(lexer);
+            continue;
+        }
+        if (is_inline_trivia(lexer->lookahead)) {
+            skip(lexer);
+            continue;
+        }
+        if (skip_line_continuation(lexer)) {
+            continue;
+        }
+        if (lexer->lookahead == '#') {
+            skip_line_comment(lexer);
+            continue;
+        }
+        if (lexer->lookahead == '<') {
+            enum BlockCommentScanResult block_comment = scan_block_comment(lexer);
+            if (block_comment == BLOCK_COMMENT_TERMINATED) {
+                continue;
+            }
+            if (block_comment == BLOCK_COMMENT_UNTERMINATED) {
+                return true;
+            }
+            return saw_newline;
+        }
+        if (!saw_newline) {
+            return false;
+        }
+        if (has_line_initial_pipeline_continuation(lexer)) {
+            return false;
+        }
+        // A line-initial `param(...)` after attributes should remain part of a
+        // script/program param block, not start a standalone attribute statement.
+        if (has_attribute_list_param_block_lookahead(lexer)) {
+            return false;
+        }
+        return true;
     }
 }
 
@@ -286,6 +452,9 @@ bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer,
 
     if (scan_expandable_string_immcontent(lexer, valid_symbols)) {
         return true;
+    }
+    if (valid_symbols[ATTRIBUTE_STATEMENT_BOUNDARY]) {
+        return scan_attribute_statement_boundary(lexer);
     }
     if (scan_for_clause_break(lexer, valid_symbols)) {
         return true;

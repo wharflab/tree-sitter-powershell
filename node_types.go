@@ -24,6 +24,7 @@ const (
 	NodeAttributeArguments = "attribute_arguments"
 	NodeAttributeList = "attribute_list"
 	NodeAttributeName = "attribute_name"
+	NodeAttributeStatement = "attribute_statement"
 	NodeBarewordArgumentList = "bareword_argument_list"
 	NodeBitwiseArgumentExpression = "bitwise_argument_expression"
 	NodeBitwiseExpression = "bitwise_expression"
