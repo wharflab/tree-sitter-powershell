@@ -2149,6 +2149,14 @@
         "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[`\\&\\s][^\\&\\s\\(\\)\\}\\|;,]*"
       }
     },
+    "_bracketed_generic_token": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\[[^\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}_\\p{Nd}\\[\\]\\s]+\\]",
+        "flags": "u"
+      }
+    },
     "escape_character": {
       "type": "TOKEN",
       "content": {
@@ -5033,6 +5041,24 @@
                     "type": "BLANK"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "command_argument_sep"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_bracketed_generic_token"
+                },
+                "named": true,
+                "value": "generic_token"
               }
             ]
           },

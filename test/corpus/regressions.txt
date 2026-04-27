@@ -68,19 +68,50 @@ function *Die($M, $C=0) { throw $M }
 
 ===
 Unquoted bracket-bang argument to command
-:skip
 ; source: mvelazc0/BadZure/legacy/Invoke-BadZure.ps1
-; deferred: '[' at argument position is reserved for type_literal /
-; attributed_type_literal; falling back to generic_token when the bracket
-; content is not a valid type needs GLR disambiguation that conflicts
-; with existing element_access/expandable_bareword handling. Tracked in #33.
 ===
 
 Write-Host [!] Creating Users
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Unquoted type literal as command argument remains type literal
+; source: #33
+===
+
+Write-Host [int]
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (type_literal
+                  (type_spec
+                    (type_name
+                      (type_identifier))))))))))))
 
 ===
 param default of type literal followed by next param with @() default

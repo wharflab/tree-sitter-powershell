@@ -407,6 +407,12 @@ export default grammar({
     generic_token: ($) =>
       token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
 
+    // Command-mode status prefixes like `[!]` are generic arguments, not
+    // type literals. Keep this to punctuation-only content so `[int]` still
+    // takes the type_literal path.
+    _bracketed_generic_token: () =>
+      token(psRegex(`\\[[^${PS_IDENTIFIER_FOLLOW_CHARS}\\[\\]\\s]+\\]`)),
+
     // A backtick escape sequence used in bareword command-argument position,
     // e.g. `n (newline), `r (carriage-return). The tail absorbs any immediately-
     // adjacent bareword characters so that adjacent-token forms like `n'hello'`n
@@ -957,6 +963,7 @@ export default grammar({
         choice(
           seq($.command_argument_sep, $.concatenated_command_argument),
           seq($.command_argument_sep, optional($.generic_token)),
+          seq($.command_argument_sep, alias($._bracketed_generic_token, $.generic_token)),
           seq($.command_argument_sep, $.array_literal_expression),
           seq($.command_argument_sep, $.expandable_bareword),
           seq($.command_argument_sep, $.bareword_argument_list),
