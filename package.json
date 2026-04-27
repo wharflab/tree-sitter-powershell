@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-pwsh",
-  "version": "0.34.1",
+  "version": "0.34.2",
   "description": "PowerShell grammar for tree-sitter",
   "type": "module",
   "repository": {
