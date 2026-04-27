@@ -148,12 +148,7 @@ param(
 
 ===
 Function body with only an attribute then a comment
-:skip
 ; source: texhex/BiosSledgehammer/MPSXM.psm1
-; deferred: allowing a bare attribute as a statement expression conflicts
-; with attribute_list used by param/class/enum/script_parameter. GLR
-; disambiguation possible but ripples across many tests; needs its own
-; targeted effort. Tracked in #40.
 ===
 
 function Get-Thing {
@@ -164,7 +159,74 @@ function Get-Thing {
 
 ---
 
-(program)
+(program
+  (statement_list
+    (function_statement
+      (function_name)
+      (script_block
+        (script_block_body
+          (statement_list
+            (attribute_statement
+              (attribute
+                (attribute_name
+                  (type_spec
+                    (type_name
+                      (type_identifier))))
+                (attribute_arguments
+                  (attribute_argument
+                    (ternary_expression
+                      (null_coalesce_expression
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (type_literal
+                                            (type_spec
+                                              (type_name
+                                                (type_identifier)))))))))))))))))))
+            (comment)
+            (pipeline
+              (pipeline_chain
+                (ternary_expression
+                  (null_coalesce_expression
+                    (logical_expression
+                      (bitwise_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (member_access
+                                        (type_literal
+                                          (type_spec
+                                            (type_name
+                                              (type_identifier))))
+                                        (member_name
+                                          (simple_name))))))))))))))))))))))
+
+===
+Top-level bare attribute statement
+===
+
+[CmdletBinding()]
+
+---
+
+(program
+  (statement_list
+    (attribute_statement
+      (attribute
+        (attribute_name
+          (type_spec
+            (type_name
+              (type_identifier))))))))
 
 ===
 Trailing bare dash as native-command argument

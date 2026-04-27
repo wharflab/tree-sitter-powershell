@@ -472,6 +472,7 @@ export default grammar({
           $.function_statement,
           $.class_statement,
           $.enum_statement,
+          $.attribute_statement,
           seq($.flow_control_statement, $._statement_boundary),
           $.trap_statement,
           $.try_statement,
@@ -485,6 +486,9 @@ export default grammar({
       ),
 
     empty_statement: ($) => prec(PREC.EMPTY, ';'),
+
+    attribute_statement: ($) =>
+      seq(alias($._attribute_expression, $.attribute), $._statement_boundary),
 
     if_statement: ($) =>
       prec.left(
@@ -1481,16 +1485,19 @@ export default grammar({
     // Attributes
     attribute_list: ($) => repeat1($.attribute),
 
+    _attribute_expression: ($) =>
+      seq(
+        '[',
+        $.attribute_name,
+        '(',
+        optional($.attribute_arguments),
+        ')',
+        ']',
+      ),
+
     attribute: ($) =>
       choice(
-        seq(
-          '[',
-          $.attribute_name,
-          '(',
-          optional($.attribute_arguments),
-          ')',
-          ']',
-        ),
+        $._attribute_expression,
         $.type_literal,
       ),
 

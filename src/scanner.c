@@ -157,6 +157,27 @@ static bool has_line_initial_pipeline_continuation(TSLexer *lexer)
     return lexer->lookahead == '&';
 }
 
+static bool has_param_block_lookahead(TSLexer *lexer)
+{
+    const char *keyword = "param";
+    for (unsigned i = 0; keyword[i] != '\0'; i++) {
+        int32_t lookahead = lexer->lookahead;
+        if (lookahead >= 'A' && lookahead <= 'Z') {
+            lookahead = lookahead - 'A' + 'a';
+        }
+        if (lookahead != keyword[i]) {
+            return false;
+        }
+        skip(lexer);
+    }
+
+    while (is_inline_trivia(lexer->lookahead)) {
+        skip(lexer);
+    }
+
+    return lexer->lookahead == '(';
+}
+
 static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
 {
     if (!valid_symbols[STATEMENT_BOUNDARY]) {
@@ -208,6 +229,11 @@ static bool scan_statement_boundary(TSLexer *lexer, const bool *valid_symbols)
             // PowerShell 7 pipeline continuation: a line-initial `|`, `||`, or `&&`
             // continues the current pipeline, so suppress the boundary.
             if (has_line_initial_pipeline_continuation(lexer)) {
+                return false;
+            }
+            // A line-initial `param(...)` after attributes should remain part of
+            // a script/program param block, not start a new statement.
+            if (has_param_block_lookahead(lexer)) {
                 return false;
             }
             return true;
