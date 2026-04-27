@@ -73,8 +73,7 @@ Unquoted bracket-bang argument to command
 ; deferred: '[' at argument position is reserved for type_literal /
 ; attributed_type_literal; falling back to generic_token when the bracket
 ; content is not a valid type needs GLR disambiguation that conflicts
-; with existing element_access/expandable_bareword handling. Requires
-; its own targeted effort.
+; with existing element_access/expandable_bareword handling. Tracked in #33.
 ===
 
 Write-Host [!] Creating Users
@@ -105,7 +104,7 @@ Function body with only an attribute then a comment
 ; deferred: allowing a bare attribute as a statement expression conflicts
 ; with attribute_list used by param/class/enum/script_parameter. GLR
 ; disambiguation possible but ripples across many tests; needs its own
-; targeted effort. See follow-up issue.
+; targeted effort. Tracked in #40.
 ===
 
 function Get-Thing {
