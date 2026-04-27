@@ -47,6 +47,7 @@ const psDecimalDigits = () => psRegex(`[${PS_DECIMAL_DIGIT_CHARS}]+`);
 const psDollarLiteral = (lineTerminator = '') =>
   psRegex(`\\$(\`.{1}|\`\\r?\\n|[^${PS_DOLLAR_LITERAL_START_CHARS}${lineTerminator}][^\\$"${lineTerminator}\`]*)`);
 
+/** @param {GrammarSymbols<string>} $ */
 const switchPattern = ($) =>
   choice($._primary_expression, $._switch_condition_token);
 
