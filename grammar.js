@@ -47,6 +47,9 @@ const psDecimalDigits = () => psRegex(`[${PS_DECIMAL_DIGIT_CHARS}]+`);
 const psDollarLiteral = (lineTerminator = '') =>
   psRegex(`\\$(\`.{1}|\`\\r?\\n|[^${PS_DOLLAR_LITERAL_START_CHARS}${lineTerminator}][^\\$"${lineTerminator}\`]*)`);
 
+const switchPattern = ($) =>
+  choice($._primary_expression, $._switch_condition_token);
+
 export default grammar({
   name: 'powershell',
 
@@ -566,8 +569,7 @@ export default grammar({
         seq(reservedWord('-file'), $.switch_filename),
       ),
 
-    switch_filename: ($) =>
-      choice($._primary_expression, $._switch_condition_token),
+    switch_filename: ($) => switchPattern($),
 
     switch_body: ($) => seq('{', optional($.switch_clauses), '}'),
 
@@ -581,8 +583,7 @@ export default grammar({
         repeat(';'),
       ),
 
-    switch_clause_condition: ($) =>
-      choice($._primary_expression, $._switch_condition_token),
+    switch_clause_condition: ($) => switchPattern($),
 
     _switch_condition_token: ($) =>
       token(/[^\(\)\{\}\s;\&"'][^\(\)\{\}\s;\&]*/),
