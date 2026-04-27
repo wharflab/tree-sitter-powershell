@@ -324,7 +324,6 @@ gci | `
 
 ===
 Expandable bareword path with backslash and glob as comma-separated args
-:skip
 ; source: silverqx/TinyORM/tools/deploy.ps1
 ===
 
@@ -332,7 +331,23 @@ Get-Item -Path $x\a-*, $y\b-*
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (bareword_argument_list
+              (expandable_bareword
+                (variable)
+                (generic_token))
+              (expandable_bareword
+                (variable)
+                (generic_token)))))))))
 
 ===
 switch case with $(...) or ${...} inside expandable string pattern

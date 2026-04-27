@@ -5104,8 +5104,17 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "generic_token"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "generic_token"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expandable_bareword"
+              }
+            ]
           },
           {
             "type": "REPEAT1",
