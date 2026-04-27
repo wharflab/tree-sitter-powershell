@@ -773,6 +773,10 @@
           "named": true
         },
         {
+          "type": "concatenated_command_argument",
+          "named": true
+        },
+        {
           "type": "escape_character",
           "named": true
         },
@@ -956,6 +960,49 @@
     "type": "comparison_operator",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "concatenated_command_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "escape_character",
+          "named": true
+        },
+        {
+          "type": "expandable_bareword",
+          "named": true
+        },
+        {
+          "type": "expandable_string_literal",
+          "named": true
+        },
+        {
+          "type": "generic_token",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "verbatim_string_characters",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "data_command",
@@ -2799,6 +2846,10 @@
         },
         {
           "type": "command_argument_sep",
+          "named": true
+        },
+        {
+          "type": "concatenated_command_argument",
           "named": true
         },
         {
