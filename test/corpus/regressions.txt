@@ -1,6 +1,5 @@
 ===
 Function name with symbolic leading char
-:skip
 ; source: nightroman/Invoke-Build/Invoke-Build.ps1
 ===
 
@@ -9,7 +8,63 @@ function *Die($M, $C=0) { throw $M }
 
 ---
 
-(program)
+(program
+  (statement_list
+    (function_statement
+      (function_name)
+      (function_parameter_declaration
+        (parameter_list
+          (script_parameter
+            (variable))
+          (script_parameter
+            (variable)
+            (script_parameter_default
+              (ternary_expression
+                (null_coalesce_expression
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (integer_literal
+                                      (decimal_integer_literal)))))))))))))))))
+      (script_block
+        (script_block_body
+          (statement_list
+            (flow_control_statement
+              (pipeline
+                (pipeline_chain
+                  (ternary_expression
+                    (null_coalesce_expression
+                      (logical_expression
+                        (bitwise_expression
+                          (comparison_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (format_expression
+                                  (range_expression
+                                    (array_literal_expression
+                                      (unary_expression
+                                        (variable)))))))))))))))))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (verbatim_string_characters))))
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal))))))))))
 
 ===
 Unquoted bracket-bang argument to command
@@ -42,6 +97,10 @@ param(
 Function body with only an attribute then a comment
 :skip
 ; source: texhex/BiosSledgehammer/MPSXM.psm1
+; deferred: allowing a bare attribute as a statement expression conflicts
+; with attribute_list used by param/class/enum/script_parameter. GLR
+; disambiguation possible but ripples across many tests; needs its own
+; targeted effort. See follow-up issue.
 ===
 
 function Get-Thing {
