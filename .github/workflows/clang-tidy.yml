@@ -1,0 +1,46 @@
+name: Clang-Tidy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/scanner.c
+      - .clang-tidy
+      - .github/workflows/clang-tidy.yml
+  pull_request:
+    paths:
+      - src/scanner.c
+      - .clang-tidy
+      - .github/workflows/clang-tidy.yml
+
+jobs:
+  scanner:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Select latest clang-tidy
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest_clang_tidy="$(
+            { compgen -c clang-tidy- || true; } \
+              | sed -n 's/^clang-tidy-\([0-9][0-9]*\)$/\1 clang-tidy-\1/p' \
+              | sort -nr \
+              | awk 'NR == 1 { print $2 }'
+          )"
+          if [ -z "$latest_clang_tidy" ]; then
+            latest_clang_tidy="$(command -v clang-tidy || true)"
+          fi
+          if [ -z "$latest_clang_tidy" ]; then
+            echo "::error::No clang-tidy executable found on the runner"
+            exit 1
+          fi
+          echo "CLANG_TIDY=$latest_clang_tidy" >> "$GITHUB_ENV"
+          echo "Selected $latest_clang_tidy"
+      - name: Show clang-tidy version
+        run: '"$CLANG_TIDY" --version'
+      - name: Verify clang-tidy config
+        run: '"$CLANG_TIDY" --verify-config'
+      - name: Run clang-tidy on scanner
+        run: '"$CLANG_TIDY" src/scanner.c -- -std=c11 -Isrc'
