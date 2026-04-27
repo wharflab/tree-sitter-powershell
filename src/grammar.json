@@ -2149,6 +2149,22 @@
         "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[`\\&\\s][^\\&\\s\\(\\)\\}\\|;,]*"
       }
     },
+    "escape_character": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "`[^\\r\\n]"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\&\\s\\(\\)\\}\\|;,]*"
+          }
+        ]
+      }
+    },
     "_command_token": {
       "type": "TOKEN",
       "content": {
@@ -5007,6 +5023,19 @@
               {
                 "type": "SYMBOL",
                 "name": "bareword_argument_list"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "command_argument_sep"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "escape_character"
               }
             ]
           },

@@ -754,6 +754,10 @@
           "named": true
         },
         {
+          "type": "escape_character",
+          "named": true
+        },
+        {
           "type": "expandable_bareword",
           "named": true
         },
@@ -2779,6 +2783,10 @@
           "named": true
         },
         {
+          "type": "escape_character",
+          "named": true
+        },
+        {
           "type": "expandable_bareword",
           "named": true
         },
@@ -4433,6 +4441,10 @@
   {
     "type": "end",
     "named": false
+  },
+  {
+    "type": "escape_character",
+    "named": true
   },
   {
     "type": "exit",
