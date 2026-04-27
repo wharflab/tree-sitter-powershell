@@ -28,7 +28,7 @@ jobs:
       - name: Set up tree-sitter CLI
         uses: tree-sitter/setup-action/cli@v2
       - name: Install dependencies
-        run: npm i --omit peer --omit optional
+        run: npm ci --omit peer --omit optional
       - name: Regenerate parser
         run: |
           while read -r grammar_dir; do
@@ -71,7 +71,7 @@ jobs:
       - name: Set up tree-sitter CLI
         uses: tree-sitter/setup-action/cli@v2
       - name: Install dependencies
-        run: npm i --omit peer --omit optional
+        run: npm ci --omit peer --omit optional
       - name: Regenerate parser
         shell: bash
         run: |
