@@ -407,6 +407,11 @@ export default grammar({
     generic_token: ($) =>
       token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
 
+    // Command-argument fragments stop before interpolation or quoted-string
+    // starts so adjacent native arguments like `/flag:"$($x)"` can concatenate.
+    _command_argument_token: () =>
+      token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,\$\"\'`]*/),
+
     // Command-mode status prefixes like `[!]` are generic arguments, not
     // type literals. Keep this to punctuation-only content so `[int]` still
     // takes the type_literal path.
@@ -963,7 +968,7 @@ export default grammar({
         PREC.PARAM,
         choice(
           seq($.command_argument_sep, $.concatenated_command_argument),
-          seq($.command_argument_sep, optional($.generic_token)),
+          seq($.command_argument_sep, optional(alias($._command_argument_token, $.generic_token))),
           seq($.command_argument_sep, alias($._bracketed_generic_token, $.generic_token)),
           seq($.command_argument_sep, $.array_literal_expression),
           seq($.command_argument_sep, $.expandable_bareword),
@@ -986,6 +991,11 @@ export default grammar({
             $._immediate_string_command_argument_fragment,
             repeat($._immediate_command_argument_fragment),
           ),
+          seq(
+            $._concatenated_command_argument_token_head,
+            $._immediate_command_argument_expression_fragment,
+            repeat($._immediate_command_argument_fragment),
+          ),
         ),
       ),
 
@@ -993,7 +1003,14 @@ export default grammar({
       choice(
         $.array_literal_expression,
         $.expandable_bareword,
-        $.generic_token,
+        alias($._command_argument_token, $.generic_token),
+        $.escape_character,
+      ),
+
+    _concatenated_command_argument_token_head: ($) =>
+      choice(
+        alias($._command_argument_token, $.generic_token),
+        $.expandable_bareword,
         $.escape_character,
       ),
 
@@ -1003,9 +1020,16 @@ export default grammar({
         $._immediate_string_command_argument_fragment,
       ),
 
+    _immediate_command_argument_expression_fragment: ($) =>
+      choice(
+        alias($._immediate_variable, $.variable),
+        alias($._immediate_sub_expression, $.sub_expression),
+      ),
+
     _immediate_non_string_command_argument_fragment: ($) =>
       choice(
         alias($._immediate_variable, $.variable),
+        alias($._immediate_sub_expression, $.sub_expression),
         alias($._immediate_bareword_argument_fragment, $.generic_token),
         alias($._immediate_escape_character, $.escape_character),
       ),
@@ -1048,8 +1072,18 @@ export default grammar({
         ),
       ),
 
-    _immediate_expandable_string_literal: () =>
-      token.immediate(seq('"', repeat(choice(/[^"`]+/, /`.{1}|`\r?\n/, '""')), '"')),
+    _immediate_expandable_string_literal: ($) =>
+      prec(
+        1,
+        seq(
+          token.immediate('"'),
+          repeat($._expandable_string_content),
+          token.immediate('"'),
+        ),
+      ),
+
+    _immediate_sub_expression: ($) =>
+      seq(token.immediate('$('), field('statements', optional($.statement_list)), ')'),
 
     _immediate_verbatim_string_characters: () =>
       token.immediate(seq(/'/, repeat(choice(/[^']+/, /''/)), /'/)),
@@ -1080,11 +1114,11 @@ export default grammar({
     bareword_argument_list: ($) =>
       prec.right(
         seq(
-          choice($.generic_token, $.expandable_bareword),
+          choice(alias($._command_argument_token, $.generic_token), $.expandable_bareword),
           repeat1(
             seq(
               $._bareword_argument_list_separator,
-              choice($.generic_token, $.expandable_bareword, $.unary_expression),
+              choice(alias($._command_argument_token, $.generic_token), $.expandable_bareword, $.unary_expression),
             ),
           ),
         ),

@@ -688,7 +688,6 @@ switch ($x) {
 
 ===
 Native command with /flag:"$(expr)" colon-prefixed interpolated argument
-:skip
 ; source: 0x6d69636b/windows_hardening/HardeningKitty.psm1
 ===
 
@@ -696,7 +695,79 @@ Native command with /flag:"$(expr)" colon-prefixed interpolated argument
 
 ---
 
-(program)
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_invokation_operator)
+          (command_name_expr
+            (path_command_name
+              (variable)))
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (concatenated_command_argument
+              (generic_token)
+              (expandable_string_literal
+                (sub_expression
+                  (statement_list
+                    (pipeline
+                      (pipeline_chain
+                        (ternary_expression
+                          (null_coalesce_expression
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable))))))))))))))))))
+            (command_argument_sep)
+            (concatenated_command_argument
+              (generic_token)
+              (sub_expression
+                (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))))))
+            (command_argument_sep)
+            (concatenated_command_argument
+              (generic_token)
+              (sub_expression
+                (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (ternary_expression
+                        (null_coalesce_expression
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (variable)))))))))))))))))
+            (command_argument_sep)))
+        (command
+          (command_name))))))
 
 ===
 Backtick-n escape sequence used as bareword argument
