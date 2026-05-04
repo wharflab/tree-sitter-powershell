@@ -25,10 +25,11 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                         (unary_expression
                           (variable)))
                       (assignement_operator)
-                      value: (pipeline_chain
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal))))))))
+                      value: (assignment_value
+                        (pipeline_chain
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal)))))))))
               (unary_expression
                 (parenthesized_expression
                   (pipeline
@@ -37,10 +38,11 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                         (unary_expression
                           (variable)))
                       (assignement_operator)
-                      value: (pipeline_chain
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal))))))))))))
+                      value: (assignment_value
+                        (pipeline_chain
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal)))))))))))))
       for_condition: (for_condition
         (pipeline
           (pipeline_chain
@@ -101,10 +103,11 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                         (unary_expression
                           (variable)))
                       (assignement_operator)
-                      (pipeline_chain
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal))))))
+                      (assignment_value
+                        (pipeline_chain
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal)))))))
                   (empty_statement)
                   (pipeline
                     (assignment_expression
@@ -112,10 +115,11 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                         (unary_expression
                           (variable)))
                       (assignement_operator)
-                      (pipeline_chain
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal))))))))))))
+                      (assignment_value
+                        (pipeline_chain
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal)))))))))))))
       (for_condition
         (pipeline
           (pipeline_chain
@@ -167,10 +171,11 @@ for (;;)
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (for_statement
       (statement_block
         (statement_list
@@ -203,10 +208,11 @@ for (;;$i++)
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (for_statement
       (for_iterator
         (pipeline
@@ -245,10 +251,11 @@ for(;$i -le 10;$i++)
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (for_statement
       (for_condition
         (pipeline
@@ -295,10 +302,11 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
               (unary_expression
                 (variable)))
             (assignement_operator)
-            (pipeline_chain
-              (unary_expression
-                (integer_literal
-                  (decimal_integer_literal)))))))
+            (assignment_value
+              (pipeline_chain
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal))))))))
       (for_condition
         (pipeline
           (pipeline_chain
@@ -348,10 +356,11 @@ for ($i = 0
               (unary_expression
                 (variable)))
             (assignement_operator)
-            (pipeline_chain
-              (unary_expression
-                (integer_literal
-                  (decimal_integer_literal)))))))
+            (assignment_value
+              (pipeline_chain
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal))))))))
       (for_condition
         (pipeline
           (pipeline_chain
@@ -395,10 +404,11 @@ for ($i = 0;
               (unary_expression
                 (variable)))
             (assignement_operator)
-            value: (pipeline_chain
-              (unary_expression
-                (integer_literal
-                  (decimal_integer_literal)))))))
+            value: (assignment_value
+              (pipeline_chain
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal))))))))
       for_condition: (for_condition
         (pipeline
           (pipeline_chain
@@ -442,16 +452,17 @@ for ($i = 0) { $i }
           (ERROR
             (integer_literal
               (decimal_integer_literal)))
-          value: (pipeline_chain
-            (unary_expression
-              (script_block_expression
-                (script_block
-                  script_block_body: (script_block_body
-                    statement_list: (statement_list
-                      (pipeline
-                        (pipeline_chain
-                          (unary_expression
-                            (variable)))))))))))))))
+          value: (assignment_value
+            (pipeline_chain
+              (unary_expression
+                (script_block_expression
+                  (script_block
+                    script_block_body: (script_block_body
+                      statement_list: (statement_list
+                        (pipeline
+                          (pipeline_chain
+                            (unary_expression
+                              (variable))))))))))))))))
 
 ===
 For loop : invalid condition only
@@ -526,10 +537,11 @@ for ($i = 0; $i -lt 10) { $i }
             (unary_expression
               (variable)))
           (assignement_operator)
-          value: (pipeline_chain
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))))))
+          value: (assignment_value
+            (pipeline_chain
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal))))))))
     (for_condition
       (pipeline
         (pipeline_chain

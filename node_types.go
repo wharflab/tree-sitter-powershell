@@ -19,6 +19,7 @@ const (
 	NodeAssemblyQualifier = "assembly_qualifier"
 	NodeAssignementOperator = "assignement_operator"
 	NodeAssignmentExpression = "assignment_expression"
+	NodeAssignmentValue = "assignment_value"
 	NodeAttribute = "attribute"
 	NodeAttributeArgument = "attribute_argument"
 	NodeAttributeArguments = "attribute_arguments"

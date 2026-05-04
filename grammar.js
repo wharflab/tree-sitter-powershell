@@ -876,8 +876,7 @@ export default grammar({
           $.parallel_statement,
           $.sequence_statement,
           $.assignment_expression,
-          $._pipeline,
-          $.empty_statement,
+          alias($._pipeline, $.assignment_value),
         ),
       ),
 

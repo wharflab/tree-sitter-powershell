@@ -279,6 +279,10 @@
             "named": true
           },
           {
+            "type": "assignment_value",
+            "named": true
+          },
+          {
             "type": "attribute_statement",
             "named": true
           },
@@ -292,10 +296,6 @@
           },
           {
             "type": "do_statement",
-            "named": true
-          },
-          {
-            "type": "empty_statement",
             "named": true
           },
           {
@@ -335,14 +335,6 @@
             "named": true
           },
           {
-            "type": "pipeline_chain",
-            "named": true
-          },
-          {
-            "type": "pipeline_chain_tail",
-            "named": true
-          },
-          {
             "type": "sequence_statement",
             "named": true
           },
@@ -375,6 +367,25 @@
         },
         {
           "type": "left_assignment_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "assignment_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pipeline_chain",
+          "named": true
+        },
+        {
+          "type": "pipeline_chain_tail",
           "named": true
         }
       ]

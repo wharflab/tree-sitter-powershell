@@ -16,27 +16,29 @@ $Path = "C:\Windows\System32"
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (array_literal_expression
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))))))
+        (assignment_value
+          (pipeline_chain
+            (array_literal_expression
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal)))
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal)))
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal))))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (string_literal
-              (expandable_string_literal))))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Variable : Command results
@@ -56,25 +58,27 @@ $Today = (Get-Date).DateTime
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (command
-            (command_name)))))
+        (assignment_value
+          (pipeline_chain
+            (command
+              (command_name))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (member_access
-              (parenthesized_expression
-                (pipeline
-                  (pipeline_chain
-                    (command
-                      (command_name)))))
-              (member_name
-                (simple_name)))))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (member_access
+                (parenthesized_expression
+                  (pipeline
+                    (pipeline_chain
+                      (command
+                        (command_name)))))
+                (member_name
+                  (simple_name))))))))))
 
 ===
 Variable : Multi assignment
@@ -102,10 +106,11 @@ $a = $b = $c = 0
               (unary_expression
                 (variable)))
             (assignement_operator)
-            (pipeline_chain
-              (unary_expression
-                (integer_literal
-                  (decimal_integer_literal))))))))))
+            (assignment_value
+              (pipeline_chain
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal)))))))))))
 
 ===
 Variable : Multi variables, Multi assignment
@@ -129,16 +134,17 @@ $i,$j = 10, "red", $true
             (unary_expression
               (variable))))
         (assignement_operator)
-        (pipeline_chain
-          (array_literal_expression
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))
-            (unary_expression
-              (variable))))))
+        (assignment_value
+          (pipeline_chain
+            (array_literal_expression
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal)))
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal)))
+              (unary_expression
+                (variable)))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
@@ -148,16 +154,17 @@ $i,$j = 10, "red", $true
             (unary_expression
               (variable))))
         (assignement_operator)
-        (pipeline_chain
-          (array_literal_expression
-            (unary_expression
-              (integer_literal
-                (decimal_integer_literal)))
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))
-            (unary_expression
-              (variable))))))))
+        (assignment_value
+          (pipeline_chain
+            (array_literal_expression
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal)))
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal)))
+              (unary_expression
+                (variable)))))))))
 
 ===
 Variable : Typed variables
@@ -184,30 +191,33 @@ $words += 10
                 (unary_expression
                   (variable))))))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (string_literal
-              (expandable_string_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))))
 
 ===
 Variable : Simple variable

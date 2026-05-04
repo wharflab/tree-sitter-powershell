@@ -375,9 +375,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -388,9 +389,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -401,9 +403,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -414,9 +417,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable)))))))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable))))))))))))))
 
 ===
 Switch Test 4
@@ -450,9 +454,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -463,9 +468,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -476,9 +482,10 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable)))))))))
           (switch_clause
             (switch_clause_condition)
             (statement_block
@@ -489,6 +496,7 @@ switch ($fontstyle) {
                       (unary_expression
                         (variable)))
                     (assignement_operator)
-                    (pipeline_chain
-                      (unary_expression
-                        (variable)))))))))))))
+                    (assignment_value
+                      (pipeline_chain
+                        (unary_expression
+                          (variable))))))))))))))

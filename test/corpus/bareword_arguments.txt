@@ -196,50 +196,51 @@ $childItems = @(Get-ChildItem -LiteralPath $ItemPath -Force:$Force |
           (unary_expression
             (variable)))
         (assignement_operator)
-        value: (pipeline_chain
-          (unary_expression
-            (array_expression
-              statements: (statement_list
-                (pipeline
-                  (pipeline_chain
-                    (command
-                      command_name: (command_name)
-                      command_elements: (command_elements
-                        (command_argument_sep)
-                        (command_parameter)
-                        (command_argument_sep)
-                        (unary_expression
-                          (variable))
-                        (command_argument_sep)
-                        (command_parameter)
-                        (command_argument_sep)
-                        (unary_expression
-                          (variable))
-                        (command_argument_sep)))
-                    (command
-                      command_name: (command_name)
-                      command_elements: (command_elements
-                        (command_argument_sep)
-                        (unary_expression
-                          (script_block_expression
-                            (script_block
-                              script_block_body: (script_block_body
-                                statement_list: (statement_list
-                                  (pipeline
-                                    (pipeline_chain
-                                      (unary_expression
-                                        (member_access
-                                          (variable)
-                                          (member_name
-                                            (simple_name)))))))))))
-                        (command_argument_sep)))
-                    (command
-                      command_name: (command_name)
-                      command_elements: (command_elements
-                        (command_argument_sep)
-                        (bareword_argument_list
-                          (generic_token)
-                          (generic_token))))))))))))))
+        value: (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (array_expression
+                statements: (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (command_parameter)
+                          (command_argument_sep)
+                          (unary_expression
+                            (variable))
+                          (command_argument_sep)
+                          (command_parameter)
+                          (command_argument_sep)
+                          (unary_expression
+                            (variable))
+                          (command_argument_sep)))
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (unary_expression
+                            (script_block_expression
+                              (script_block
+                                script_block_body: (script_block_body
+                                  statement_list: (statement_list
+                                    (pipeline
+                                      (pipeline_chain
+                                        (unary_expression
+                                          (member_access
+                                            (variable)
+                                            (member_name
+                                              (simple_name)))))))))))
+                          (command_argument_sep)))
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (bareword_argument_list
+                            (generic_token)
+                            (generic_token)))))))))))))))
 
 ===
 Question mark after variable starts expandable bareword tail

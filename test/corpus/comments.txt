@@ -18,10 +18,11 @@ Get-ChildItem .
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (comment)
     (pipeline
       (pipeline_chain
@@ -51,10 +52,11 @@ Get-ChildItem .
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (comment)
     (pipeline
       (pipeline_chain
@@ -92,10 +94,11 @@ Get-ChildItem .
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (integer_literal
-              (decimal_integer_literal))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))
     (comment)
     (pipeline
       (pipeline_chain

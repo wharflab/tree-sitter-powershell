@@ -28,10 +28,11 @@ function Test-Pipeline {
                         (unary_expression
                           (variable)))
                       (assignement_operator)
-                      value: (pipeline_chain
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))))))))
+                      value: (assignment_value
+                        (pipeline_chain
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal))))))))))
             (named_block
               (block_name)
               (statement_block

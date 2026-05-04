@@ -4699,12 +4699,13 @@
             "name": "assignment_expression"
           },
           {
-            "type": "SYMBOL",
-            "name": "_pipeline"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "empty_statement"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_pipeline"
+            },
+            "named": true,
+            "value": "assignment_value"
           }
         ]
       }

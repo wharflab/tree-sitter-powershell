@@ -318,13 +318,17 @@ $FP8DpgPcK0IovuDHPZ4p2 = $FP8DpgPcK0IovuDHPZ4p + "P"  + "S"  + " "  + (Get-Locat
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (additive_expression
+        (assignment_value
+          (pipeline_chain
             (additive_expression
               (additive_expression
                 (additive_expression
-                  (unary_expression
-                    (variable))
+                  (additive_expression
+                    (unary_expression
+                      (variable))
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal))))
                   (unary_expression
                     (string_literal
                       (expandable_string_literal))))
@@ -332,17 +336,14 @@ $FP8DpgPcK0IovuDHPZ4p2 = $FP8DpgPcK0IovuDHPZ4p + "P"  + "S"  + " "  + (Get-Locat
                   (string_literal
                     (expandable_string_literal))))
               (unary_expression
-                (string_literal
-                  (expandable_string_literal))))
-            (unary_expression
-              (member_access
-                (parenthesized_expression
-                  (pipeline
-                    (pipeline_chain
-                      (command
-                        (command_name)))))
-                (member_name
-                  (simple_name))))))))))
+                (member_access
+                  (parenthesized_expression
+                    (pipeline
+                      (pipeline_chain
+                        (command
+                          (command_name)))))
+                  (member_name
+                    (simple_name)))))))))))
 
 ===
 Priority with indexed expression add post increment affected var
@@ -360,30 +361,31 @@ $upgrade += [char]($title[3] -bxor $update[$i])
           (unary_expression
             (variable)))
         (assignement_operator)
-        (pipeline_chain
-          (unary_expression
-            (expression_with_unary_operator
-              (cast_expression
-                (type_literal
-                  (type_spec
-                    (type_name
-                      (type_identifier))))
-                (unary_expression
-                  (parenthesized_expression
-                    (pipeline
-                      (pipeline_chain
-                        (bitwise_expression
-                          (unary_expression
-                            (element_access
-                              (variable)
-                              (unary_expression
-                                (integer_literal
-                                  (decimal_integer_literal)))))
-                          (unary_expression
-                            (element_access
-                              (variable)
-                              (unary_expression
-                                (variable)))))))))))))))))
+        (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (expression_with_unary_operator
+                (cast_expression
+                  (type_literal
+                    (type_spec
+                      (type_name
+                        (type_identifier))))
+                  (unary_expression
+                    (parenthesized_expression
+                      (pipeline
+                        (pipeline_chain
+                          (bitwise_expression
+                            (unary_expression
+                              (element_access
+                                (variable)
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal)))))
+                            (unary_expression
+                              (element_access
+                                (variable)
+                                (unary_expression
+                                  (variable))))))))))))))))))
 
 ===
 Reverse array

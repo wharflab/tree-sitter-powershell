@@ -462,11 +462,12 @@ $string = """$s2"""
           (unary_expression
             (variable)))
         (assignement_operator)
-        value: (pipeline_chain
-          (unary_expression
-            (string_literal
-              (expandable_string_literal
-                (variable)))))))))
+        value: (assignment_value
+          (pipeline_chain
+            (unary_expression
+              (string_literal
+                (expandable_string_literal
+                  (variable))))))))))
 
 ===
 Strings : hash after subexpression in expandable string
