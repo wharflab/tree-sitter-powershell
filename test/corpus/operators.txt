@@ -10,27 +10,12 @@ $a -eq $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 2
@@ -44,27 +29,12 @@ $a -ne $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 3
@@ -78,27 +48,12 @@ $a -ge $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 4
@@ -112,27 +67,12 @@ $a -gt $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 5
@@ -146,27 +86,12 @@ $a -lt $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 6
@@ -180,27 +105,12 @@ $a -le $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 7
@@ -214,27 +124,12 @@ $a -like $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 8
@@ -248,27 +143,12 @@ $a -notlike $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 9
@@ -282,27 +162,12 @@ $a -match $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 10
@@ -316,27 +181,12 @@ $a -notmatch $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 11
@@ -350,27 +200,12 @@ $a -replace $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 12
@@ -384,27 +219,12 @@ $a -contains $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 13
@@ -418,27 +238,12 @@ $a -notcontains $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 14
@@ -452,27 +257,12 @@ $a -in $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 15
@@ -486,27 +276,12 @@ $a -notin $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 16
@@ -520,27 +295,12 @@ $a -split $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 17
@@ -554,27 +314,12 @@ $a -join $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 18
@@ -588,27 +333,12 @@ $a -is $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 19
@@ -622,27 +352,12 @@ $a -isnot $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Simple binary operator 20
@@ -656,27 +371,12 @@ $a -as $a
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))
-                  (comparison_operator)
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (variable))))))))))))))))
+        (comparison_expression
+          (unary_expression
+            (variable))
+          (comparison_operator)
+          (unary_expression
+            (variable)))))))
 
 ===
 Bitwise -bor in method argument list
@@ -690,123 +390,45 @@ $win32::SetWindowPos($hWnd, 0, 0, 0, 0, 0, $win32::SWP_NOSIZE -bor $win32::SWP_N
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (invokation_expression
-                                (variable)
-                                (member_name
-                                  (simple_name))
-                                (argument_list
-                                  argument_expression_list: (argument_expression_list
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (variable))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (integer_literal
-                                                            (decimal_integer_literal)))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (integer_literal
-                                                            (decimal_integer_literal)))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (integer_literal
-                                                            (decimal_integer_literal)))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (integer_literal
-                                                            (decimal_integer_literal)))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (integer_literal
-                                                            (decimal_integer_literal)))))))))))))
-                                    (argument_expression
-                                      (ternary_argument_expression
-                                        (null_coalesce_argument_expression
-                                          (logical_argument_expression
-                                            (bitwise_argument_expression
-                                              (bitwise_argument_expression
-                                                (comparison_argument_expression
-                                                  (additive_argument_expression
-                                                    (multiplicative_argument_expression
-                                                      (format_argument_expression
-                                                        (range_argument_expression
-                                                          (unary_expression
-                                                            (member_access
-                                                              (variable)
-                                                              (member_name
-                                                                (simple_name))))))))))
-                                              (comparison_argument_expression
-                                                (additive_argument_expression
-                                                  (multiplicative_argument_expression
-                                                    (format_argument_expression
-                                                      (range_argument_expression
-                                                        (unary_expression
-                                                          (member_access
-                                                            (variable)
-                                                            (member_name
-                                                              (simple_name))))))))))))))))))))))))))))))))
+        (unary_expression
+          (invokation_expression
+            (variable)
+            (member_name
+              (simple_name))
+            (argument_list
+              argument_expression_list: (argument_expression_list
+                (argument_expression
+                  (unary_expression
+                    (variable)))
+                (argument_expression
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))
+                (argument_expression
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))
+                (argument_expression
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))
+                (argument_expression
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))
+                (argument_expression
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))
+                (argument_expression
+                  (bitwise_argument_expression
+                    (unary_expression
+                      (member_access
+                        (variable)
+                        (member_name
+                          (simple_name))))
+                    (unary_expression
+                      (member_access
+                        (variable)
+                        (member_name
+                          (simple_name))))))))))))))

@@ -11,59 +11,20 @@ $x = $true ? "yes" : "no"
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
             (ternary_expression
-              (null_coalesce_expression
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (variable)))))))))))
-              (ternary_expression
-                (null_coalesce_expression
-                  (logical_expression
-                    (bitwise_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (string_literal
-                                      (expandable_string_literal)))))))))))))
-              (ternary_expression
-                (null_coalesce_expression
-                  (logical_expression
-                    (bitwise_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (string_literal
-                                      (expandable_string_literal))))))))))))))))))))
+              (unary_expression
+                (variable))
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal)))
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Null-coalescing operator
@@ -78,45 +39,17 @@ $x = $y ?? "default"
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
-            (ternary_expression
-              (null_coalesce_expression
-                (null_coalesce_expression
-                  (logical_expression
-                    (bitwise_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (variable)))))))))))
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (string_literal
-                                    (expandable_string_literal)))))))))))))))))))
+            (null_coalesce_expression
+              (unary_expression
+                (variable))
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Null-coalescing assignment
@@ -131,31 +64,11 @@ $x ??= "default"
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
-            (ternary_expression
-              (null_coalesce_expression
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (string_literal
-                                    (expandable_string_literal)))))))))))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))

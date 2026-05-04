@@ -14,42 +14,17 @@ while ($i -lt 10) {
       condition: (while_condition
         (pipeline
           (pipeline_chain
-            (ternary_expression
-              (null_coalesce_expression
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (variable))))))))
-                      (comparison_operator)
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (integer_literal
-                                    (decimal_integer_literal))))))))))))))))
+            (comparison_expression
+              (unary_expression
+                (variable))
+              (comparison_operator)
+              (unary_expression
+                (integer_literal
+                  (decimal_integer_literal)))))))
       (statement_block
         statement_list: (statement_list
           (pipeline
             (pipeline_chain
-              (ternary_expression
-                (null_coalesce_expression
-                  (logical_expression
-                    (bitwise_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (post_increment_expression
-                                      (variable))))))))))))))))))))
+              (unary_expression
+                (post_increment_expression
+                  (variable))))))))))

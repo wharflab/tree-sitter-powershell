@@ -10,19 +10,9 @@ Strings : expandable
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : empty expandable
@@ -36,19 +26,9 @@ Strings : empty expandable
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : expandle with braced variable
@@ -62,21 +42,11 @@ Strings : expandle with braced variable
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable
-                                    (braced_variable)))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable
+                (braced_variable)))))))))
 
 ===
 Strings : expandle with subexpression
@@ -90,25 +60,15 @@ Strings : expandle with subexpression
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (sub_expression
-                                    (statement_list
-                                      (pipeline
-                                        (pipeline_chain
-                                          (command
-                                            (command_name)))))))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (sub_expression
+                (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (command
+                        (command_name)))))))))))))
 
 ===
 Strings : verbatim
@@ -122,19 +82,9 @@ Strings : verbatim
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (verbatim_string_characters)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (verbatim_string_characters)))))))
 
 ===
 Strings : verbatim empty
@@ -148,19 +98,9 @@ Strings : verbatim empty
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (verbatim_string_characters)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (verbatim_string_characters)))))))
 
 ===
 Strings : verbatim here string
@@ -176,19 +116,9 @@ toto
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (verbatim_here_string_characters)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (verbatim_here_string_characters)))))))
 
 ===
 Strings : verbatim here string empty
@@ -204,19 +134,9 @@ Strings : verbatim here string empty
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (verbatim_here_string_characters)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (verbatim_here_string_characters)))))))
 
 ===
 Strings : expandle here string
@@ -232,19 +152,9 @@ Strings : expandle here string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_here_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_here_string_literal)))))))
 
 ===
 Strings : expandle here string with var
@@ -260,20 +170,10 @@ $toto
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_here_string_literal
-                                  (variable))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_here_string_literal
+              (variable))))))))
 
 ===
 Strings : expandle here string empty
@@ -289,19 +189,9 @@ Strings : expandle here string empty
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_here_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_here_string_literal)))))))
 
 ===
 Strings : escape variable and print dollar
@@ -315,19 +205,9 @@ Strings : escape variable and print dollar
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : concat var content and dollar
@@ -341,20 +221,10 @@ Strings : concat var content and dollar
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable))))))))
 
 ===
 Strings : Single-quoted string
@@ -368,19 +238,9 @@ Strings : Single-quoted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (verbatim_string_characters)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (verbatim_string_characters)))))))
 
 ===
 Strings : Double-quoted string
@@ -394,19 +254,9 @@ Strings : Double-quoted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Variable substituted string
@@ -420,20 +270,10 @@ Strings : Variable substituted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable))))))))
 
 ===
 Strings : Brace-variable substituted string
@@ -447,21 +287,11 @@ Strings : Brace-variable substituted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable
-                                    (braced_variable)))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable
+                (braced_variable)))))))))
 
 ===
 Strings : Escaped variable in double quoted string
@@ -475,19 +305,9 @@ Strings : Escaped variable in double quoted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Escaped brace variable in double quoted string
@@ -501,19 +321,9 @@ Strings : Escaped brace variable in double quoted string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Regexp
@@ -527,19 +337,9 @@ Strings : Regexp
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Dollar hash stays text
@@ -553,19 +353,9 @@ Strings : Dollar hash stays text
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Hash is text in expandable string
@@ -579,19 +369,9 @@ Strings : Hash is text in expandable string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Hash-prefixed expandable string
@@ -605,19 +385,9 @@ Strings : Hash-prefixed expandable string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal)))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal)))))))
 
 ===
 Strings : Format string with dollar hash
@@ -631,26 +401,14 @@ Strings : Format string with dollar hash
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (string_literal
-                                  (expandable_string_literal))))))
-                        (format_operator)
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (format_expression
+          (unary_expression
+            (string_literal
+              (expandable_string_literal)))
+          (format_operator)
+          (unary_expression
+            (integer_literal
+              (decimal_integer_literal))))))))
 
 ===
 Strings : hash after variable in expandable string
@@ -664,20 +422,10 @@ Strings : hash after variable in expandable string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable))))))))
 
 ===
 Strings : hash after variable across newline in expandable string
@@ -693,20 +441,10 @@ line3"
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (variable))))))))
 
 ===
 Strings : triple-quoted expandable string
@@ -721,35 +459,15 @@ $string = """$s2"""
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
-            (ternary_expression
-              (null_coalesce_expression
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (string_literal
-                                    (expandable_string_literal
-                                      (variable))))))))))))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal
+                  (variable))))))))))
 
 ===
 Strings : hash after subexpression in expandable string
@@ -763,32 +481,12 @@ Strings : hash after subexpression in expandable string
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (sub_expression
-                                    (statement_list
-                                      (pipeline
-                                        (pipeline_chain
-                                          (ternary_expression
-                                            (null_coalesce_expression
-                                              (logical_expression
-                                                (bitwise_expression
-                                                  (comparison_expression
-                                                    (additive_expression
-                                                      (multiplicative_expression
-                                                        (format_expression
-                                                          (range_expression
-                                                            (array_literal_expression
-                                                              (unary_expression
-                                                                (variable)))))))))))))))))))))))))))))))))
+        (unary_expression
+          (string_literal
+            (expandable_string_literal
+              (sub_expression
+                (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (unary_expression
+                        (variable)))))))))))))

@@ -57,54 +57,24 @@ throw "Do not run this file!"
                   (simple_name))
                 (pipeline
                   (pipeline_chain
-                    (ternary_expression
-                      (null_coalesce_expression
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (string_literal
-                                            (expandable_string_literal))))))))))))))))
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal))))))
               (hash_entry
                 (key_expression
                   (simple_name))
                 (pipeline
                   (pipeline_chain
-                    (ternary_expression
-                      (null_coalesce_expression
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (string_literal
-                                            (expandable_string_literal))))))))))))))))))))))
+                    (unary_expression
+                      (string_literal
+                        (expandable_string_literal))))))))))))
   (statement_list
     (flow_control_statement
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal))))))))))))))))))
+          (unary_expression
+            (string_literal
+              (expandable_string_literal))))))))
 
 ===
 Requires : before using
@@ -167,17 +137,7 @@ throw "first"
     (flow_control_statement
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (string_literal
-                                  (expandable_string_literal)))))))))))))))))
+          (unary_expression
+            (string_literal
+              (expandable_string_literal)))))))
   (comment))

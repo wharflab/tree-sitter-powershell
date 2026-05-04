@@ -11,19 +11,9 @@ throw "Error occurred"
     (flow_control_statement
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (string_literal
-                                  (expandable_string_literal))))))))))))))))))
+          (unary_expression
+            (string_literal
+              (expandable_string_literal))))))))
 
 ===
 Return with value
@@ -38,19 +28,9 @@ return 42
     (flow_control_statement
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (integer_literal
-                                  (decimal_integer_literal))))))))))))))))))
+          (unary_expression
+            (integer_literal
+              (decimal_integer_literal))))))))
 
 ===
 Return without value
@@ -77,19 +57,9 @@ exit 1
     (flow_control_statement
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (integer_literal
-                                  (decimal_integer_literal))))))))))))))))))
+          (unary_expression
+            (integer_literal
+              (decimal_integer_literal))))))))
 
 ===
 Break without label

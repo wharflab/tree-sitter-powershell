@@ -118,23 +118,12 @@ cmd $a[0]
           command_name: (command_name)
           command_elements: (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (element_access
-                  (variable)
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (integer_literal
-                                          (decimal_integer_literal))))))))))))))))))))))
+            (unary_expression
+              (element_access
+                (variable)
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal)))))))))))
 
 ===
 Variable member access in command argument position is not a bareword
@@ -152,12 +141,11 @@ cmd $a.Prop
           command_name: (command_name)
           command_elements: (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (member_access
-                  (variable)
-                  (member_name
-                    (simple_name)))))))))))
+            (unary_expression
+              (member_access
+                (variable)
+                (member_name
+                  (simple_name))))))))))
 
 ===
 Expandable bareword followed by command parameter
@@ -181,17 +169,15 @@ New-ItemProperty $Path\Command -Name 'x' -Value 'y'
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (verbatim_string_characters))))
+            (unary_expression
+              (string_literal
+                (verbatim_string_characters)))
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (verbatim_string_characters))))))))))
+            (unary_expression
+              (string_literal
+                (verbatim_string_characters)))))))))
 
 ===
 Multi-line pipeline inside array subexpression with bareword list
@@ -207,87 +193,54 @@ $childItems = @(Get-ChildItem -LiteralPath $ItemPath -Force:$Force |
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
-            (ternary_expression
-              (null_coalesce_expression
-                (logical_expression
-                  (bitwise_expression
-                    (comparison_expression
-                      (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (array_expression
-                                    statements: (statement_list
-                                      (pipeline
-                                        (pipeline_chain
-                                          (command
-                                            command_name: (command_name)
-                                            command_elements: (command_elements
-                                              (command_argument_sep)
-                                              (command_parameter)
-                                              (command_argument_sep)
-                                              (array_literal_expression
-                                                (unary_expression
-                                                  (variable)))
-                                              (command_argument_sep)
-                                              (command_parameter)
-                                              (command_argument_sep)
-                                              (array_literal_expression
-                                                (unary_expression
-                                                  (variable)))
-                                              (command_argument_sep)))
-                                          (command
-                                            command_name: (command_name)
-                                            command_elements: (command_elements
-                                              (command_argument_sep)
-                                              (array_literal_expression
-                                                (unary_expression
-                                                  (script_block_expression
-                                                    (script_block
-                                                      script_block_body: (script_block_body
-                                                        statement_list: (statement_list
-                                                          (pipeline
-                                                            (pipeline_chain
-                                                              (ternary_expression
-                                                                (null_coalesce_expression
-                                                                  (logical_expression
-                                                                    (bitwise_expression
-                                                                      (comparison_expression
-                                                                        (additive_expression
-                                                                          (multiplicative_expression
-                                                                            (format_expression
-                                                                              (range_expression
-                                                                                (array_literal_expression
-                                                                                  (unary_expression
-                                                                                    (member_access
-                                                                                      (variable)
-                                                                                      (member_name
-                                                                                        (simple_name))))))))))))))))))))))
-                                              (command_argument_sep)))
-                                          (command
-                                            command_name: (command_name)
-                                            command_elements: (command_elements
-                                              (command_argument_sep)
-                                              (bareword_argument_list
-                                                (generic_token)
-                                                (generic_token)))))))))))))))))))))))))
+            (unary_expression
+              (array_expression
+                statements: (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (command_parameter)
+                          (command_argument_sep)
+                          (unary_expression
+                            (variable))
+                          (command_argument_sep)
+                          (command_parameter)
+                          (command_argument_sep)
+                          (unary_expression
+                            (variable))
+                          (command_argument_sep)))
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (unary_expression
+                            (script_block_expression
+                              (script_block
+                                script_block_body: (script_block_body
+                                  statement_list: (statement_list
+                                    (pipeline
+                                      (pipeline_chain
+                                        (unary_expression
+                                          (member_access
+                                            (variable)
+                                            (member_name
+                                              (simple_name)))))))))))
+                          (command_argument_sep)))
+                      (command
+                        command_name: (command_name)
+                        command_elements: (command_elements
+                          (command_argument_sep)
+                          (bareword_argument_list
+                            (generic_token)
+                            (generic_token)))))))))))))))
 
 ===
 Question mark after variable starts expandable bareword tail

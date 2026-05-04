@@ -14,10 +14,9 @@ Write-Host "CERT"
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Cmdlet that start with a number
@@ -83,67 +82,41 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (sub_expression
-                  statements: (statement_list
-                    (pipeline
-                      (pipeline_chain
-                        (ternary_expression
-                          (null_coalesce_expression
-                            (logical_expression
-                              (bitwise_expression
-                                (comparison_expression
-                                  (comparison_expression
-                                    (additive_expression
-                                      (multiplicative_expression
-                                        (format_expression
-                                          (range_expression
-                                            (array_literal_expression
-                                              (unary_expression
-                                                (parenthesized_expression
-                                                  (pipeline
-                                                    (pipeline_chain
-                                                      (ternary_expression
-                                                        (null_coalesce_expression
-                                                          (logical_expression
-                                                            (bitwise_expression
-                                                              (comparison_expression
-                                                                (additive_expression
-                                                                  (multiplicative_expression
-                                                                    (format_expression
-                                                                      (range_expression
-                                                                        (array_literal_expression
-                                                                          (unary_expression
-                                                                            (member_access
-                                                                              (parenthesized_expression
-                                                                                (pipeline
-                                                                                  (pipeline_chain
-                                                                                    (command
-                                                                                      command_name: (command_name)
-                                                                                      command_elements: (command_elements
-                                                                                        (command_argument_sep)
-                                                                                        (generic_token))))))
-                                                                              (member_name
-                                                                                (simple_name))))))))))))))))))))))))
-                                  (comparison_operator)
-                                  (additive_expression
-                                    (multiplicative_expression
-                                      (format_expression
-                                        (range_expression
-                                          (array_literal_expression
-                                            (unary_expression
-                                              (string_literal
-                                                (expandable_string_literal)))
-                                            (unary_expression
-                                              (string_literal
-                                                (expandable_string_literal)))))))))))))))))))
+            (unary_expression
+              (sub_expression
+                statements: (statement_list
+                  (pipeline
+                    (pipeline_chain
+                      (comparison_expression
+                        (unary_expression
+                          (parenthesized_expression
+                            (pipeline
+                              (pipeline_chain
+                                (unary_expression
+                                  (member_access
+                                    (parenthesized_expression
+                                      (pipeline
+                                        (pipeline_chain
+                                          (command
+                                            command_name: (command_name)
+                                            command_elements: (command_elements
+                                              (command_argument_sep)
+                                              (generic_token))))))
+                                    (member_name
+                                      (simple_name))))))))
+                        (comparison_operator)
+                        (array_literal_expression
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal)))
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal))))))))))
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (variable)))))))))
+            (unary_expression
+              (variable))))))))
 
 ===
 Quoted CmdLet
@@ -161,10 +134,9 @@ i''ex "pwd"
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Double Quoted CmdLet
@@ -182,10 +154,9 @@ i""ex "pwd"
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Obfuscated cmdlet and string
@@ -203,10 +174,9 @@ ie""x'' "p`"`"w''d`"`""
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Native command
@@ -300,46 +270,26 @@ Foreach statement without token separator
                   (statement_list
                     (pipeline
                       (pipeline_chain
-                        (ternary_expression
-                          (null_coalesce_expression
-                            (logical_expression
-                              (bitwise_expression
-                                (comparison_expression
-                                  (additive_expression
-                                    (multiplicative_expression
-                                      (format_expression
-                                        (range_expression
-                                          (array_literal_expression
+                        (unary_expression
+                          (parenthesized_expression
+                            (pipeline
+                              (pipeline_chain
+                                (unary_expression
+                                  (expression_with_unary_operator
+                                    (cast_expression
+                                      (type_literal
+                                        (type_spec
+                                          (type_name
+                                            (type_identifier))))
+                                      (unary_expression
+                                        (expression_with_unary_operator
+                                          (cast_expression
+                                            (type_literal
+                                              (type_spec
+                                                (type_name
+                                                  (type_identifier))))
                                             (unary_expression
-                                              (parenthesized_expression
-                                                (pipeline
-                                                  (pipeline_chain
-                                                    (ternary_expression
-                                                      (null_coalesce_expression
-                                                        (logical_expression
-                                                          (bitwise_expression
-                                                            (comparison_expression
-                                                              (additive_expression
-                                                                (multiplicative_expression
-                                                                  (format_expression
-                                                                    (range_expression
-                                                                      (array_literal_expression
-                                                                        (unary_expression
-                                                                          (expression_with_unary_operator
-                                                                            (cast_expression
-                                                                              (type_literal
-                                                                                (type_spec
-                                                                                  (type_name
-                                                                                    (type_identifier))))
-                                                                              (unary_expression
-                                                                                (expression_with_unary_operator
-                                                                                  (cast_expression
-                                                                                    (type_literal
-                                                                                      (type_spec
-                                                                                        (type_name
-                                                                                          (type_identifier))))
-                                                                                    (unary_expression
-                                                                                      (variable))))))))))))))))))))))))))))))))))))))))))))
+                                              (variable))))))))))))))))))))))))
 
 ===
 multiline command line
@@ -358,10 +308,9 @@ Write-Debug `
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))))))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 command with argument set by :
@@ -379,9 +328,8 @@ New-Item $profileDir -ItemType Directory -Force -Verbose:$VerbosePreference > $n
           (command_name)
           (command_elements
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (variable)))
+            (unary_expression
+              (variable))
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
@@ -391,17 +339,15 @@ New-Item $profileDir -ItemType Directory -Force -Verbose:$VerbosePreference > $n
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (variable)))
+            (unary_expression
+              (variable))
             (command_argument_sep)
             (redirection
               (file_redirection_operator)
               (redirected_file_name
                 (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (variable)))))))))))
+                (unary_expression
+                  (variable))))))))))
 
 ===
 Diff between argument and array literal
@@ -416,20 +362,10 @@ $rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 44
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable)))))))))))))
+          (unary_expression
+            (variable)))
         (assignement_operator)
-        value: (pipeline
+        value: (assignment_value
           (pipeline_chain
             (command
               (command_invokation_operator)
@@ -438,38 +374,19 @@ $rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 44
                   (expandable_string_literal)))
               command_elements: (command_elements
                 (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (string_literal
-                      (expandable_string_literal))))
+                (unary_expression
+                  (string_literal
+                    (expandable_string_literal)))
                 (argument_list
                   argument_expression_list: (argument_expression_list
                     (argument_expression
-                      (ternary_argument_expression
-                        (null_coalesce_argument_expression
-                          (logical_argument_expression
-                            (bitwise_argument_expression
-                              (comparison_argument_expression
-                                (additive_argument_expression
-                                  (multiplicative_argument_expression
-                                    (format_argument_expression
-                                      (range_argument_expression
-                                        (unary_expression
-                                          (string_literal
-                                            (expandable_string_literal)))))))))))))
+                      (unary_expression
+                        (string_literal
+                          (expandable_string_literal))))
                     (argument_expression
-                      (ternary_argument_expression
-                        (null_coalesce_argument_expression
-                          (logical_argument_expression
-                            (bitwise_argument_expression
-                              (comparison_argument_expression
-                                (additive_argument_expression
-                                  (multiplicative_argument_expression
-                                    (format_argument_expression
-                                      (range_argument_expression
-                                        (unary_expression
-                                          (integer_literal
-                                            (decimal_integer_literal)))))))))))))))))))))))
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))))))))
 
 ===
 Cmdlet that start with a keyword
@@ -527,19 +444,9 @@ iex("calc.exe")
             (parenthesized_expression
               (pipeline
                 (pipeline_chain
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (string_literal
-                                          (expandable_string_literal))))))))))))))))))))))
+                  (unary_expression
+                    (string_literal
+                      (expandable_string_literal))))))))))))
 
 ===
 Cmdlet that start with a keyword 2

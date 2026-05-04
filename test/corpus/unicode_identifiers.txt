@@ -46,95 +46,42 @@ Invoke-Δelta -Μessage "Hello" -値 3
                         (type_identifier))))))
               (variable)
               (script_parameter_default
-                (ternary_expression
-                  (null_coalesce_expression
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (integer_literal
-                                        (decimal_integer_literal)))))))))))))))))
+                (unary_expression
+                  (integer_literal
+                    (decimal_integer_literal)))))))
         script_block_body: (script_block_body
           statement_list: (statement_list
             (pipeline
               (assignment_expression
                 (left_assignment_expression
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))))
+                  (unary_expression
+                    (variable)))
                 (assignement_operator)
-                value: (pipeline
+                value: (assignment_value
                   (pipeline_chain
-                    (ternary_expression
-                      (null_coalesce_expression
-                        (logical_expression
-                          (bitwise_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (script_block_expression
-                                            (param_block
-                                              (parameter_list
-                                                (script_parameter
-                                                  (variable))))
-                                            (script_block
-                                              script_block_body: (script_block_body
-                                                statement_list: (statement_list
-                                                  (pipeline
-                                                    (pipeline_chain
-                                                      (ternary_expression
-                                                        (null_coalesce_expression
-                                                          (logical_expression
-                                                            (bitwise_expression
-                                                              (comparison_expression
-                                                                (additive_expression
-                                                                  (multiplicative_expression
-                                                                    (multiplicative_expression
-                                                                      (format_expression
-                                                                        (range_expression
-                                                                          (array_literal_expression
-                                                                            (unary_expression
-                                                                              (variable))))))
-                                                                    (format_expression
-                                                                      (range_expression
-                                                                        (array_literal_expression
-                                                                          (unary_expression
-                                                                            (real_literal)))))))))))))))))))))))))))))))))
+                    (unary_expression
+                      (script_block_expression
+                        (param_block
+                          (parameter_list
+                            (script_parameter
+                              (variable))))
+                        (script_block
+                          script_block_body: (script_block_body
+                            statement_list: (statement_list
+                              (pipeline
+                                (pipeline_chain
+                                  (multiplicative_expression
+                                    (unary_expression
+                                      (variable))
+                                    (unary_expression
+                                      (real_literal))))))))))))))
             (pipeline
               (assignment_expression
                 (left_assignment_expression
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))))
+                  (unary_expression
+                    (variable)))
                 (assignement_operator)
-                value: (pipeline
+                value: (assignment_value
                   (pipeline_chain
                     (command
                       (command_invokation_operator)
@@ -143,59 +90,29 @@ Invoke-Δelta -Μessage "Hello" -値 3
                           (variable)))
                       command_elements: (command_elements
                         (command_argument_sep)
-                        (array_literal_expression
-                          (unary_expression
-                            (parenthesized_expression
-                              (pipeline
-                                (pipeline_chain
-                                  (ternary_expression
-                                    (null_coalesce_expression
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (additive_expression
-                                                (multiplicative_expression
-                                                  (format_expression
-                                                    (range_expression
-                                                      (array_literal_expression
-                                                        (unary_expression
-                                                          (variable)))))))
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (integer_literal
-                                                          (decimal_integer_literal))))))))))))))))))))))))
+                        (unary_expression
+                          (parenthesized_expression
+                            (pipeline
+                              (pipeline_chain
+                                (additive_expression
+                                  (unary_expression
+                                    (variable))
+                                  (unary_expression
+                                    (integer_literal
+                                      (decimal_integer_literal))))))))))))))
             (if_statement
               condition: (pipeline
                 (pipeline_chain
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (comparison_expression
-                              (additive_expression
-                                (multiplicative_expression
-                                  (format_expression
-                                    (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (member_access
-                                            (variable)
-                                            (member_name
-                                              (simple_name))))))))))
-                            (comparison_operator)
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (integer_literal
-                                          (decimal_integer_literal)))))))))))))))
+                  (comparison_expression
+                    (unary_expression
+                      (member_access
+                        (variable)
+                        (member_name
+                          (simple_name))))
+                    (comparison_operator)
+                    (unary_expression
+                      (integer_literal
+                        (decimal_integer_literal))))))
               (statement_block
                 statement_list: (statement_list
                   (pipeline
@@ -204,12 +121,11 @@ Invoke-Δelta -Μessage "Hello" -値 3
                         command_name: (command_name)
                         command_elements: (command_elements
                           (command_argument_sep)
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable)
-                                  (variable))))))))))))))))
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal
+                                (variable)
+                                (variable)))))))))))))))
     (pipeline
       (pipeline_chain
         (command
@@ -218,17 +134,15 @@ Invoke-Δelta -Μessage "Hello" -値 3
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (string_literal
-                  (expandable_string_literal))))
+            (unary_expression
+              (string_literal
+                (expandable_string_literal)))
             (command_argument_sep)
             (command_parameter)
             (command_argument_sep)
-            (array_literal_expression
-              (unary_expression
-                (integer_literal
-                  (decimal_integer_literal))))))))))
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))))
 
 ===
 Unicode class, type, method, and enum names
@@ -270,18 +184,8 @@ enum Χρώμα { Κόκκινο = １ }
             statement_list: (statement_list
               (pipeline
                 (pipeline_chain
-                  (ternary_expression
-                    (null_coalesce_expression
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (variable)))))))))))))))))))
+                  (unary_expression
+                    (variable)))))))))
     (enum_statement
       (simple_name)
       (enum_member
