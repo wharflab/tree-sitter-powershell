@@ -119,34 +119,14 @@ using module @{ ModuleName = 'PSReadLine'; RequiredVersion = '2.0' }
               (simple_name))
             (pipeline
               (pipeline_chain
-                (ternary_expression
-                  (null_coalesce_expression
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (verbatim_string_characters))))))))))))))))
+                (unary_expression
+                  (string_literal
+                    (verbatim_string_characters))))))
           (hash_entry
             (key_expression
               (simple_name))
             (pipeline
               (pipeline_chain
-                (ternary_expression
-                  (null_coalesce_expression
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (verbatim_string_characters)))))))))))))))))))))
+                (unary_expression
+                  (string_literal
+                    (verbatim_string_characters)))))))))))

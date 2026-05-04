@@ -12,7 +12,19 @@
           "named": true
         },
         {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
           "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -31,7 +43,23 @@
           "named": true
         },
         {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
           "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -46,7 +74,43 @@
       "required": true,
       "types": [
         {
+          "type": "additive_argument_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_argument_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_argument_expression",
+          "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
+          "type": "logical_argument_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
           "type": "ternary_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -211,6 +275,10 @@
         "required": true,
         "types": [
           {
+            "type": "assignment_expression",
+            "named": true
+          },
+          {
             "type": "attribute_statement",
             "named": true
           },
@@ -267,7 +335,11 @@
             "named": true
           },
           {
-            "type": "pipeline",
+            "type": "pipeline_chain",
+            "named": true
+          },
+          {
+            "type": "pipeline_chain_tail",
             "named": true
           },
           {
@@ -337,14 +409,54 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
         {
           "type": "simple_name",
           "named": true
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -442,11 +554,31 @@
       "required": true,
       "types": [
         {
+          "type": "additive_argument_expression",
+          "named": true
+        },
+        {
           "type": "bitwise_argument_expression",
           "named": true
         },
         {
           "type": "comparison_argument_expression",
+          "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -461,11 +593,35 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "bitwise_expression",
           "named": true
         },
         {
           "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -646,11 +802,47 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
         {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
           "type": "class_attribute",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         },
         {
@@ -659,6 +851,10 @@
         },
         {
           "type": "type_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -803,6 +999,10 @@
         {
           "type": "stop_parsing",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -929,6 +1129,22 @@
         {
           "type": "comparison_operator",
           "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -946,11 +1162,31 @@
           "named": true
         },
         {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "comparison_expression",
           "named": true
         },
         {
           "type": "comparison_operator",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -995,6 +1231,10 @@
         },
         {
           "type": "sub_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -1131,11 +1371,31 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
           "type": "array_expression",
           "named": true
         },
         {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
           "type": "element_access",
+          "named": true
+        },
+        {
+          "type": "format_expression",
           "named": true
         },
         {
@@ -1151,7 +1411,19 @@
           "named": true
         },
         {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
           "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
           "named": true
         },
         {
@@ -1164,6 +1436,10 @@
         },
         {
           "type": "post_increment_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         },
         {
@@ -1188,6 +1464,10 @@
         },
         {
           "type": "type_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -1565,6 +1845,10 @@
         {
           "type": "range_argument_expression",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -1578,6 +1862,10 @@
       "required": true,
       "types": [
         {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "format_expression",
           "named": true
         },
@@ -1587,6 +1875,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2156,10 +2448,50 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2174,11 +2506,35 @@
       "required": true,
       "types": [
         {
+          "type": "additive_argument_expression",
+          "named": true
+        },
+        {
           "type": "bitwise_argument_expression",
           "named": true
         },
         {
+          "type": "comparison_argument_expression",
+          "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
           "type": "logical_argument_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2193,11 +2549,39 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "bitwise_expression",
           "named": true
         },
         {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
           "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2357,6 +2741,14 @@
         {
           "type": "multiplicative_argument_expression",
           "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -2370,11 +2762,23 @@
       "required": true,
       "types": [
         {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
           "type": "format_expression",
           "named": true
         },
         {
           "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2423,11 +2827,39 @@
       "required": true,
       "types": [
         {
+          "type": "additive_argument_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_argument_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_argument_expression",
+          "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
           "type": "logical_argument_expression",
           "named": true
         },
         {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
           "type": "null_coalesce_argument_expression",
+          "named": true
+        },
+        {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2442,11 +2874,43 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
           "type": "logical_expression",
           "named": true
         },
         {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
           "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -2564,10 +3028,46 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
           "type": "command",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         },
         {
@@ -2576,6 +3076,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -2824,6 +3328,10 @@
         {
           "type": "range_expression",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -2918,6 +3426,10 @@
         },
         {
           "type": "type_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         },
         {
@@ -3149,10 +3661,50 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
+          "type": "null_coalesce_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -3585,11 +4137,43 @@
       "required": true,
       "types": [
         {
+          "type": "additive_argument_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_argument_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_argument_expression",
+          "named": true
+        },
+        {
+          "type": "format_argument_expression",
+          "named": true
+        },
+        {
+          "type": "logical_argument_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_argument_expression",
+          "named": true
+        },
+        {
           "type": "null_coalesce_argument_expression",
           "named": true
         },
         {
+          "type": "range_argument_expression",
+          "named": true
+        },
+        {
           "type": "ternary_argument_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -3604,11 +4188,47 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
+          "named": true
+        },
+        {
+          "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
+          "named": true
+        },
+        {
           "type": "null_coalesce_expression",
           "named": true
         },
         {
+          "type": "range_expression",
+          "named": true
+        },
+        {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]

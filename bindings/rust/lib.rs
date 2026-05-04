@@ -7,7 +7,7 @@
 //! let code = r#"
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
-//! let language = tree_sitter_powershell::LANGUAGE;
+//! let language = tree_sitter_pwsh::LANGUAGE;
 //! parser
 //!     .set_language(&language.into())
 //!     .expect("Error loading PowerShell parser");

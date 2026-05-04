@@ -70,6 +70,7 @@ export default grammar({
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
     [$.path_command_name, $._value],
+    [$._array_literal_expression, $.array_literal_expression],
   ],
 
   rules: {
@@ -823,10 +824,13 @@ export default grammar({
     pipeline: ($) =>
       choice(
         $.assignment_expression,
-        seq(
-          $.pipeline_chain,
-          repeat(seq($.pipeline_chain_tail, $.pipeline_chain)),
-        ),
+        $._pipeline,
+      ),
+
+    _pipeline: ($) =>
+      seq(
+        $.pipeline_chain,
+        repeat(seq($.pipeline_chain_tail, $.pipeline_chain)),
       ),
 
     pipeline_chain: ($) =>
@@ -852,7 +856,29 @@ export default grammar({
       seq(
         $.left_assignment_expression,
         $.assignement_operator,
-        field('value', $._statement),
+        field('value', $._assignment_value),
+      ),
+
+    _assignment_value: ($) =>
+      prec.right(
+        choice(
+          $.if_statement,
+          seq(optional($.label), $._labeled_statement),
+          $.function_statement,
+          $.class_statement,
+          $.enum_statement,
+          $.attribute_statement,
+          $.flow_control_statement,
+          $.trap_statement,
+          $.try_statement,
+          $.data_statement,
+          $.inlinescript_statement,
+          $.parallel_statement,
+          $.sequence_statement,
+          $.assignment_expression,
+          $._pipeline,
+          $.empty_statement,
+        ),
       ),
 
     _pipeline_tail: ($) => repeat1(seq('|', $.command)),
@@ -970,7 +996,7 @@ export default grammar({
           seq($.command_argument_sep, $.concatenated_command_argument),
           seq($.command_argument_sep, optional(alias($._command_argument_token, $.generic_token))),
           seq($.command_argument_sep, alias($._bracketed_generic_token, $.generic_token)),
-          seq($.command_argument_sep, $.array_literal_expression),
+          seq($.command_argument_sep, $._array_literal_expression),
           seq($.command_argument_sep, $.expandable_bareword),
           seq($.command_argument_sep, $.bareword_argument_list),
           seq($.command_argument_sep, $.escape_character),
@@ -1001,7 +1027,7 @@ export default grammar({
 
     _concatenated_command_argument_head: ($) =>
       choice(
-        $.array_literal_expression,
+        $._array_literal_expression,
         $.expandable_bareword,
         alias($._command_argument_token, $.generic_token),
         $.escape_character,
@@ -1218,116 +1244,119 @@ export default grammar({
       seq($.simple_name, optional(seq('=', $.integer_literal))),
 
     // Expressions
-    _expression: ($) => $.ternary_expression,
+    _expression: ($) => $._ternary_expression,
+
+    _ternary_expression: ($) =>
+      choice($.ternary_expression, $._null_coalesce_expression),
 
     ternary_expression: ($) =>
       prec.right(
-        choice(
-          $.null_coalesce_expression,
-          seq(
-            $.null_coalesce_expression,
-            '?',
-            $.ternary_expression,
-            ':',
-            $.ternary_expression,
-          ),
+        seq(
+          $._null_coalesce_expression,
+          '?',
+          $._ternary_expression,
+          ':',
+          $._ternary_expression,
         ),
       ),
+
+    _null_coalesce_expression: ($) =>
+      choice($.null_coalesce_expression, $._logical_expression),
 
     null_coalesce_expression: ($) =>
       prec.left(
-        choice(
-          $.logical_expression,
-          seq($.null_coalesce_expression, '??', $.logical_expression),
-        ),
+        seq($._null_coalesce_expression, '??', $._logical_expression),
       ),
+
+    _logical_expression: ($) =>
+      choice($.logical_expression, $._bitwise_expression),
 
     logical_expression: ($) =>
       prec.left(
-        choice(
-          $.bitwise_expression,
-          seq(
-            $.logical_expression,
-            choice(
-              reservedWord('-and'),
-              reservedWord('-or'),
-              reservedWord('-xor'),
-            ),
-            $.bitwise_expression,
+        seq(
+          $._logical_expression,
+          choice(
+            reservedWord('-and'),
+            reservedWord('-or'),
+            reservedWord('-xor'),
           ),
+          $._bitwise_expression,
         ),
       ),
+
+    _bitwise_expression: ($) =>
+      choice($.bitwise_expression, $._comparison_expression),
 
     bitwise_expression: ($) =>
       prec.left(
-        choice(
-          $.comparison_expression,
-          seq(
-            $.bitwise_expression,
-            choice(
-              reservedWord('-band'),
-              reservedWord('-bor'),
-              reservedWord('-bxor'),
-            ),
-            $.comparison_expression,
+        seq(
+          $._bitwise_expression,
+          choice(
+            reservedWord('-band'),
+            reservedWord('-bor'),
+            reservedWord('-bxor'),
           ),
+          $._comparison_expression,
         ),
       ),
+
+    _comparison_expression: ($) =>
+      choice($.comparison_expression, $._additive_expression),
 
     comparison_expression: ($) =>
       prec.left(
-        choice(
-          $.additive_expression,
-          seq(
-            $.comparison_expression,
-            $.comparison_operator,
-            $.additive_expression,
-          ),
+        seq(
+          $._comparison_expression,
+          $.comparison_operator,
+          $._additive_expression,
         ),
       ),
+
+    _additive_expression: ($) =>
+      choice($.additive_expression, $._multiplicative_expression),
 
     additive_expression: ($) =>
       prec.left(
-        choice(
-          $.multiplicative_expression,
-          seq(
-            $.additive_expression,
-            choice('+', '-'),
-            $.multiplicative_expression,
-          ),
+        seq(
+          $._additive_expression,
+          choice('+', '-'),
+          $._multiplicative_expression,
         ),
       ),
+
+    _multiplicative_expression: ($) =>
+      choice($.multiplicative_expression, $._format_expression),
 
     multiplicative_expression: ($) =>
       prec.left(
-        choice(
-          $.format_expression,
-          seq(
-            $.multiplicative_expression,
-            choice('/', '\\', '%', '*'),
-            $.format_expression,
-          ),
+        seq(
+          $._multiplicative_expression,
+          choice('/', '\\', '%', '*'),
+          $._format_expression,
         ),
       ),
+
+    _format_expression: ($) =>
+      choice($.format_expression, $._range_expression),
 
     format_expression: ($) =>
       prec.left(
-        choice(
-          $.range_expression,
-          seq($.format_expression, $.format_operator, $.range_expression),
-        ),
+        seq($._format_expression, $.format_operator, $._range_expression),
       ),
+
+    _range_expression: ($) =>
+      choice($.range_expression, $._array_literal_expression),
 
     range_expression: ($) =>
       prec.left(
-        choice(
-          $.array_literal_expression,
-          seq($.range_expression, '..', $.array_literal_expression),
-        ),
+        seq($._range_expression, '..', $._array_literal_expression),
       ),
 
+    _array_literal_expression: ($) =>
+      choice($.array_literal_expression, $.unary_expression),
+
     array_literal_expression: ($) =>
-      prec.left(seq($.unary_expression, repeat(seq(',', $.unary_expression)))),
+      prec.left(seq($.unary_expression, repeat1(seq(',', $.unary_expression)))),
 
     unary_expression: ($) =>
       prec.right(
@@ -1489,120 +1518,126 @@ export default grammar({
         seq($.argument_expression, repeat(seq(',', $.argument_expression))),
       ),
 
-    argument_expression: ($) => $.ternary_argument_expression,
+    argument_expression: ($) => $._ternary_argument_expression,
+
+    _ternary_argument_expression: ($) =>
+      choice(
+        $.ternary_argument_expression,
+        $._null_coalesce_argument_expression,
+      ),
 
     ternary_argument_expression: ($) =>
       prec.right(
-        choice(
-          $.null_coalesce_argument_expression,
-          seq(
-            $.null_coalesce_argument_expression,
-            '?',
-            $.ternary_argument_expression,
-            ':',
-            $.ternary_argument_expression,
-          ),
+        seq(
+          $._null_coalesce_argument_expression,
+          '?',
+          $._ternary_argument_expression,
+          ':',
+          $._ternary_argument_expression,
         ),
+      ),
+
+    _null_coalesce_argument_expression: ($) =>
+      choice(
+        $.null_coalesce_argument_expression,
+        $._logical_argument_expression,
       ),
 
     null_coalesce_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.logical_argument_expression,
-          seq(
-            $.null_coalesce_argument_expression,
-            '??',
-            $.logical_argument_expression,
-          ),
+        seq(
+          $._null_coalesce_argument_expression,
+          '??',
+          $._logical_argument_expression,
         ),
       ),
+
+    _logical_argument_expression: ($) =>
+      choice($.logical_argument_expression, $._bitwise_argument_expression),
 
     logical_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.bitwise_argument_expression,
-          seq(
-            $.logical_argument_expression,
-            choice(
-              reservedWord('-and'),
-              reservedWord('-or'),
-              reservedWord('-xor'),
-            ),
-            $.bitwise_argument_expression,
+        seq(
+          $._logical_argument_expression,
+          choice(
+            reservedWord('-and'),
+            reservedWord('-or'),
+            reservedWord('-xor'),
           ),
+          $._bitwise_argument_expression,
         ),
       ),
+
+    _bitwise_argument_expression: ($) =>
+      choice($.bitwise_argument_expression, $._comparison_argument_expression),
 
     bitwise_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.comparison_argument_expression,
-          seq(
-            $.bitwise_argument_expression,
-            choice(
-              reservedWord('-band'),
-              reservedWord('-bor'),
-              reservedWord('-bxor'),
-            ),
-            $.comparison_argument_expression,
+        seq(
+          $._bitwise_argument_expression,
+          choice(
+            reservedWord('-band'),
+            reservedWord('-bor'),
+            reservedWord('-bxor'),
           ),
+          $._comparison_argument_expression,
         ),
       ),
+
+    _comparison_argument_expression: ($) =>
+      choice($.comparison_argument_expression, $._additive_argument_expression),
 
     comparison_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.additive_argument_expression,
-          seq(
-            $.comparison_argument_expression,
-            $.comparison_operator,
-            $.additive_argument_expression,
-          ),
+        seq(
+          $._comparison_argument_expression,
+          $.comparison_operator,
+          $._additive_argument_expression,
         ),
       ),
+
+    _additive_argument_expression: ($) =>
+      choice($.additive_argument_expression, $._multiplicative_argument_expression),
 
     additive_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.multiplicative_argument_expression,
-          seq(
-            $.additive_argument_expression,
-            choice('+', '-'),
-            $.multiplicative_argument_expression,
-          ),
+        seq(
+          $._additive_argument_expression,
+          choice('+', '-'),
+          $._multiplicative_argument_expression,
         ),
       ),
+
+    _multiplicative_argument_expression: ($) =>
+      choice($.multiplicative_argument_expression, $._format_argument_expression),
 
     multiplicative_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.format_argument_expression,
-          seq(
-            $.multiplicative_argument_expression,
-            choice('/', '\\', '%', '*'),
-            $.format_argument_expression,
-          ),
+        seq(
+          $._multiplicative_argument_expression,
+          choice('/', '\\', '%', '*'),
+          $._format_argument_expression,
         ),
       ),
+
+    _format_argument_expression: ($) =>
+      choice($.format_argument_expression, $._range_argument_expression),
 
     format_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.range_argument_expression,
-          seq(
-            $.format_argument_expression,
-            $.format_operator,
-            $.range_argument_expression,
-          ),
+        seq(
+          $._format_argument_expression,
+          $.format_operator,
+          $._range_argument_expression,
         ),
       ),
 
+    _range_argument_expression: ($) =>
+      choice($.range_argument_expression, $.unary_expression),
+
     range_argument_expression: ($) =>
       prec.left(
-        choice(
-          $.unary_expression,
-          seq($.range_argument_expression, '..', $.unary_expression),
-        ),
+        seq($._range_argument_expression, '..', $.unary_expression),
       ),
 
     type_literal: ($) =>

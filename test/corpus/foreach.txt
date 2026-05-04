@@ -14,18 +14,8 @@ foreach ($item in $collection) {
       (variable)
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))))))))
+          (unary_expression
+            (variable))))
       (statement_block
         statement_list: (statement_list
           (pipeline
@@ -34,9 +24,8 @@ foreach ($item in $collection) {
                 command_name: (command_name)
                 command_elements: (command_elements
                   (command_argument_sep)
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                  (unary_expression
+                    (variable)))))))))))
 
 ===
 Foreach with -parallel
@@ -55,31 +44,11 @@ foreach -parallel ($item in $collection) {
       (variable)
       (pipeline
         (pipeline_chain
-          (ternary_expression
-            (null_coalesce_expression
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (variable))))))))))))))
+          (unary_expression
+            (variable))))
       (statement_block
         statement_list: (statement_list
           (pipeline
             (pipeline_chain
-              (ternary_expression
-                (null_coalesce_expression
-                  (logical_expression
-                    (bitwise_expression
-                      (comparison_expression
-                        (additive_expression
-                          (multiplicative_expression
-                            (format_expression
-                              (range_expression
-                                (array_literal_expression
-                                  (unary_expression
-                                    (variable)))))))))))))))))))
+              (unary_expression
+                (variable)))))))))

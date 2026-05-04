@@ -10,19 +10,9 @@ Unsigned integer
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Unsigned long
@@ -36,19 +26,9 @@ Unsigned long
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Short integer
@@ -62,19 +42,9 @@ Short integer
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Unsigned short
@@ -88,19 +58,9 @@ Unsigned short
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Signed byte
@@ -114,19 +74,9 @@ Signed byte
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Unsigned byte
@@ -140,19 +90,9 @@ Unsigned byte
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Hexadecimal integer
@@ -166,19 +106,9 @@ Hexadecimal integer
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (hexadecimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (hexadecimal_integer_literal)))))))
 
 ===
 Hexadecimal long
@@ -192,19 +122,9 @@ Hexadecimal long
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (hexadecimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (hexadecimal_integer_literal)))))))
 
 ===
 Hexadecimal unsigned
@@ -218,19 +138,9 @@ Hexadecimal unsigned
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (hexadecimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (hexadecimal_integer_literal)))))))
 
 ===
 BigInteger suffix
@@ -244,16 +154,6 @@ BigInteger suffix
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+        (unary_expression
+          (integer_literal
+            (decimal_integer_literal)))))))

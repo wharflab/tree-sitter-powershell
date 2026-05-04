@@ -10,21 +10,11 @@ Simple type expression #1
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (type_name
-                                    (type_identifier)))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (type_name
+                (type_identifier)))))))))
 
 ===
 Simple type expression #2
@@ -38,25 +28,15 @@ Simple type expression #2
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (type_name
-                                    (type_name
-                                      (type_name
-                                        (type_identifier))
-                                      (type_identifier))
-                                    (type_identifier)))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (type_name
+                (type_name
+                  (type_name
+                    (type_identifier))
+                  (type_identifier))
+                (type_identifier)))))))))
 
 ===
 Array type expression #1
@@ -70,22 +50,12 @@ Array type expression #1
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (array_type_name
-                                    (type_name
-                                      (type_identifier))))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (array_type_name
+                (type_name
+                  (type_identifier))))))))))
 
 ===
 Array type expression #1
@@ -99,24 +69,14 @@ Array type expression #1
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (array_type_name
-                                    (type_name
-                                      (type_name
-                                        (type_identifier))
-                                      (type_identifier))))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (array_type_name
+                (type_name
+                  (type_name
+                    (type_identifier))
+                  (type_identifier))))))))))
 
 ===
 Generic type expression #1
@@ -130,26 +90,16 @@ Generic type expression #1
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (generic_type_name
-                                    (type_name
-                                      (type_identifier)))
-                                  (generic_type_arguments
-                                    (type_spec
-                                      (type_name
-                                        (type_identifier)))))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (generic_type_name
+                (type_name
+                  (type_identifier)))
+              (generic_type_arguments
+                (type_spec
+                  (type_name
+                    (type_identifier)))))))))))
 
 ===
 Generic type expression #2
@@ -163,39 +113,29 @@ Generic type expression #2
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (generic_type_name
-                                    (type_name
-                                      (type_name
-                                        (type_name
-                                          (type_name
-                                            (type_identifier))
-                                          (type_identifier))
-                                        (type_identifier))
-                                      (type_identifier)))
-                                  (generic_type_arguments
-                                    (type_spec
-                                      (type_name
-                                        (type_identifier)))
-                                    (type_spec
-                                      (type_name
-                                        (type_name
-                                          (type_name
-                                            (type_identifier))
-                                          (type_identifier))
-                                        (type_identifier)))))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (generic_type_name
+                (type_name
+                  (type_name
+                    (type_name
+                      (type_name
+                        (type_identifier))
+                      (type_identifier))
+                    (type_identifier))
+                  (type_identifier)))
+              (generic_type_arguments
+                (type_spec
+                  (type_name
+                    (type_identifier)))
+                (type_spec
+                  (type_name
+                    (type_name
+                      (type_name
+                        (type_identifier))
+                      (type_identifier))
+                    (type_identifier)))))))))))
 
 ===
 Complex type expression
@@ -209,48 +149,38 @@ Complex type expression
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (generic_type_name
-                                    (type_name
-                                      (type_name
-                                        (type_name
-                                          (type_name
-                                            (type_identifier))
-                                          (type_identifier))
-                                        (type_identifier))
-                                      (type_identifier)))
-                                  (generic_type_arguments
-                                    (type_spec
-                                      (array_type_name
-                                        (type_name
-                                          (type_identifier))))
-                                    (type_spec
-                                      (generic_type_name
-                                        (type_name
-                                          (type_name
-                                            (type_name
-                                              (type_name
-                                                (type_identifier))
-                                              (type_identifier))
-                                            (type_identifier))
-                                          (type_identifier)))
-                                      (generic_type_arguments
-                                        (type_spec
-                                          (array_type_name
-                                            (type_name
-                                              (type_identifier))))))))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (generic_type_name
+                (type_name
+                  (type_name
+                    (type_name
+                      (type_name
+                        (type_identifier))
+                      (type_identifier))
+                    (type_identifier))
+                  (type_identifier)))
+              (generic_type_arguments
+                (type_spec
+                  (array_type_name
+                    (type_name
+                      (type_identifier))))
+                (type_spec
+                  (generic_type_name
+                    (type_name
+                      (type_name
+                        (type_name
+                          (type_name
+                            (type_identifier))
+                          (type_identifier))
+                        (type_identifier))
+                      (type_identifier)))
+                  (generic_type_arguments
+                    (type_spec
+                      (array_type_name
+                        (type_name
+                          (type_identifier))))))))))))))
 
 ===
 Type-attributed variable
@@ -264,25 +194,15 @@ Type-attributed variable
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (expression_with_unary_operator
-                                (cast_expression
-                                  (type_literal
-                                    (type_spec
-                                      (type_name
-                                        (type_identifier))))
-                                  (unary_expression
-                                    (variable)))))))))))))))))))
+        (unary_expression
+          (expression_with_unary_operator
+            (cast_expression
+              (type_literal
+                (type_spec
+                  (type_name
+                    (type_identifier))))
+              (unary_expression
+                (variable)))))))))
 
 ===
 Double-backtick generic arity type
@@ -296,24 +216,14 @@ Double-backtick generic arity type
   (statement_list
     (pipeline
       (pipeline_chain
-        (ternary_expression
-          (null_coalesce_expression
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (type_literal
-                                (type_spec
-                                  (type_name
-                                    (type_name
-                                      (type_name
-                                        (type_name
-                                          (type_identifier))
-                                        (type_identifier))
-                                      (type_identifier))
-                                    (type_identifier)))))))))))))))))))
+        (unary_expression
+          (type_literal
+            (type_spec
+              (type_name
+                (type_name
+                  (type_name
+                    (type_name
+                      (type_identifier))
+                    (type_identifier))
+                  (type_identifier))
+                (type_identifier)))))))))
