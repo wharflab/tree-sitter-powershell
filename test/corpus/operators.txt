@@ -391,7 +391,7 @@ $win32::SetWindowPos($hWnd, 0, 0, 0, 0, 0, $win32::SWP_NOSIZE -bor $win32::SWP_N
     (pipeline
       (pipeline_chain
         (unary_expression
-          (invokation_expression
+          (invocation_expression
             (variable)
             (member_name
               (simple_name))

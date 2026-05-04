@@ -13,7 +13,7 @@ $x = $true ? "yes" : "no"
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         value: (assignment_value
           (pipeline_chain
             (ternary_expression
@@ -41,7 +41,7 @@ $x = $y ?? "default"
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         value: (assignment_value
           (pipeline_chain
             (null_coalesce_expression
@@ -66,7 +66,7 @@ $x ??= "default"
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         value: (assignment_value
           (pipeline_chain
             (unary_expression

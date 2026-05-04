@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-pwsh"
 description = "PowerShell grammar for tree-sitter"
-version = "0.37.0"
+version = "0.38.0"
 authors = ["Wharflab"]
 license = "MIT"
 readme = "README.md"

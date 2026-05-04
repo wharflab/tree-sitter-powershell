@@ -134,7 +134,7 @@ foreach($x in $vx)
     $xaml = (Get-Variable -Name "xaml$($x)").Value #load the xaml we created earlier
     $xaml.SelectNodes("//*[@Name]") | %{ #find all nodes with a "Name" attribute
         $cname = "form$($x)Control$(($_.Name -replace $xp, '_'))"
-        Set-Variable -Name "$cname" -Value $SyncClass.SyncHash."form$($x)".FindName($_.Name) #create a variale to hold the control/object
+        Set-Variable -Name "$cname" -Value $SyncClass.SyncHash."form$($x)".FindName($_.Name) #create a variable to hold the control/object
         $controls += (Get-Variable -Name "form$($x)Control$($_.Name)").Name #add the control name to our array
         $SyncClass.SyncHash.Add($cname, $SyncClass.SyncHash."form$($x)".FindName($_.Name)) #add the control directly to the hashtable
     }

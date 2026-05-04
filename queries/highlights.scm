@@ -108,13 +108,13 @@
 (function_statement
   (function_name) @function)
 
-(invokation_expression
+(invocation_expression
   (member_name) @function)
 
 (member_access
   (member_name) @property)
 
-(command_invokation_operator) @operator
+(command_invocation_operator) @operator
 
 (type_spec) @type
 

@@ -56,7 +56,7 @@ Invoke-Δelta -Μessage "Hello" -値 3
                 (left_assignment_expression
                   (unary_expression
                     (variable)))
-                (assignement_operator)
+                (assignment_operator)
                 value: (assignment_value
                   (pipeline_chain
                     (unary_expression
@@ -80,11 +80,11 @@ Invoke-Δelta -Μessage "Hello" -値 3
                 (left_assignment_expression
                   (unary_expression
                     (variable)))
-                (assignement_operator)
+                (assignment_operator)
                 value: (assignment_value
                   (pipeline_chain
                     (command
-                      (command_invokation_operator)
+                      (command_invocation_operator)
                       command_name: (command_name_expr
                         (path_command_name
                           (variable)))

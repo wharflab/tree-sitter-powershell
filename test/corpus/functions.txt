@@ -272,7 +272,7 @@ function Test
               (variable))))))))
 
 ===
-Basic parameter with Parameter with many paramters
+Basic parameter with Parameter with many parameters
 ===
 
 function Test

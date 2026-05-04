@@ -6,6 +6,15 @@ on:
   pull_request:
 
 jobs:
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Check spelling
+        uses: crate-ci/typos@v1.45.1
+
   test:
     runs-on: ubuntu-latest
     steps:

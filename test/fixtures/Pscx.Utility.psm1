@@ -121,10 +121,10 @@ filter New-HashObject {
     The condition that determines whether the TrueBlock scriptblock is used or the FalseBlock
     is used.
 .PARAMETER TrueBlock
-    This block gets evaluated and its contents are returned from the function if the Conditon
+    This block gets evaluated and its contents are returned from the function if the Condition
     scriptblock evaluates to $true.
 .PARAMETER FalseBlock
-    This block gets evaluated and its contents are returned from the function if the Conditon
+    This block gets evaluated and its contents are returned from the function if the Condition
     scriptblock evaluates to $false.
 .PARAMETER InputObject
     Specifies the input object. Invoke-Ternary injects the InputObject into each scriptblock
@@ -196,7 +196,7 @@ function Invoke-Ternary {
     The condition that determines whether the TrueBlock scriptblock is used or the FalseBlock
     is used.
 .PARAMETER AlternateExpr
-    This block gets evaluated and its contents are returned from the function if the Conditon
+    This block gets evaluated and its contents are returned from the function if the Condition
     scriptblock evaluates to $true.
 .PARAMETER InputObject
     Specifies the input object. Invoke-NullCoalescing injects the InputObject into each
@@ -1943,7 +1943,7 @@ function Show-Tree
 .Parameter CommandName
   The name of the command to get parameters for.
 .Parameter ParameterName
-  Wilcard-enabled filter for parameter names.
+  Wildcard-enabled filter for parameter names.
 .Parameter ModuleName
   The name of the module which contains the command (this is for scoping)
 .Parameter SkipProviderParameters
@@ -1967,13 +1967,13 @@ function Show-Tree
   Version 0.93 - Sept 24, 2009 - By Hal Rottenberg http://poshcode.org/1344
   Version 1.0  - Jan 19, 2010 - By Joel Bennett http://poshcode.org/1592
                - Merged Oisin and Hal's code with my own implementation
-               - ADDED calculation of dynamic paramters
+               - ADDED calculation of dynamic parameters
   Version 2.0  - July 22, 2010 - By Joel Bennett http://poshcode.org/get/2005
                - CHANGED uses FormatData so the output is objects
                - ADDED calculation of shortest names to the aliases (idea from Shay Levy http://poshcode.org/1982,
                  but with a correct implementation)
   Version 2.1  - July 22, 2010 - By Joel Bennett http://poshcode.org/2007
-               - FIXED Help for SCRIPT file (script help must be separated from #Requires by an emtpy line)
+               - FIXED Help for SCRIPT file (script help must be separated from #Requires by an empty line)
                - Fleshed out and added dates to this version history after Bergle's criticism ;)
   Version 2.2  - July 29, 2010 - By Joel Bennett http://poshcode.org/2030
                - FIXED a major bug which caused Get-Parameters to delete all the parameters from the CommandInfo
@@ -2229,7 +2229,7 @@ function Get-Parameter {
     This function requires the PowerShell Community Extensions. To find out
     the most recent set of Visual Studio environment variables imported use
     the cmdlet Get-EnvironmentBlock.  If you want to revert back to a previous
-    Visul Studio environment variable configuration use the cmdlet
+    Visual Studio environment variable configuration use the cmdlet
     Pop-EnvironmentBlock.
 .PARAMETER VisualStudioVersion
     The version of Visual Studio to import environment variables for. Valid
@@ -2322,7 +2322,7 @@ function Import-VisualStudioVars
 
             if ($RequireWorkload -or $ArchSpecified) {
                 if (!$RequireWorkload) {
-                    # We get here when the architecture was specified but no worload, most likely these users want the C++ workload
+                    # We get here when the architecture was specified but no workload, most likely these users want the C++ workload
                     $RequireWorkload = 'Microsoft.VisualStudio.Component.VC.Tools.x86.x64'
                 }
 

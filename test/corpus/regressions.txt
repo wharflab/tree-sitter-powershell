@@ -490,7 +490,7 @@ Native command with /flag:"$(expr)" colon-prefixed interpolated argument
     (pipeline
       (pipeline_chain
         (command
-          (command_invokation_operator)
+          (command_invocation_operator)
           (command_name_expr
             (path_command_name
               (variable)))
@@ -596,7 +596,7 @@ $z = [System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -619,7 +619,7 @@ $z = [System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -654,7 +654,7 @@ $z = [System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -785,7 +785,7 @@ $y.z = {}
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -798,7 +798,7 @@ $y.z = {}
               (variable)
               (member_name
                 (simple_name)))))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -817,6 +817,6 @@ $x = ;
     (left_assignment_expression
       (unary_expression
         (variable)))
-    (assignement_operator))
+    (assignment_operator))
   (statement_list
     (empty_statement)))

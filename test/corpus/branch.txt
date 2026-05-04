@@ -374,7 +374,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -388,7 +388,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -402,7 +402,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -416,7 +416,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -453,7 +453,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -467,7 +467,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -481,7 +481,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
@@ -495,7 +495,7 @@ switch ($fontstyle) {
                     (left_assignment_expression
                       (unary_expression
                         (variable)))
-                    (assignement_operator)
+                    (assignment_operator)
                     (assignment_value
                       (pipeline_chain
                         (unary_expression
