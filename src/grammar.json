@@ -978,7 +978,7 @@
         }
       ]
     },
-    "assignement_operator": {
+    "assignment_operator": {
       "type": "CHOICE",
       "members": [
         {
@@ -4607,7 +4607,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "assignement_operator"
+          "name": "assignment_operator"
         },
         {
           "type": "FIELD",
@@ -4763,7 +4763,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "command_invokation_operator"
+              "name": "command_invocation_operator"
             },
             {
               "type": "FIELD",
@@ -4793,7 +4793,7 @@
         }
       ]
     },
-    "command_invokation_operator": {
+    "command_invocation_operator": {
       "type": "CHOICE",
       "members": [
         {
@@ -7356,7 +7356,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "invokation_expression"
+          "name": "invocation_expression"
         },
         {
           "type": "SYMBOL",
@@ -7716,7 +7716,7 @@
         ]
       }
     },
-    "invokation_expression": {
+    "invocation_expression": {
       "type": "CHOICE",
       "members": [
         {
@@ -7766,15 +7766,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "invokation_foreach_expression"
+          "name": "invocation_foreach_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "invokation_where_expression"
+          "name": "invocation_where_expression"
         }
       ]
     },
-    "invokation_foreach_expression": {
+    "invocation_foreach_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -7812,7 +7812,7 @@
         }
       ]
     },
-    "invokation_where_expression": {
+    "invocation_where_expression": {
       "type": "SEQ",
       "members": [
         {

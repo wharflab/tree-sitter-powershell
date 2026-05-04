@@ -15,7 +15,7 @@ $Path = "C:\Windows\System32"
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (array_literal_expression
@@ -33,7 +33,7 @@ $Path = "C:\Windows\System32"
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -57,7 +57,7 @@ $Today = (Get-Date).DateTime
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (command
@@ -67,7 +67,7 @@ $Today = (Get-Date).DateTime
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -95,17 +95,17 @@ $a = $b = $c = 0
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_expression
           (left_assignment_expression
             (unary_expression
               (variable)))
-          (assignement_operator)
+          (assignment_operator)
           (assignment_expression
             (left_assignment_expression
               (unary_expression
                 (variable)))
-            (assignement_operator)
+            (assignment_operator)
             (assignment_value
               (pipeline_chain
                 (unary_expression
@@ -133,7 +133,7 @@ $i,$j = 10, "red", $true
               (variable))
             (unary_expression
               (variable))))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (array_literal_expression
@@ -153,7 +153,7 @@ $i,$j = 10, "red", $true
               (variable))
             (unary_expression
               (variable))))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (array_literal_expression
@@ -190,7 +190,7 @@ $words += 10
                       (type_identifier))))
                 (unary_expression
                   (variable))))))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -201,7 +201,7 @@ $words += 10
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -212,7 +212,7 @@ $words += 10
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression

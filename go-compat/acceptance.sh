@@ -17,7 +17,7 @@ cd "$repo_root/go-compat/smoke"
 # Confirm `replace` is picking up this checkout and not a proxy-cached
 # copy of the released grammar. If this ever resolves to $GOMODCACHE,
 # the build will compile against whatever parser.c the proxy cached
-# (which is why PR #17 initially mis-reported ABI 15 even after the
+# (which is why PR #17 initially reported ABI 15 incorrectly even after the
 # fix landed).
 resolved_dir="$(go list -m -f '{{.Dir}}' github.com/wharflab/tree-sitter-powershell)"
 echo "github.com/wharflab/tree-sitter-powershell resolved to: $resolved_dir"

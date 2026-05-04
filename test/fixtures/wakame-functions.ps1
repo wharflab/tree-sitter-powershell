@@ -36,7 +36,7 @@ function sshpubkey2xml( $sshkeystr )
     
     # Why does it start working when adding one here? (1 + $fp3[1]) This
     # was just a guess because the ssh-keygen modulus seems to be 0 0 1 1
-    # = 257 in lengh, and produces a 257 byte encoded file.  But all the
+    # = 257 in length, and produces a 257 byte encoded file.  But all the
     # other experiments with openssh and RSACryptoServiceProvider.Encrypt
     # produce 256 byte encoded files.  So I guessed and dropped the first
     # byte of the modulus, which was 0.

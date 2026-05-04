@@ -262,11 +262,6 @@
     }
   },
   {
-    "type": "assignement_operator",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "assignment_expression",
     "named": true,
     "fields": {
@@ -362,7 +357,7 @@
       "required": true,
       "types": [
         {
-          "type": "assignement_operator",
+          "type": "assignment_operator",
           "named": true
         },
         {
@@ -371,6 +366,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "assignment_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "assignment_value",
@@ -940,7 +940,7 @@
       "required": false,
       "types": [
         {
-          "type": "command_invokation_operator",
+          "type": "command_invocation_operator",
           "named": true
         }
       ]
@@ -1019,7 +1019,7 @@
     }
   },
   {
-    "type": "command_invokation_operator",
+    "type": "command_invocation_operator",
     "named": true,
     "fields": {}
   },
@@ -1071,7 +1071,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -1418,7 +1418,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -2179,7 +2179,7 @@
     }
   },
   {
-    "type": "invokation_expression",
+    "type": "invocation_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -2207,15 +2207,15 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
-          "type": "invokation_foreach_expression",
+          "type": "invocation_foreach_expression",
           "named": true
         },
         {
-          "type": "invokation_where_expression",
+          "type": "invocation_where_expression",
           "named": true
         },
         {
@@ -2266,7 +2266,7 @@
     }
   },
   {
-    "type": "invokation_foreach_expression",
+    "type": "invocation_foreach_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -2294,7 +2294,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -2341,7 +2341,7 @@
     }
   },
   {
-    "type": "invokation_where_expression",
+    "type": "invocation_where_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -2369,7 +2369,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -2623,7 +2623,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -3130,7 +3130,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -3201,7 +3201,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -3400,7 +3400,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -3945,7 +3945,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -4050,7 +4050,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {
@@ -4385,7 +4385,7 @@
           "named": true
         },
         {
-          "type": "invokation_expression",
+          "type": "invocation_expression",
           "named": true
         },
         {

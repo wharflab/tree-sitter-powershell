@@ -246,7 +246,7 @@ export default grammar({
     generic_type_name: ($) => seq($.type_name, '['),
 
     // Operators and punctuators
-    assignement_operator: ($) =>
+    assignment_operator: ($) =>
       choice('=', '!=', '+=', '*=', '/=', '%=', '-=', '??='),
 
     file_redirection_operator: ($) =>
@@ -849,13 +849,13 @@ export default grammar({
 
     pipeline_chain_tail: ($) => choice('&&', '||'),
 
-    // Distinct a normal expression to a left assignement expession
+    // Distinguish a normal expression from a left assignment expression.
     left_assignment_expression: ($) => $._expression,
 
     assignment_expression: ($) =>
       seq(
         $.left_assignment_expression,
-        $.assignement_operator,
+        $.assignment_operator,
         field('value', $._assignment_value),
       ),
 
@@ -889,14 +889,14 @@ export default grammar({
           field('command_elements', optional($.command_elements)),
         ),
         seq(
-          $.command_invokation_operator,
+          $.command_invocation_operator,
           // optional($.command_module),
           field('command_name', $.command_name_expr),
           field('command_elements', optional($.command_elements)),
         ),
       ),
 
-    command_invokation_operator: ($) => choice('.', '&'),
+    command_invocation_operator: ($) => choice('.', '&'),
 
     // This rule is ignored as it does not appear as a rule
     // command_module: $ => $.primary_expression,
@@ -1404,7 +1404,7 @@ export default grammar({
         $._value,
         $.member_access,
         $.element_access,
-        $.invokation_expression,
+        $.invocation_expression,
         $.post_increment_expression,
         $.post_decrement_expression,
       ),
@@ -1476,7 +1476,7 @@ export default grammar({
         seq($._primary_expression, '[', $._expression, ']'),
       ),
 
-    invokation_expression: ($) =>
+    invocation_expression: ($) =>
       choice(
         seq(
           $._primary_expression,
@@ -1485,12 +1485,12 @@ export default grammar({
           $.argument_list,
         ),
         seq($._primary_expression, '::', $.member_name, $.argument_list),
-        $.invokation_foreach_expression,
-        $.invokation_where_expression,
+        $.invocation_foreach_expression,
+        $.invocation_where_expression,
       ),
 
     // adding this rule to handle .foreach syntax
-    invokation_foreach_expression: ($) =>
+    invocation_foreach_expression: ($) =>
       seq(
         $._primary_expression,
         token.immediate(reservedWord('.foreach')),
@@ -1498,7 +1498,7 @@ export default grammar({
       ),
 
     // adding this rule to handle .where syntax
-    invokation_where_expression: ($) =>
+    invocation_where_expression: ($) =>
       seq(
         $._primary_expression,
         token.immediate(reservedWord('.where')),
@@ -1712,7 +1712,7 @@ export default grammar({
  * @param {string} word
  */
 function reservedWord(word) {
-  // return word // when debuging
+  // return word // when debugging
   return alias(reserved(caseInsensitive(word)), word);
 }
 

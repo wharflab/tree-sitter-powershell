@@ -225,7 +225,7 @@ Get-ChildItem (Join-Path $PSScriptRoot *.ps1) | ForEach-Object { . $_.FullName}
                       (pipeline
                         (pipeline_chain
                           (command
-                            (command_invokation_operator)
+                            (command_invocation_operator)
                             (command_name_expr
                               (path_command_name
                                 (variable)
@@ -265,7 +265,7 @@ Call object expression with multi type as parameters
     (pipeline
       (pipeline_chain
         (unary_expression
-          (invokation_expression
+          (invocation_expression
             (type_literal
               (type_spec
                 (type_name
@@ -317,7 +317,7 @@ $FP8DpgPcK0IovuDHPZ4p2 = $FP8DpgPcK0IovuDHPZ4p + "P"  + "S"  + " "  + (Get-Locat
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (additive_expression
@@ -360,7 +360,7 @@ $upgrade += [char]($title[3] -bxor $update[$i])
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -429,7 +429,7 @@ Invoke from Path
     (pipeline
       (pipeline_chain
         (command
-          (command_invokation_operator)
+          (command_invocation_operator)
           (command_name_expr
             (path_command_name
               (variable)

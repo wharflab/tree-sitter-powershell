@@ -1,0 +1,11 @@
+[files]
+extend-exclude = [".git"]
+ignore-hidden = false
+
+[default.extend-words]
+Nd = "Nd"
+ccontains = "ccontains"
+ine = "ine"
+pn = "pn"
+Pn = "Pn"
+Ue = "Ue"

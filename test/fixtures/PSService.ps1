@@ -105,7 +105,7 @@
 #    2016-11-17 RBM Fixed issue #6 Mangled hyphen in final Unregister-Event.  #
 #    2017-05-10 CJG Added execution policy bypass flag.                       #
 #    2017-10-04 RBL rblindberg Updated C# code OnStop() routine fixing        #
-#                   orphaned process left after stoping the service.          #
+#                   orphaned process left after stopping the service.          #
 #    2017-12-05 NWK omrsafetyo Added ServiceUser and ServicePassword to the   #
 #                   script parameters.                                        #
 #    2017-12-10 JFL Removed the unreliable service account detection tests,   #
@@ -313,7 +313,7 @@ $exeFullName = "$installDir\$exeName"
 $logDir = "${ENV:windir}\Logs"          # Where to log the service messages
 $logFile = "$logDir\$serviceName.log"
 $logName = "Application"                # Event Log name (Unrelated to the logFile!)
-# Note: The current implementation only supports "classic" (ie. XP-compatble) event logs.
+# Note: The current implementation only supports "classic" (ie. XP-compatible) event logs.
 #       To support new style (Vista and later) "Applications and Services Logs" folder trees, it would
 #       be necessary to use the new *WinEvent commands instead of the XP-compatible *EventLog commands.
 # Gotcha: If you change $logName to "NEWLOGNAME", make sure that the registry key below does not exist:
@@ -381,7 +381,7 @@ Function Now {
 #                                                                             #
 #   History                                                                   #
 #    2016-06-05 JFL Also prepend the Process ID.                              #
-#    2016-06-08 JFL Allow outputing blank lines.                              #
+#    2016-06-08 JFL Allow outputting blank lines.                              #
 #                                                                             #
 #-----------------------------------------------------------------------------#
 
@@ -1200,12 +1200,12 @@ if ($Service) {                 # Run the service
         }
       }
     } while ($message -ne "exit")
-  } catch { # An exception occurred while runnning the service
+  } catch { # An exception occurred while running the service
     $msg = $_.Exception.Message
     $line = $_.InvocationInfo.ScriptLineNumber
     Log "$scriptName -Service # Error at line ${line}: $msg"
   } finally { # Invoked in all cases: Exception or normally by -Stop or OS shutdown.
-    # Note: If a lenghty cleanup is necessary at this stage, consider skipping
+    # Note: If a lengthy cleanup is necessary at this stage, consider skipping
     # as much of it as possible in case of a shutdown, to speed-up reboots.
     # For that, change the (if ($SCMPreShutdown) {code block}) above to send a
     # "shutdown" message instead of "exit", and handle that "shutdown" message

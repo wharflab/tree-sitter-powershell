@@ -148,7 +148,7 @@ Line-initial pipe continuation inside script block
     (pipeline
       (pipeline_chain
         (command
-          (command_invokation_operator)
+          (command_invocation_operator)
           command_name: (command_name_expr
             (script_block_expression
               (script_block
@@ -185,7 +185,7 @@ Invocation operator with &
     (pipeline
       (pipeline_chain
         (command
-          (command_invokation_operator)
+          (command_invocation_operator)
           command_name: (command_name_expr
             (string_literal
               (expandable_string_literal))))))))
@@ -203,7 +203,7 @@ Dot-sourcing operator
     (pipeline
       (pipeline_chain
         (command
-          (command_invokation_operator)
+          (command_invocation_operator)
           command_name: (command_name_expr
             (command_name)))))))
 

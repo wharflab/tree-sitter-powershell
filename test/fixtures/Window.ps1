@@ -84,7 +84,7 @@
 
   .PARAMETER Step
   Command argument, optional.
-  A pair of integers: $horizonal, $vertical
+  A pair of integers: $horizontal, $vertical
   How much to shift each window top-left corner when moving several windows.
   Alias: -S
 
@@ -315,7 +315,7 @@ Add-Type @"
 
     [DllImport("user32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool AllowSetForegroundWindow(uint pid); // Requires having the priviledge for granting it to others
+    public static extern bool AllowSetForegroundWindow(uint pid); // Requires having the privilege for granting it to others
 
     [DllImport("user32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]

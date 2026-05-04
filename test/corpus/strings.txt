@@ -461,7 +461,7 @@ $string = """$s2"""
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         value: (assignment_value
           (pipeline_chain
             (unary_expression

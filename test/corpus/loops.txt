@@ -24,7 +24,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                       (left_assignment_expression
                         (unary_expression
                           (variable)))
-                      (assignement_operator)
+                      (assignment_operator)
                       value: (assignment_value
                         (pipeline_chain
                           (unary_expression
@@ -37,7 +37,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                       (left_assignment_expression
                         (unary_expression
                           (variable)))
-                      (assignement_operator)
+                      (assignment_operator)
                       value: (assignment_value
                         (pipeline_chain
                           (unary_expression
@@ -102,7 +102,7 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                       (left_assignment_expression
                         (unary_expression
                           (variable)))
-                      (assignement_operator)
+                      (assignment_operator)
                       (assignment_value
                         (pipeline_chain
                           (unary_expression
@@ -114,7 +114,7 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                       (left_assignment_expression
                         (unary_expression
                           (variable)))
-                      (assignement_operator)
+                      (assignment_operator)
                       (assignment_value
                         (pipeline_chain
                           (unary_expression
@@ -170,7 +170,7 @@ for (;;)
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -207,7 +207,7 @@ for (;;$i++)
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -250,7 +250,7 @@ for(;$i -le 10;$i++)
         (left_assignment_expression
           (unary_expression
             (variable)))
-        (assignement_operator)
+        (assignment_operator)
         (assignment_value
           (pipeline_chain
             (unary_expression
@@ -301,7 +301,7 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
             (left_assignment_expression
               (unary_expression
                 (variable)))
-            (assignement_operator)
+            (assignment_operator)
             (assignment_value
               (pipeline_chain
                 (unary_expression
@@ -355,7 +355,7 @@ for ($i = 0
             (left_assignment_expression
               (unary_expression
                 (variable)))
-            (assignement_operator)
+            (assignment_operator)
             (assignment_value
               (pipeline_chain
                 (unary_expression
@@ -403,7 +403,7 @@ for ($i = 0;
             (left_assignment_expression
               (unary_expression
                 (variable)))
-            (assignement_operator)
+            (assignment_operator)
             value: (assignment_value
               (pipeline_chain
                 (unary_expression
@@ -448,7 +448,7 @@ for ($i = 0) { $i }
           (left_assignment_expression
             (unary_expression
               (variable)))
-          (assignement_operator)
+          (assignment_operator)
           (ERROR
             (integer_literal
               (decimal_integer_literal)))
@@ -536,7 +536,7 @@ for ($i = 0; $i -lt 10) { $i }
           (left_assignment_expression
             (unary_expression
               (variable)))
-          (assignement_operator)
+          (assignment_operator)
           value: (assignment_value
             (pipeline_chain
               (unary_expression

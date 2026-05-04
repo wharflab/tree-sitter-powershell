@@ -21,7 +21,7 @@
 #                   https://github.com/JFLarvoire/SysToolsLib                 #
 #                                                                             #
 #                   Possible improvements to do:                              #
-#                   * Allow inputing WMI Win32_ShadowCopy objects.            #
+#                   * Allow inputting WMI Win32_ShadowCopy objects.           #
 #                   * Output a new type, instead of a generic PSObject.       #
 #                   * Change Days,Weeks,...,Years to ScriptProperties,        #
 #                     dynamically recomputed?                                 #
@@ -625,7 +625,7 @@ Function Out-Default {
 #   Notes           Contrary to Write-Output, Write-Host does not attempt     #
 #                   to format input lists of objects as tables. So...         #
 #                   1) To get the output formatted as tables, it's necessary  #
-#                      to pipe the input throught Out-String first.           #
+#                      to pipe the input through Out-String first.            #
 #                   2) This makes it unnecessary to synchronize stepping      #
 #                      with the next pipeline stage, like Out-Default has to. #
 #                                                                             #
@@ -664,7 +664,7 @@ Set-Alias msg Write-Host -Confirm:$false -WhatIf:$false
 #   Notes           Contrary to Write-Output, Write-Verbose does not attempt  #
 #                   to format input lists of objects as tables. So...         #
 #                   1) To get the output formatted as tables, it's necessary  #
-#                      to pipe the input throught Out-String first.           #
+#                      to pipe the input through Out-String first.            #
 #                   2) This makes it unnecessary to synchronize stepping      #
 #                      with the next pipeline stage, like Out-Default has to. #
 #                                                                             #
@@ -741,7 +741,7 @@ Function Out-Verbose {
 #   Notes           Contrary to Write-Output, Write-Debug does not attempt    #
 #                   to format input lists of objects as tables. So...         #
 #                   1) To get the output formatted as tables, it's necessary  #
-#                      to pipe the input throught Out-String first.           #
+#                      to pipe the input through Out-String first.            #
 #                   2) This makes it unnecessary to synchronize stepping      #
 #                      with the next pipeline stage, like Out-Default has to. #
 #                                                                             #
@@ -850,7 +850,7 @@ Function Out-Debug1 {
 #   Notes           Contrary to Write-Output, Write-Warning does not attempt  #
 #                   to format input lists of objects as tables. So...         #
 #                   1) To get the output formatted as tables, it's necessary  #
-#                      to pipe the input throught Out-String first.           #
+#                      to pipe the input through Out-String first.            #
 #                   2) This makes it unnecessary to synchronize stepping      #
 #                      with the next pipeline stage, like Out-Default has to. #
 #                                                                             #
