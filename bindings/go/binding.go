@@ -2,9 +2,7 @@ package tree_sitter_powershell
 
 // #cgo CFLAGS: -std=c11 -fPIC -I${SRCDIR}/../../src
 // #include "../../src/parser.c"
-// #if __has_include("../../src/scanner.c")
 // #include "../../src/scanner.c"
-// #endif
 import "C"
 
 import "unsafe"

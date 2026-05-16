@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-powershell
 HOMEPAGE_URL := https://github.com/airbus-cert/tree-sitter-powershell
-VERSION := 0.38.0
+VERSION := 0.38.1
 
 # repository
 SRC_DIR := src
@@ -93,9 +93,7 @@ else
 	cd '$(DESTDIR)$(LIBDIR)' && ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER) lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR)
 	cd '$(DESTDIR)$(LIBDIR)' && ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR) lib$(LANGUAGE_NAME).$(SOEXT)
 endif
-ifneq ($(wildcard queries/*.scm),)
 	install -m644 queries/*.scm '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/powershell
-endif
 
 uninstall:
 	$(RM) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).a \

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-powershell
-        VERSION "0.38.0"
+        VERSION "0.38.1"
         DESCRIPTION ""
         HOMEPAGE_URL "https://github.com/airbus-cert/tree-sitter-powershell"
         LANGUAGES C)
@@ -36,10 +36,7 @@ add_custom_command(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/src/parser.c"
                    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
                    COMMENT "Generating parser.c")
 
-add_library(tree-sitter-powershell src/parser.c)
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/scanner.c)
-  target_sources(tree-sitter-powershell PRIVATE src/scanner.c)
-endif()
+add_library(tree-sitter-powershell src/parser.c src/scanner.c)
 target_include_directories(tree-sitter-powershell
                            PRIVATE src
                            INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bindings/c>
