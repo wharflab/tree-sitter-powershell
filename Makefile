@@ -93,9 +93,7 @@ else
 	cd '$(DESTDIR)$(LIBDIR)' && ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER) lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR)
 	cd '$(DESTDIR)$(LIBDIR)' && ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR) lib$(LANGUAGE_NAME).$(SOEXT)
 endif
-ifneq ($(wildcard queries/*.scm),)
 	install -m644 queries/*.scm '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/powershell
-endif
 
 uninstall:
 	$(RM) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).a \
