@@ -1458,6 +1458,8 @@ export default grammar({
       prec.left(
         choice(
           seq($._primary_expression, token.immediate('.'), $.member_name),
+          // PowerShell 7 null-conditional member access: ${a}?.b
+          seq($._primary_expression, token.immediate('?.'), $.member_name),
           seq($._primary_expression, '::', $.member_name),
         ),
       ),
@@ -1473,14 +1475,20 @@ export default grammar({
     element_access: ($) =>
       prec(
         PREC.ELEMENT_ACCESS,
-        seq($._primary_expression, '[', $._expression, ']'),
+        seq(
+          $._primary_expression,
+          // PowerShell 7 null-conditional element access: ${a}?[0]
+          choice('[', token.immediate('?[')),
+          $._expression,
+          ']',
+        ),
       ),
 
     invocation_expression: ($) =>
       choice(
         seq(
           $._primary_expression,
-          token.immediate('.'),
+          choice(token.immediate('.'), token.immediate('?.')),
           $.member_name,
           $.argument_list,
         ),

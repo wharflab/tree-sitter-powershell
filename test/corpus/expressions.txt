@@ -434,3 +434,62 @@ Invoke from Path
             (path_command_name
               (variable)
               (path_command_name_token))))))))
+
+================================================================================
+Null-conditional member access
+================================================================================
+
+${a}?.Name
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (unary_expression
+          (member_access
+            (variable
+              (braced_variable))
+            (member_name
+              (simple_name))))))))
+
+================================================================================
+Null-conditional method call
+================================================================================
+
+${a}?.ToString()
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (unary_expression
+          (invocation_expression
+            (variable
+              (braced_variable))
+            (member_name
+              (simple_name))
+            (argument_list)))))))
+
+================================================================================
+Null-conditional element access
+================================================================================
+
+${a}?[0]
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (unary_expression
+          (element_access
+            (variable
+              (braced_variable))
+            (unary_expression
+              (integer_literal
+                (decimal_integer_literal)))))))))
