@@ -590,7 +590,8 @@ export default grammar({
       seq(
         $.switch_clause_condition,
         $.statement_block,
-        $._statement_boundary,
+        // Clauses may share a line: switch ($x) { 'a' { 1 } default { 2 } }
+        optional($._statement_boundary),
         repeat(';'),
       ),
 

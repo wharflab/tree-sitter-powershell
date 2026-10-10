@@ -3083,8 +3083,16 @@
           "name": "statement_block"
         },
         {
-          "type": "SYMBOL",
-          "name": "_statement_boundary"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_statement_boundary"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "REPEAT",
