@@ -1178,7 +1178,10 @@ export default grammar({
 
     // Class
     class_attribute: ($) =>
-      choice(token(reservedWord('hidden')), token(reservedWord('static'))),
+      choice(
+        alias(token(reservedWord('hidden')), 'hidden'),
+        alias(token(reservedWord('static')), 'static'),
+      ),
 
     class_property_definition: ($) =>
       seq(
@@ -1219,7 +1222,7 @@ export default grammar({
     class_statement: ($) =>
       seq(
         optional($.attribute_list),
-        token(reservedWord('class')),
+        alias(token(reservedWord('class')), 'class'),
         $.simple_name,
         optional(seq(':', $.type_spec, repeat(seq(',', $.type_spec)))),
         '{',
@@ -1240,7 +1243,7 @@ export default grammar({
     enum_statement: ($) =>
       seq(
         optional($.attribute_list),
-        token(reservedWord('enum')),
+        alias(token(reservedWord('enum')), 'enum'),
         $.simple_name,
         '{',
         repeat(seq($.enum_member, $._statement_boundary, repeat(';'))),

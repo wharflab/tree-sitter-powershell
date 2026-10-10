@@ -783,12 +783,12 @@ static const char * const ts_symbol_names[] = {
   [sym__expandable_bareword_tail] = "generic_token",
   [sym__bareword_argument_list_separator] = "_bareword_argument_list_separator",
   [anon_sym_DASH_DASH_PERCENT] = "--%",
-  [aux_sym_class_attribute_token1] = "class_attribute_token1",
-  [aux_sym_class_attribute_token2] = "class_attribute_token2",
+  [aux_sym_class_attribute_token1] = "hidden",
+  [aux_sym_class_attribute_token2] = "static",
   [aux_sym_class_method_base_ctor_token1] = "base",
   [aux_sym_class_method_base_ctor_token2] = "this",
-  [aux_sym_class_statement_token1] = "class_statement_token1",
-  [aux_sym_enum_statement_token1] = "enum_statement_token1",
+  [aux_sym_class_statement_token1] = "class",
+  [aux_sym_enum_statement_token1] = "enum",
   [anon_sym_QMARK] = "\?",
   [anon_sym_QMARK_QMARK] = "\?\?",
   [aux_sym_logical_expression_token1] = "-and",
@@ -1304,7 +1304,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__bareword_argument_list_separator] = sym__bareword_argument_list_separator,
   [anon_sym_DASH_DASH_PERCENT] = anon_sym_DASH_DASH_PERCENT,
   [aux_sym_class_attribute_token1] = aux_sym_class_attribute_token1,
-  [aux_sym_class_attribute_token2] = aux_sym_class_attribute_token2,
+  [aux_sym_class_attribute_token2] = aux_sym_using_statement_token5,
   [aux_sym_class_method_base_ctor_token1] = aux_sym_class_method_base_ctor_token1,
   [aux_sym_class_method_base_ctor_token2] = aux_sym_class_method_base_ctor_token2,
   [aux_sym_class_statement_token1] = aux_sym_class_statement_token1,
@@ -2532,11 +2532,11 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [aux_sym_class_attribute_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [aux_sym_class_attribute_token2] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [aux_sym_class_method_base_ctor_token1] = {
@@ -2548,11 +2548,11 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [aux_sym_class_statement_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [aux_sym_enum_statement_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [anon_sym_QMARK] = {

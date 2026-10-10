@@ -5123,6 +5123,10 @@
     "named": false
   },
   {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "clean",
     "named": false
   },
@@ -5168,6 +5172,10 @@
     "named": false
   },
   {
+    "type": "enum",
+    "named": false
+  },
+  {
     "type": "escape_character",
     "named": true
   },
@@ -5202,6 +5210,10 @@
   {
     "type": "hexadecimal_integer_literal",
     "named": true
+  },
+  {
+    "type": "hidden",
+    "named": false
   },
   {
     "type": "if",
