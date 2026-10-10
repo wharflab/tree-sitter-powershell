@@ -5310,8 +5310,22 @@
                 "name": "_concatenated_command_argument_token_head"
               },
               {
-                "type": "SYMBOL",
-                "name": "_immediate_command_argument_expression_fragment"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_immediate_command_argument_expression_fragment"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_immediate_escape_character"
+                    },
+                    "named": true,
+                    "value": "escape_character"
+                  }
+                ]
               },
               {
                 "type": "REPEAT",

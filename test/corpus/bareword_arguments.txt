@@ -261,3 +261,43 @@ Write-Output $foo?bar
             (expandable_bareword
               (variable)
               (generic_token))))))))
+
+================================================================================
+Escape inside a bareword argument
+================================================================================
+
+Write-Host foo`nbar
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (concatenated_command_argument
+              (generic_token)
+              (escape_character))))))))
+
+================================================================================
+Escaped space inside a bareword path
+================================================================================
+
+Get-Item C:\Program` Files\x
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (concatenated_command_argument
+              (generic_token)
+              (escape_character))))))))

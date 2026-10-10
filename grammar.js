@@ -1022,7 +1022,11 @@ export default grammar({
           ),
           seq(
             $._concatenated_command_argument_token_head,
-            $._immediate_command_argument_expression_fragment,
+            choice(
+              $._immediate_command_argument_expression_fragment,
+              // A backtick escape inside a bareword, e.g. foo`nbar
+              alias($._immediate_escape_character, $.escape_character),
+            ),
             repeat($._immediate_command_argument_fragment),
           ),
         ),
