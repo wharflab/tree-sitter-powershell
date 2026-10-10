@@ -500,3 +500,44 @@ switch ($fontstyle) {
                       (pipeline_chain
                         (unary_expression
                           (variable))))))))))))))
+
+================================================================================
+Switch with clauses on one line
+================================================================================
+
+switch -Regex ($x) { 'a' { 1 } default { 2 } }
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (switch_statement
+      (switch_parameters
+        (switch_parameter))
+      (switch_condition
+        (pipeline
+          (pipeline_chain
+            (unary_expression
+              (variable)))))
+      (switch_body
+        (switch_clauses
+          (switch_clause
+            (switch_clause_condition
+              (string_literal
+                (verbatim_string_characters)))
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (unary_expression
+                      (integer_literal
+                        (decimal_integer_literal))))))))
+          (switch_clause
+            (switch_clause_condition)
+            (statement_block
+              (statement_list
+                (pipeline
+                  (pipeline_chain
+                    (unary_expression
+                      (integer_literal
+                        (decimal_integer_literal)))))))))))))

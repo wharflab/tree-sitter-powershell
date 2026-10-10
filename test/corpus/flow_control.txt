@@ -96,3 +96,49 @@ throw
 (program
   (statement_list
     (flow_control_statement)))
+
+================================================================================
+Break to a bare label name
+================================================================================
+
+:outer while ($true) { break outer }
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (label)
+    (while_statement
+      (while_condition
+        (pipeline
+          (pipeline_chain
+            (unary_expression
+              (variable)))))
+      (statement_block
+        (statement_list
+          (flow_control_statement
+            (label_expression
+              (label_name))))))))
+
+================================================================================
+Continue to a bare label name
+================================================================================
+
+:outer foreach ($i in 1..3) { continue outer }
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement_list
+    (label)
+    (foreach_statement
+      (variable)
+      (pipeline
+        (pipeline_chain
+          (command
+            (command_name))))
+      (statement_block
+        (statement_list
+          (flow_control_statement
+            (label_expression
+              (label_name))))))))

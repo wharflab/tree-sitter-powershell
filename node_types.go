@@ -105,6 +105,7 @@ const (
 	NodeKeyExpression = "key_expression"
 	NodeLabel = "label"
 	NodeLabelExpression = "label_expression"
+	NodeLabelName = "label_name"
 	NodeLeftAssignmentExpression = "left_assignment_expression"
 	NodeLogicalArgumentExpression = "logical_argument_expression"
 	NodeLogicalExpression = "logical_expression"

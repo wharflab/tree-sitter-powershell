@@ -590,7 +590,8 @@ export default grammar({
       seq(
         $.switch_clause_condition,
         $.statement_block,
-        $._statement_boundary,
+        // Clauses may share a line: switch ($x) { 'a' { 1 } default { 2 } }
+        optional($._statement_boundary),
         repeat(';'),
       ),
 
@@ -725,7 +726,10 @@ export default grammar({
 
     label: ($) => token(seq(':', psIdentifier())),
 
-    label_expression: ($) => choice($.label, $.unary_expression),
+    label_expression: ($) => choice($.label, $.unary_expression, $.label_name),
+
+    // break outer / continue outer
+    label_name: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     trap_statement: ($) =>
       seq(reservedWord('trap'), optional($.type_literal), $.statement_block),
@@ -1018,7 +1022,11 @@ export default grammar({
           ),
           seq(
             $._concatenated_command_argument_token_head,
-            $._immediate_command_argument_expression_fragment,
+            choice(
+              $._immediate_command_argument_expression_fragment,
+              // A backtick escape inside a bareword, e.g. foo`nbar
+              alias($._immediate_escape_character, $.escape_character),
+            ),
             repeat($._immediate_command_argument_fragment),
           ),
         ),
@@ -1170,7 +1178,10 @@ export default grammar({
 
     // Class
     class_attribute: ($) =>
-      choice(token(reservedWord('hidden')), token(reservedWord('static'))),
+      choice(
+        alias(token(reservedWord('hidden')), 'hidden'),
+        alias(token(reservedWord('static')), 'static'),
+      ),
 
     class_property_definition: ($) =>
       seq(
@@ -1211,7 +1222,7 @@ export default grammar({
     class_statement: ($) =>
       seq(
         optional($.attribute_list),
-        token(reservedWord('class')),
+        alias(token(reservedWord('class')), 'class'),
         $.simple_name,
         optional(seq(':', $.type_spec, repeat(seq(',', $.type_spec)))),
         '{',
@@ -1232,7 +1243,7 @@ export default grammar({
     enum_statement: ($) =>
       seq(
         optional($.attribute_list),
-        token(reservedWord('enum')),
+        alias(token(reservedWord('enum')), 'enum'),
         $.simple_name,
         '{',
         repeat(seq($.enum_member, $._statement_boundary, repeat(';'))),
@@ -1458,6 +1469,8 @@ export default grammar({
       prec.left(
         choice(
           seq($._primary_expression, token.immediate('.'), $.member_name),
+          // PowerShell 7 null-conditional member access: ${a}?.b
+          seq($._primary_expression, token.immediate('?.'), $.member_name),
           seq($._primary_expression, '::', $.member_name),
         ),
       ),
@@ -1473,14 +1486,20 @@ export default grammar({
     element_access: ($) =>
       prec(
         PREC.ELEMENT_ACCESS,
-        seq($._primary_expression, '[', $._expression, ']'),
+        seq(
+          $._primary_expression,
+          // PowerShell 7 null-conditional element access: ${a}?[0]
+          choice('[', token.immediate('?[')),
+          $._expression,
+          ']',
+        ),
       ),
 
     invocation_expression: ($) =>
       choice(
         seq(
           $._primary_expression,
-          token.immediate('.'),
+          choice(token.immediate('.'), token.immediate('?.')),
           $.member_name,
           $.argument_list,
         ),

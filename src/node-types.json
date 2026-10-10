@@ -2447,6 +2447,10 @@
           "named": true
         },
         {
+          "type": "label_name",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -5055,11 +5059,19 @@
     "named": false
   },
   {
+    "type": "?.",
+    "named": false
+  },
+  {
     "type": "??",
     "named": false
   },
   {
     "type": "??=",
+    "named": false
+  },
+  {
+    "type": "?[",
     "named": false
   },
   {
@@ -5111,6 +5123,10 @@
     "named": false
   },
   {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "clean",
     "named": false
   },
@@ -5156,6 +5172,10 @@
     "named": false
   },
   {
+    "type": "enum",
+    "named": false
+  },
+  {
     "type": "escape_character",
     "named": true
   },
@@ -5192,6 +5212,10 @@
     "named": true
   },
   {
+    "type": "hidden",
+    "named": false
+  },
+  {
     "type": "if",
     "named": false
   },
@@ -5205,6 +5229,10 @@
   },
   {
     "type": "label",
+    "named": true
+  },
+  {
+    "type": "label_name",
     "named": true
   },
   {
