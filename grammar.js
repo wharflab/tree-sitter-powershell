@@ -726,7 +726,10 @@ export default grammar({
 
     label: ($) => token(seq(':', psIdentifier())),
 
-    label_expression: ($) => choice($.label, $.unary_expression),
+    label_expression: ($) => choice($.label, $.unary_expression, $.label_name),
+
+    // break outer / continue outer
+    label_name: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     trap_statement: ($) =>
       seq(reservedWord('trap'), optional($.type_literal), $.statement_block),
